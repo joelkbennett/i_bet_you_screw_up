@@ -4,7 +4,7 @@ helpers do
   # end
 
   def current_user
-    @current_user = User.find(4)
+    @current_user = User.find(1)
   end
 
   def all_promises(page_number)
@@ -32,7 +32,12 @@ helpers do
   end
 
   def bet_for_a_user_on_a_promise(user_id, promise_id)
-    Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
+    @bet_for_a_user_on_a_promise = Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
+    if @bet_for_a_user_on_a_promise
+      @bet_for_a_user_on_a_promise
+    else
+      Bet.new
+    end
   end
 
   def promise_expires_in
