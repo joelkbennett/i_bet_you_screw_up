@@ -60,14 +60,15 @@ end
 
 post '/promises/:id/new_bet' do |id|
   a_promise(id)
-  @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
   user_of_the_promise(@promise.user_id)
+  bet_in_favour = params[:in_favour] == "For" ? true : false
   @bet = Bet.new(
     bet_value: params[:bet_value],
-    in_favour: true,
+    in_favour: bet_in_favour,
     user_id: @current_user.id,
     promise_id: id
   )
   @bet.save
+  @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
   erb :'promises/show'
 end
