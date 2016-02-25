@@ -4,6 +4,8 @@ source "https://rubygems.org"
 gem 'rake'
 gem 'activesupport'
 
+gem 'bourbon'
+
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
