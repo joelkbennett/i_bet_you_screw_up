@@ -3,3 +3,5 @@
 .byebug-history
 /db/*.sqlite3
 /db/*.db
+**/.sass-cache/*
+**/.DS_Store
