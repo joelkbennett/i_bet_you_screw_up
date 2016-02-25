@@ -5,6 +5,7 @@ gem 'rake'
 gem 'activesupport'
 
 gem 'bourbon'
+gem 'neat'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
