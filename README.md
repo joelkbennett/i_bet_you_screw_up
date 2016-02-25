@@ -1,7 +1,5 @@
-Sinatra
-=============
-
-Brought to you by Lighthouse Labs
+I Bet You Screwed Up
+====================
 
 ## Getting Started
 
