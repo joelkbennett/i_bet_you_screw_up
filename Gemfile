@@ -6,6 +6,7 @@ gem 'activesupport'
 
 gem 'bourbon'
 gem 'neat'
+gem 'bitters'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
