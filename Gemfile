@@ -15,6 +15,8 @@ gem 'sinatra-activerecord'
 gem 'puma'
 gem 'tux'
 
+gem 'will_paginate'
+
 group :development, :test do
   gem 'pry'
   gem 'shotgun'

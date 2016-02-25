@@ -9,7 +9,7 @@
   </div>
 <% else %>  
   <div>
-    <form method="post" action="/promises/<%= @promise.id %>/new_bet">
+    <form id="new-bet-form" method="post" action="/promises/<%= @promise.id %>/new_bet">
       <input type="text" name="bet_value" placeholder="Enter Bet Value" required autofocus>
       <input type="submit" name="in_favour" value="For">
       <input type="submit" name="not_in_favour" value="Against">

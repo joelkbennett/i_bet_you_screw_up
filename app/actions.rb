@@ -7,8 +7,8 @@ helpers do
     @current_user = User.find(4)
   end
 
-  def all_promises
-    @promises = Promise.all
+  def all_promises(page_number)
+    @promises = Promise.all.paginate(:page => page_number, :per_page => 1)
   end
 
   def all_bets
@@ -38,7 +38,6 @@ end
 
 before do
   current_user
-  all_promises
   all_bets
 end
 
@@ -47,6 +46,8 @@ get '/' do
 end
 
 get '/promises' do
+  @page_number = params[:page] ? params[:page].to_i : 1
+  all_promises(@page_number)
   erb :'promises/index'
 end
 
@@ -71,4 +72,8 @@ post '/promises/:id/new_bet' do |id|
   @bet.save
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
   erb :'promises/show'
+end
+
+get '/update' do
+   Time.now.to_s  
 end
