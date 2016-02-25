@@ -1,0 +1,18 @@
+<div>
+  <%= @promise.content %>
+  <%= @user_of_the_promise.username %>
+</div>
+<% if @current_user_bet %>
+  <div>
+    <%= @current_user_bet.bet_value %>
+    <%= @current_user_bet.created_at %>
+  </div>
+<% else %>  
+  <div>
+    <form method="post" action="/promises/<%= @promise.id %>/new_bet">
+      <input type="text" name="bet_value" placeholder="Bet Value" required autofocus>
+      <button value="in_favour">For</button>
+      <button>Against</button>
+    </form>
+  </div>
+<% end %>
