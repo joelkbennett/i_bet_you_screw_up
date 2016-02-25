@@ -1,8 +1,15 @@
-<div>
-  <%= @promise.content %>
-  <%= @user_of_the_promise.username %>
+<div class="promise">
+  <div class="promise-content">
+    <div class="details">
+      <p><%= @promise.content %></p>
+    </div>
+    <p class="promise-detail">Expires in <%= @promise_expires_in %> hours!</p>
+  </div>
+  <div class="user-img">
+    <img src="http://placehold.it/400x400">  
+  </div>
 </div>
-<% if @current_user_bet %>
+
   <div>
     <%= @current_user_bet.bet_value %>
     <%= @current_user_bet.created_at %>
@@ -15,4 +22,41 @@
       <input type="submit" name="not_in_favour" value="Against">
     </form>
   </div>
+
+
+<% if @current_user_bet %>
+  <div class="form">
+    <div class="promise-details">
+      <form>
+        <h2>Will <%= @user_of_the_promise.name %> keep their promise?</h2>
+        <br>
+        <input class="place_bet" type="button" name="yes" value="Yes (33)">
+        <input class="place_bet" type="button" name="yes" value="No (45)">
+      </form>
+      <br>
+    </div>
+  </div>
 <% end %>
+
+<div class="form">
+  <div class="promise-details">
+    <form>
+      <h2>Did you keep your promise?</h2>
+      <br>
+      <input class="verify-promise" type="button" name="yes" value="Promise Kept">
+      <input class="verify-promise" type="button" name="yes" value="Promise Not Kept">
+    </form>
+    <br>
+  </div>
+</div>
+
+<div class="form">
+  <div class="promise-details">
+    <form>
+      <h2>Login to place a bet.</h2>
+      <br>
+      <input type="button" name="yes" value="Login">
+    </form>
+    <br>
+  </div>
+</div>

@@ -34,6 +34,10 @@ helpers do
   def bet_for_a_user_on_a_promise(user_id, promise_id)
     Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
   end
+
+  def promise_expires_in
+    @promise_expires_in = ((@promise.expires_at.to_time - DateTime.now) / 1.hours).ceil
+  end
 end
 
 before do
@@ -72,8 +76,4 @@ post '/promises/:id/new_bet' do |id|
   @bet.save
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
   erb :'promises/show'
-end
-
-get '/update' do
-   Time.now.to_s  
 end

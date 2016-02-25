@@ -1,17 +1,21 @@
-<% @promises.each do |promise| %>
-  <div class="promise-image">
-    <img src="http://placehold.it/400x400" alt="Logo image">
-  </div>
-  <div class="promise-content">
-    <a href="/promises/<%= promise.id %>"><h1><%= User.find(promise.user_id).username %> has promised...</h1></a>
-    <p><%= promise.content %></p>
-    <p class="promise-detail">Expires in <%= ((promise.expires_at.to_time - DateTime.now) / 1.hours).ceil %> hours!</p>
-  </div>
-  <div class="promise-controls">
-    <a class="button" href='#'>Quick Wager</a>
-    <a class="button" href='/promises/<%= promise.id %>'>View Promise Details</a>
-  </div>
-<% end %>
+<section class="article-body">      
+  <% @promises.each do |promise| %>
+    <div class="promise">
+      <div class="promise-image">
+        <img src="http://placehold.it/400x400" alt="Logo image">
+      </div>
+      <div class="promise-content">
+        <a href="/promises/<%= promise.id %>"><h1><%= User.find(promise.user_id).username %> has promised...</h1></a>
+        <p><%= promise.content %></p>
+        <p class="promise-detail">Expires in <%= ((promise.expires_at.to_time - DateTime.now) / 1.hours).ceil %> hours!</p>
+      </div>
+      <div class="promise-controls">
+        <a class="button" href='#'>Quick Wager</a>
+        <a class="button" href='/promises/<%= promise.id %>'>View Promise Details</a>
+      </div>
+    </div>
+  <% end %>
+</section>
 
  <footer class="article-footer">
   <div class="pagination">
