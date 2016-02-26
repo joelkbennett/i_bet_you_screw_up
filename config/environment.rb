@@ -11,6 +11,8 @@ require 'digest/md5'
 
 require 'pry'
 require 'pg'
+require 'bcrypt'
+require 'json'
 
 require 'will_paginate'
 require 'will_paginate/array'

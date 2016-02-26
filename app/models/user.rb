@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_secure_password
+
   has_many :bets
   has_many :promises
 
