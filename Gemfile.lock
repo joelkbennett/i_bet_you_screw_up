@@ -102,6 +102,7 @@ DEPENDENCIES
   bcrypt
   bitters
   bourbon
+  byebug
   json
   neat
   pg
