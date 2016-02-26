@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :bets
   has_many :promises
   has_many :comments
+  has_many :friendships
+  has_many :friends, through: :friendships
 
   validates :first_name, presence: true
   validates :last_name, presence: true
