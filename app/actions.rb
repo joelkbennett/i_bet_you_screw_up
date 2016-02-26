@@ -63,6 +63,10 @@ get '/promises' do
   erb :'promises/index'
 end
 
+get '/promises/new' do
+  erb :'promises/new'
+end
+
 get '/promises/:id' do |id|
   a_promise(id)
   user_of_the_promise(@promise.user_id)
@@ -71,6 +75,17 @@ get '/promises/:id' do |id|
   total_users_against_the_promise_to_be_kept(id)
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
   erb :'promises/show'
+end
+
+post '/promises/new' do
+  promise = Promise.new(
+    content: params[:content],
+    expires_at: params[:expires_at],
+    user_id: @current_user.id
+  )
+  if promise.save
+    redirect "/promises/#{promise.id}"
+  end
 end
 
 post '/promises/:id/new_bet' do |id|
@@ -122,5 +137,5 @@ end
 
 get '/logout' do
   session[:id] = nil
-  redirect "/promises/#{id}"
+  redirect "/promises"
 end
