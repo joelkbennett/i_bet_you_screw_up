@@ -1,6 +1,6 @@
 class AddCommentsTable < ActiveRecord::Migration
   def change
-    create table :comments do |t|
+    create_table :comments do |t|
       t.string :body
       t.references :user
       t.references :promise
