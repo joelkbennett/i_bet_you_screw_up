@@ -39,3 +39,13 @@ $form-width: 40%;
   }
 
 }
+
+.form-wrapper {
+  @include span-columns(4);
+  @include shift(4);
+}
+
+.new-user-form {
+  @include span-columns(6);
+  @include shift(3);
+}

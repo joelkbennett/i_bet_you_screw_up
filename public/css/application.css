@@ -554,6 +554,26 @@ th {
 .comments-header {
   font-size: 0.7em; }
 
+/* Layout Helpers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto; }
+
 body {
   font-family: "PT Sans", sans-serif;
   text-align: left; }
@@ -1055,7 +1075,7 @@ header.navigation {
       .hero .hero-inner .hero-copy p {
         color: white;
         line-height: 1.4em;
-        margin: 0 auto 3em auto; }
+        margin: 0 auto 1em auto; }
         @media screen and (min-width: 53.75em) {
           .hero .hero-inner .hero-copy p {
             font-size: 1.1em;
@@ -1241,6 +1261,24 @@ header.navigation {
       min-width: 120px; }
     .form .promise-details input.verify-promise {
       min-width: 180px; }
+
+.form-wrapper {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 31.76157%;
+  margin-left: 34.11922%; }
+  .form-wrapper:last-child {
+    margin-right: 0; }
+
+.new-user-form {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  margin-left: 25.58941%; }
+  .new-user-form:last-child {
+    margin-right: 0; }
 
 .search-tools {
   display: -webkit-box;

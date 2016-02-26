@@ -45,7 +45,7 @@
       p {
         color: $hero-color;
         line-height: 1.4em;
-        margin: 0 auto 3em auto; 
+        margin: 0 auto 1em auto; 
 
         @include media($large-screen) {
           font-size: 1.1em;
