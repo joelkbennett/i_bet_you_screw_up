@@ -31,8 +31,8 @@ class Promise < ActiveRecord::Base
   end
 
   def self.check_expired
-    expired_promises = Promise.where(validated: nil).where('expires_at < ?', DateTime.now)
-    if expired_promises
+    expired_promises = Promise.where(validated: nil).where('expires_at < ?', DateTime.now - 8.hours)
+    if expired_promises[0]
       expired_promises.update_all(validated: false)
       expired_promises.each { |promise| promise.apply_promise_value }
     end
@@ -48,6 +48,4 @@ class Promise < ActiveRecord::Base
         errors.add(:expires_at, "can't be in the past")
       end
     end
-
-
 end
