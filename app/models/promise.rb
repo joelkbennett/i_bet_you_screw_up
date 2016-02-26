@@ -2,6 +2,7 @@ class Promise < ActiveRecord::Base
 
   belongs_to :user
   has_many :bets
+  has_many :comments
 
   validates :content, presence: true
   validates :expires_at, presence:true
@@ -10,6 +11,14 @@ class Promise < ActiveRecord::Base
 
   def hours_until_expired
     ((expires_at.to_time - (DateTime.now - 8.hours)) / 1.hours).ceil
+  end
+
+  def creator
+    User.find(user_id)
+  end
+
+  def ordered_comments
+    comments.order(created_at: :desc)
   end
 
   private

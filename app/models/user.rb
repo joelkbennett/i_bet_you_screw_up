@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :bets
   has_many :promises
+  has_many :comments
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -16,7 +17,7 @@ class User < ActiveRecord::Base
     first_name.capitalize + " " + last_name.capitalize
   end
 
-  def gravitar
+  def gravatar
     hash = Digest::MD5.hexdigest(email)
     "http://www.gravatar.com/avatar/#{hash}?s=250"
   end

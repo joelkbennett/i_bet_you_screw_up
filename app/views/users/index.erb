@@ -10,7 +10,7 @@
 
         <% @users.each do |user| %>
           <div class="user-profile">
-            <img src="<%= user.gravitar %>" class="profile-image-med">  
+            <img src="<%= user.gravatar %>" class="profile-image-med">  
             <div class="user-name"><%= user.name %></div>
             <p>
               <%= user.promises_kept %> promises kept</p>

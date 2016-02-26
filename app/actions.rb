@@ -121,6 +121,22 @@ get '/users/:id' do
   erb :'users/show'
 end
 
+post '/promises/:id/new_comment' do |id|
+  promise = Promise.find(id)
+  user = @current_user
+  comment = Comment.new(
+    body: params[:body],
+    user_id: user.id,
+    promise_id: promise.id
+  )
+
+  user.comments << comment
+  promise.comments << comment 
+
+  redirect "/promises/#{id}"
+
+end
+
 post '/login' do
   user = User.find_by(email: params[:email])
   if user.authenticate(params[:password])
