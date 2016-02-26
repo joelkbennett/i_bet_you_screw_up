@@ -1,0 +1,6 @@
+insert into users(first_name, last_name, email, password_digest, created_at, updated_at) values('prabh', 'brar', 'p@lhl.com', 12345, date '2016-02-25', date '2016-02-25');
+insert into users(first_name, last_name, email, password_digest, created_at, updated_at) values('joel', 'bennet', 'j@lhl.com', 12345, date '2016-02-25', date '2016-02-25');
+insert into users(first_name, last_name, email, password_digest, created_at, updated_at) values('laurel', 'olson', 'l@lhl.com', 12345, date '2016-02-25', date '2016-02-25');
+insert into promises(content, expires_at, user_id, created_at, updated_at) values('i will do the dishes', date '2016-02-28', 3, date '2016-02-25', date '2016-02-25');
+insert into promises(content, expires_at, user_id, created_at, updated_at) values('i will do the laundry', date '2016-02-28', 2, date '2016-02-25', date '2016-02-25');
+insert into promises(content, expires_at, user_id, created_at, updated_at) values('i will cook the dinner', date '2016-02-28', 1, date '2016-02-25', date '2016-02-25');
