@@ -11,14 +11,15 @@ class User < ActiveRecord::Base
   validate :password_complexity
 
   def name
-    first_name.capitalize + " " +last_name.capitalize
+    first_name.capitalize + " " + last_name.capitalize
   end
 
   private
-    def password_complexity
-      if !password.match(/((?=.*\d)(?=.*[A-Za-z]).{6,20})/)
-        errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
-      end
+  
+  def password_complexity
+    if !password.match(/((?=.*\d)(?=.*[A-Za-z]).{6,20})/)
+      errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
     end
+  end
 
 end

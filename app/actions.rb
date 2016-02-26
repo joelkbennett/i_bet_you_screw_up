@@ -11,6 +11,10 @@ helpers do
     @promises = Promise.all.paginate(:page => page_number, :per_page => 1)
   end
 
+  def page_number
+    page_number = params[:page_number] || 1
+  end
+
   def all_bets
     @bets = Bet.all
   end
@@ -81,4 +85,29 @@ post '/promises/:id/new_bet' do |id|
   @bet.save
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
   erb :'promises/show'
+end
+
+get '/profile' do
+  if @current_user
+    erb :'users/profile'
+  else
+    redirect '/signup'
+  end
+end
+
+post '/profile' do
+  # TODO: route for updates to user profile
+end
+
+get '/users' do
+  @users =  User.all.paginate(:page => page_number, :per_page => 20)
+  erb :'users/index'
+end
+
+post '/login' do
+  # TODO: route for logging in
+end
+
+get '/logout' do
+  session[:id] = nil
 end
