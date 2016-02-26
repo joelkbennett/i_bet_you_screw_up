@@ -122,10 +122,33 @@ get '/users/:id' do
 end
 
 post '/login' do
-  # TODO: route for logging in
+  
 end
 
 get '/logout' do
   session[:id] = nil
-  redirect "/promises"
+  redirect "/"
+end
+
+get '/signup' do
+  erb :'users/new'
+end
+
+post '/signup' do
+  @user = User.new(
+    first_name: params[:first_name],
+    last_name: params[:last_name],
+    email: params[:email],
+    password: '',
+    password_confirmation: 'nomatch'
+  )
+  @user.password = params[:password]
+  @user.password_confirmation = params[:pass_conf]
+  session[:id] = @user.id
+
+  if @user.save
+    redirect '/promises'
+  else
+    'YIKES'
+  end
 end
