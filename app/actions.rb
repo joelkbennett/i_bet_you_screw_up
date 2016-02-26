@@ -7,12 +7,8 @@ helpers do
     @current_user = User.find(2)
   end
 
-  def all_promises(page_number)
-    @promises = Promise.all.paginate(:page => page_number, :per_page => 1)
-  end
-
   def page_number
-    page_number = params[:page_number] || 1
+    @page_number = params[:page_number] || 1
   end
 
   def all_bets
@@ -63,8 +59,7 @@ get '/' do
 end
 
 get '/promises' do
-  @page_number = params[:page] ? params[:page].to_i : 1
-  all_promises(@page_number)
+  @promises = Promise.all.paginate(:page => page_number, :per_page => 20)
   erb :'promises/index'
 end
 
