@@ -3,20 +3,24 @@
     <a href="" class="hero-logo"><img src="http://placehold.it/300x300"></a>
     <div class="hero-copy">
       <h1>I Bet You'll Screw Up</h1>
-      <h2>Something about how this works. <a href='/signup'>Join today</a>.</h2> 
-      <p>Already a user? Login below</p>
-      <div class="form-wrapper">
-        <%= erb :'partials/flash_message_error' %>
-        <form action="/login" method="POST">
-          <label class='sr-only' for="email">Email</label>
-          <input type="email" id='email' name='email' placeholder='Email Address'>
+      <h2>Something about how this works. 
+        <% if current_user %><a href='/promise/new'>Make a promise</a><% else %><a href='/signup'>Join today</a><% end %>.
+      </h2> 
+      <% if !current_user %>
+        <p>Already a user? Login below</p>
+        <div class="form-wrapper">
+          <%= erb :'partials/flash_message_error' %>
+          <form action="/login" method="POST">
+            <label class='sr-only' for="email">Email</label>
+            <input type="email" id='email' name='email' placeholder='Email Address'>
 
-          <label class='sr-only' for="password">Password</label>
-          <input type="password" id='password' name='password' placeholder='Password'>
+            <label class='sr-only' for="password">Password</label>
+            <input type="password" id='password' name='password' placeholder='Password'>
 
-          <input type="submit" value='submit'>
-        </form>
-      </div>
+            <input type="submit" value='submit'>
+          </form>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
