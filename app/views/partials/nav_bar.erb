@@ -10,8 +10,7 @@
         <li class="nav-link"><a href="/users">Users</a></li>
         <li class="nav-link"> | &nbsp;</li>
         <% if @current_user %>
-          <li class="nav-link"><a href="/users/<%= @current_user.id %>">Hello, <%= @current_user.name %></a></li>
-          <!--<li class="nav-link"><a href="profile/index.html">Profile</a></li>-->
+          <li class="nav-link"><a href="/profile">Hello, <%= @current_user.name %></a></li>
           <li class="nav-link"><a href="/promises/new">Create a Promise</a></li>
           <li class="nav-link"><a href="/logout">Logout</a></li>
         <% else %>

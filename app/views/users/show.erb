@@ -4,23 +4,23 @@
 
     <header class="article-header profile-header">
       <div class="profile-details">
-        <h1><%= @current_user.name %></h1>
-        <h2>Active since <%= @current_user.created_at.to_date %></h2>
-      <p>Overall Score: <%= @current_user.promises_kept - @current_user.promises_broken %></p>
+        <h1><%= @user.name %></h1>
+        <h2>Active since <%= @user.created_at.to_date %></h2>
+      <p>Overall Score: <%= @user.promises_kept - @user.promises_broken %></p>
 <!--         Points: 50</p>  -->
       </div>
 
       <div class="container">
         <div class="profile-score profile-score-up">
-          <%= @current_user.promises_kept %>
+          <%= @user.promises_kept %>
         </div>
 
         <div class="profile-image-container">
-          <img src="<%= @current_user.gravatar %>" class='profile-image profile-image-large'>  
+          <img src="<%= @user.gravatar %>" class='profile-image profile-image-large'>  
         </div>
 
         <div class="profile-score profile-score-down">
-          <%= @current_user.promises_broken %>
+          <%= @user.promises_broken %>
         </div>
       </div>
 
@@ -33,22 +33,28 @@
 
     <section class="article-body">
 
-      <h2>Your Activity</h2>
+      <h2>
+        <% if @user == @current_user %>
+          Your Activity
+        <% else %>
+          <%= @user.name %>'s Activity
+        <% end %>
+      </h2>
 
       <ul class="accordion-tabs">
 
         <li class="tab-header-and-content">
 
           <a href="javascript:void(0)" class="is-active tab-link">
-            Your Promises
+            Promises
           </a>
 
           <div class="tab-content">
-            <% if @current_user.promises.empty? %>
+            <% if @user.promises.empty? %>
               <p>You haven't made any promises yet! </p>
               <p><a href="/promises/new">Make a promise! </a></p>
             <% else %>
-              <% @current_user.promises.each do |promise| %>
+              <% @user.promises.each do |promise| %>
                 <div class="promise">
                   <div class="promise-image">
                     <img src="http://placehold.it/400x400" alt="Logo image">
@@ -68,15 +74,15 @@
         <li class="tab-header-and-content">
 
           <a href="javascript:void(0)" class="tab-link">
-            Your Bets
+            Bets
           </a>
 
           <div class="tab-content">
-            <% if @current_user.bets.empty? %>
+            <% if @user.bets.empty? %>
               <p>You haven't made any bets yet! </p>
               <p><a href="/promises">Make a bet! </a></p>
             <% else %>
-              <% @current_user.bets.each do |bet| %>
+              <% @user.bets.each do |bet| %>
                 <div class="promise">
                   <div class="promise-image">
                     <img src="http://placehold.it/400x400" alt="Logo image">
