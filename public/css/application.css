@@ -1098,7 +1098,7 @@ header.navigation {
     .promise .promise-content .details h1 {
       font-size: 1.9em; }
     .promise .promise-content .details p {
-      font-size: 1.8em; }
+      font-size: 3em; }
 
 .cards {
   display: -webkit-box;
@@ -1241,6 +1241,18 @@ header.navigation {
       min-width: 120px; }
     .form .promise-details input.verify-promise {
       min-width: 180px; }
+
+.form-new-comment {
+  text-align: left; }
+  .form-new-comment textarea {
+    height: 10%;
+    float: left;
+    margin-bottom: 20px; }
+  .form-new-comment input {
+    width: 120px;
+    height: 30px;
+    font-size: 12px;
+    margin-bottom: 20px; }
 
 .search-tools {
   display: -webkit-box;
