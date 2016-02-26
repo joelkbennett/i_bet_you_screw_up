@@ -12,10 +12,6 @@ class Promise < ActiveRecord::Base
     ((expires_at.to_time - (DateTime.now - 8.hours)) / 1.hours).ceil
   end
 
-  def find_user
-    User.find(user_id).name
-  end
-
   private
     def expiration_date_cannot_be_in_the_past
       if expires_at < (DateTime.now - 8.hours)

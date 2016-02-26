@@ -19,18 +19,6 @@ helpers do
     @promise = Promise.find(promise_id)
   end
 
-  def all_bets_on_a_promise(promise_id)
-    @all_bets_on_a_promise = Bet.where("promise_id = ?", promise_id)
-  end
-
-  def user_of_the_promise(user_id)
-    @user_of_the_promise = User.find(user_id)
-  end
-
-  def all_bets_of_a_user(user_id)
-    @all_bets_of_a_user = Bet.where("user_id = ?", user_id)
-  end
-
   def bet_for_a_user_on_a_promise(user_id, promise_id)
     @bet_for_a_user_on_a_promise = Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
   end
@@ -66,8 +54,6 @@ end
 
 get '/promises/:id' do |id|
   a_promise(id)
-  user_of_the_promise(@promise.user_id)
-  all_bets_on_a_promise(id)
   total_users_for_the_promise_to_be_kept(id)
   total_users_against_the_promise_to_be_kept(id)
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)

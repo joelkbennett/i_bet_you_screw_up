@@ -19,7 +19,7 @@
     </div>
 
     <% if @current_user.id %>
-      <% if @current_user.id == @user_of_the_promise.id %>
+      <% if @current_user.id == @promise.user.id %>
         <% if @promise.validated.nil? %>
           <div class="form">
             <div class="promise-details">
@@ -48,7 +48,7 @@
           <div class="form">
             <div class="promise-details">
               <form method="post" action="/promises/<%= @promise.id %>/new_bet">
-                <h2>Will <%= @user_of_the_promise.name %> keep their promise?</h2>
+                <h2>Will <%= @promise.user.name %> keep their promise?</h2>
                 <br>
                 <input class="place_bet" type="text" name="bet_value" placeholder="Enter Bet Value" required autofocus>
                 <input class="place_bet" type="submit" name="in_favour" value="Yes (<%= @total_users_for_the_promise_to_be_kept %>)">

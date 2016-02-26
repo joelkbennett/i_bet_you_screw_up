@@ -15,7 +15,7 @@
             <img src="http://placehold.it/400x400" alt="Logo image">
           </div>
           <div class="promise-content">
-            <a href='promises/<%= promise.id %>'><h1><%= promise.find_user %> has promised...</h1></a>
+            <a href='promises/<%= promise.id %>'><h1><%= promise.user.name %> has promised...</h1></a>
             <p><%= promise.content %></p>
             <p class="promise-detail">Expires in  <%= promise.hours_until_expired %> hours!</p>
           </div>
