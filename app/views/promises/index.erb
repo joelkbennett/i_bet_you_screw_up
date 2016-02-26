@@ -17,7 +17,7 @@
           <div class="promise-content">
             <a href='promises/<%= promise.id %>'><h1><%= promise.find_user %> has promised...</h1></a>
             <p><%= promise.content %></p>
-            <p class="promise-detail">Expires in  <%= promise.expires_in %> hours!</p>
+            <p class="promise-detail">Expires in  <%= promise.hours_until_expired %> hours!</p>
           </div>
           <div class="promise-controls">
             <a class="button button-default" href='#'>Quick Wager</a>
