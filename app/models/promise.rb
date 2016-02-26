@@ -18,3 +18,4 @@ class Promise < ActiveRecord::Base
         errors.add(:expires_at, "can't be in the past")
       end
     end
+end
