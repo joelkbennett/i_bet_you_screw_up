@@ -8,24 +8,31 @@
     </header>
 
     <section class="article-body">
+      <div id="expired-promises">
+        <label class="label-switch">
+          <input type="checkbox" id="toggle-expired-promises" />
+          <div class="checkbox"></div>
+        </label>
+        <div id="switch-label">
+          <label for="toggle-expired-promises">: Toggle expired promises</label>
+        </div>
+      </div>
       <div class="cards">
         <% @promises.each do |promise| %>
-          <% if promise.hours_until_expired != "Expired!" %>
-            <div class="card">
-              <div class="card-image">
-                <img src="http://placehold.it/400x400" alt="Logo image">
-              </div>
-              <div class="card-header">
-                <a href='promises/<%= promise.id %>'><h1><%= promise.user.name %> has promised...</h1></a>
-              </div>
-              <div class="card-copy">
-                <p><%= promise.content[0..20] %>....</p>
-                <p class="promise-detail"><%= promise.hours_until_expired %></p>
-                <a class="button button-default card-button" href='#'>Quick Wager</a><br><br>
-                <a class="button button-default card-button" href='promises/<%= promise.id %>'>Details</a>
-              </div>
+          <div class="<% if promise.hours_until_expired == "Expired!" %>card-expired<% end %> card">
+            <div class="card-image">
+              <img src="http://placehold.it/400x400" alt="Logo image">
             </div>
-          <% end %>
+            <div class="card-header">
+              <a href='promises/<%= promise.id %>'><h1><%= promise.user.name %> has promised...</h1></a>
+            </div>
+            <div class="card-copy">
+              <p><%= promise.content[0..20] %>....</p>
+              <p class="promise-detail"><%= promise.hours_until_expired %></p>
+              <a class="button button-default card-button" href='#'>Quick Wager</a><br><br>
+              <a class="button button-default card-button" href='promises/<%= promise.id %>'>Details</a>
+            </div>
+          </div>
         <% end %>
       </div>
 
