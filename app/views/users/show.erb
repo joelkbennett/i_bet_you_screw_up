@@ -7,12 +7,14 @@
         <h1><%= @user.name %></h1>
         <h2>Active since <%= @user.created_at.to_date %></h2>
         <%= erb :'partials/flash_message_error' %>
-        <% if @current_user.friends.include?(@user) || @current_user == @user %>
-          <p>Your friend since <%= friend_since(@user, @current_user) %></p>
-        <% else %>
-          <form method="post" action="/users/friends/new/<%= @user.id %>">
-            <input type="submit" value="Add Friend">
-          </form>
+        <% unless @current_user == @user %>
+          <% if @current_user.friends.include?(@user) %>
+            <p>Your friend since <%= friend_since(@user, @current_user) %></p>
+          <% elsif @current_user != @user %>
+            <form method="post" action="/users/friends/new/<%= @user.id %>">
+              <input type="submit" value="Add Friend">
+            </form>
+          <% end %>
         <% end %>
 
       <p>Points: <%= @user.points %></p>
