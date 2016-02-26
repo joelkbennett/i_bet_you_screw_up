@@ -4,7 +4,7 @@ helpers do
   # end
 
   def current_user
-    @current_user = User.find(1)
+    @current_user = User.find(2)
   end
 
   def page_number
@@ -75,9 +75,7 @@ end
 
 post '/promises/:id/new_bet' do |id|
   a_promise(id)
-  user_of_the_promise(@promise.user_id)
   total_users_for_the_promise_to_be_kept(id)
-  p params
   bet_in_favour = true if params[:in_favour] =~ /Yes/
   bet_in_favour = false if params[:not_in_favour] =~ /No/
   @bet = Bet.new(
