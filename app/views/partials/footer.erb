@@ -1,19 +1,23 @@
   <footer class="footer page-footer" role="contentinfo">
     <div class="footer-logo">
-      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
+      <img src="http://placehold.it/100x100" alt="Logo image">
     </div>
     <div class="footer-links">
       <ul>
         <li><h3>Content</h3></li>
-        <li><a href="javascript:void(0)">About</a></li>
-        <li><a href="javascript:void(0)">Contact</a></li>
-        <li><a href="javascript:void(0)">Products</a></li>
+        <li><a href="/promises">Current Promises</a></li>
+        <li><a href="/users">Our Users</a></li>
+        <% if @current_user %>
+          <li><a href="/promise/new">New Promise</a></li>
+        <% else %>
+          <li><a href="/promise/new">Signup</a></li>
+          <li><a href="/promise/new">Login</a></li>
+        <% end %>
       </ul>
       <ul>
         <li><h3>Follow Us</h3></li>
-        <li><a href="javascript:void(0)">Facebook</a></li>
+        <li><a href="javascript:void(0)">About Us</a></li>
         <li><a href="javascript:void(0)">Twitter</a></li>
-        <li><a href="javascript:void(0)">YouTube</a></li>
       </ul>
       <ul>
         <li><h3>Legal</h3></li>
@@ -24,5 +28,5 @@
 
     <hr>
 
-    <p>Disclaimer area lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, nostrum repudiandae saepe.</p>
+    <p>We will not be help responsible for broken friendships and/or destroyed friendships.</p>
   </footer>
