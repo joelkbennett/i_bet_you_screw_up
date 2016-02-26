@@ -18,7 +18,9 @@ class Promise < ActiveRecord::Base
       "Expires in #{hours.ceil} hours!"
     elsif minutes >= 1
       "Expires in #{minutes.ceil} minutes!"
-    else
+    elsif time_difference > 0
+      "Expires in #{time_difference.ceil} seconds!"
+    else  
       "Expired!"
     end
   end
