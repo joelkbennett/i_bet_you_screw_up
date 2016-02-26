@@ -4,7 +4,7 @@ helpers do
   # end
 
   def current_user
-    @current_user = User.find(2)
+    @current_user = User.find(1)
   end
 
   def page_number
@@ -114,6 +114,11 @@ end
 get '/users' do
   @users =  User.all.paginate(:page => page_number, :per_page => 20)
   erb :'users/index'
+end
+
+get '/users/:id' do
+  @user = User.find(params[:id])
+  erb :'users/show'
 end
 
 post '/login' do
