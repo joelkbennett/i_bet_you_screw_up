@@ -5,12 +5,20 @@ class Bet < ActiveRecord::Base
 
   validates :user_id, uniqueness: { scope: [:promise_id] }
 
+  DEFAULT_BET = 10
+
   def user_name
     User.find(Promise.find(promise_id).user_id).name
   end
 
   def promise_content
     Promise.find(promise_id).content
+  end
+
+  private
+
+  def apply_bet
+    in_favour == promise.validated ? user.add_points(DEFAULT_BET) : user.subtrack_points(DEAFULT_BET)
   end
 
 end
