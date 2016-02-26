@@ -13,6 +13,7 @@ gem 'tux'
 
 gem 'bcrypt'
 gem 'json'
+gem 'pony'
 gem 'will_paginate'
 
 group :development, :test do

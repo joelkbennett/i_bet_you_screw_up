@@ -13,6 +13,7 @@ require 'pry'
 require 'pg'
 require 'bcrypt'
 require 'json'
+require 'pony'
 
 require 'will_paginate'
 require 'will_paginate/array'
