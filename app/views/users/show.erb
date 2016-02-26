@@ -4,8 +4,8 @@
 
     <header class="article-header profile-header">
       <div class="profile-details">
-        <h1>Some Username</h1>
-        <h2>Active since March, 2011</h2>
+        <h1><%= @current_user.name %></h1>
+        <h2>Active since <%= @current_user.created_at.to_date %></h2>
         <p>Overall Score: -7<br>
         Points: 50</p>
       </div>
