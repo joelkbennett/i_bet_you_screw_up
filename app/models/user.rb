@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
     first_name.capitalize + " " + last_name.capitalize
   end
 
+  def gravitar
+    hash = Digest::MD5.hexdigest(email)
+    "http://www.gravatar.com/avatar/#{hash}"
+  end
+
   private
   
   def password_complexity
