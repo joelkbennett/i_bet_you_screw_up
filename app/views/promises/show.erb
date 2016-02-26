@@ -64,9 +64,9 @@
             <h2>You have already bet on this promise.</h2>
             <p>Bet Value: <%= @current_user_bet.bet_value %></p>
             <% if @current_user_bet.in_favour %>
-              <p>You think would <%= @promise.user.name %> keep their promise!</p>
+              <p>You think <%= @promise.user.name %> would keep their promise!</p>
             <% else %>
-              <p>You think would <%= @promise.user.name %> would screw-up!</p>
+              <p>You think <%= @promise.user.name %> would would screw-up!</p>
             <% end %>
           </div>
         <% end %>
