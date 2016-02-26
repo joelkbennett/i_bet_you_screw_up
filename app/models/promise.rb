@@ -9,9 +9,13 @@ class Promise < ActiveRecord::Base
   validate :expiration_date_cannot_be_in_the_past, if: :expires_at
 
   def hours_until_expired
-    hours = ((expires_at.to_time - (DateTime.now - 8.hours)) / 1.hours).ceil
-    if hours > 0
-      "Expires in #{hours} hours!"
+    time_difference = expires_at.to_time - (Time.now - 8*60*60)
+    hours = (time_difference / (60*60))
+    minutes = (time_difference / 60)
+    if hours >= 1
+      "Expires in #{hours.ceil} hours!"
+    elsif minutes >= 1
+      "Expires in #{minutes.ceil} minutes!"
     else
       "Expired!"
     end
@@ -19,7 +23,7 @@ class Promise < ActiveRecord::Base
 
   private
     def expiration_date_cannot_be_in_the_past
-      if expires_at < (DateTime.now - 8.hours)
+      if expires_at.to_time < (Time.now - 8*60*60)
         errors.add(:expires_at, "can't be in the past")
       end
     end

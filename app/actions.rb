@@ -45,7 +45,9 @@ get '/' do
 end
 
 get '/promises' do
-  @promises = Promise.all.paginate(:page => page_number, :per_page => 20)
+  @show_expired = params[:show_expired]
+  puts @show_expired
+  @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
   erb :'promises/index'
 end
 
