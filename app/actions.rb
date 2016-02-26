@@ -31,11 +31,17 @@ helpers do
     @total_users_against_the_promise_to_be_kept = Bet.where("promise_id = ? AND in_favour = false", promise_id).count
   end
 
+  def check_flash
+    @flash = session[:flash] if session[:flash]
+    session[:flash] = nil
+  end 
+
 end
 
 before do
   current_user
   all_bets
+  check_flash
 end
 
 get '/' do
@@ -105,10 +111,6 @@ get '/profile' do
   end
 end
 
-post '/profile' do
-  # TODO: route for updates to user profile
-end
-
 get '/users' do
   @users =  User.all.paginate(:page => page_number, :per_page => 20)
   erb :'users/index'
@@ -120,7 +122,14 @@ get '/users/:id' do
 end
 
 post '/login' do
-  
+  user = User.find_by(email: params[:email])
+  if user.authenticate(params[:password])
+    session[:id] = @user.id
+    redirect '/'
+  else
+    session[:flash] = "Invalid login."
+    redirect '/login'
+  end
 end
 
 get '/logout' do
@@ -129,6 +138,7 @@ get '/logout' do
 end
 
 get '/signup' do
+  @user = User.new
   erb :'users/new'
 end
 
@@ -142,12 +152,13 @@ post '/signup' do
   )
   @user.password = params[:password]
   @user.password_confirmation = params[:pass_conf]
-  session[:id] = @user.id
 
   if @user.save
-    redirect '/promises'
+    session[:id] = @user.id
+    redirect "/users/#{@user.id}"
   else
-    'YIKES'
+    session[:flash] = "Signup Failed"
+    redirect '/signup'
   end
 end
 

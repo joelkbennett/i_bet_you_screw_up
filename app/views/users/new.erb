@@ -7,10 +7,13 @@
     </header>
 
     <section class="article-body">
+
+      <%= erb :'partials/flash_message_error' %>
+
       <form method="POST" action="/signup" class='new-user-form'>
         <div>
           <label class='sr-only' for='first_name'>First Name: </label>
-          <input type="text" name='first_name' id='first_name' placeholder='First Name'>
+          <input type="text" name='first_name' id='first_name' placeholder='First Name' value='<%= @user.first_name if @user %>'>
         </div>
 
         <div>
