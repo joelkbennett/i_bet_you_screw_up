@@ -1,4 +1,4 @@
-<section class="page-body">
+<section class="article-body">
     
   <article class="container page-article">
 
@@ -19,7 +19,9 @@
     </div>
 
     <% if @current_user.id %>
+
       <% if @current_user.id == @user_of_the_promise.id %>
+
         <% if @promise.validated.nil? %>
           <div class="form">
             <div class="promise-details">
@@ -43,7 +45,9 @@
             </div>
           <% end %>
         <% end %>
+
       <% else %>
+
         <% if !@current_user_bet %>
           <div class="form">
             <div class="promise-details">
@@ -69,6 +73,7 @@
           </div>
         <% end %>
       <% end %>
+
     <% else %>
       <div class="form">
         <div class="promise-details">
@@ -107,6 +112,8 @@
         <p class="comment-detail">Posted on: date</p>
       </div>
     </div>
+
+  </section>
 
     <!-- render pagination -->
 

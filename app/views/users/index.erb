@@ -8,17 +8,17 @@
 
       <section class="article-body users-list">
 
-      <% @users.each do |user| %>
-        <div class="user-profile">
-          <img src="<%= user.gravitar %>" class="profile-image-med">  
-          <div class="user-name"><%= user.name %></div>
-          <p>
-            <%= user.promises_kept %> promises kept</p>
-            <%= user.promises_broken %> promises broken!
-            <div class="user-rating user-rating-danger"><%= user.label %></div>
-          </p>
-        </div>                  
-      <% end %>
+        <% @users.each do |user| %>
+          <div class="user-profile">
+            <img src="<%= user.gravitar %>" class="profile-image-med">  
+            <div class="user-name"><%= user.name %></div>
+            <p>
+              <%= user.promises_kept %> promises kept</p>
+              <%= user.promises_broken %> promises broken!
+              <div class="user-rating user-rating-danger"><%= user.label %></div>
+            </p>
+          </div>                  
+        <% end %>
 
       </section>
 
