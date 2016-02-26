@@ -28,8 +28,13 @@ helpers do
   end
 
   def check_flash
-    @flash = session[:flash] if session[:flash]
-    session[:flash] = nil
+    if session[:flash_error]
+      @flash_error = session[:flash_error]
+      session[:flash_error] = nil
+    elsif session[:flash_success]
+      @flash_success = session[:flash_success]
+      session[:flash_success] = nil
+    end
   end 
 
 end
@@ -134,13 +139,20 @@ post '/promises/:id/comment/new' do |id|
 
 end
 
+post '/users/friends/new/:id' do |id|
+  Friendship.new(user_id: current_user.id, friend_id: id)
+  current_user.friends << User.find(id)
+  session[:flash_success] = "Added #{User.find(id).name} to friends!"
+  redirect "/users/#{id}"
+end
+
 post '/login' do
   user = User.find_by(email: params[:email])
   if user.authenticate(params[:password])
     session[:id] = user.id
     redirect "/users/#{user.id}"
   else
-    session[:flash] = "Invalid login."
+    session[:flash_error] = "Invalid login."
     redirect '/'
   end
 end
@@ -170,7 +182,7 @@ post '/signup' do
     session[:id] = @user.id
     redirect "/users/#{@user.id}"
   else
-    session[:flash] = "Signup Failed"
+    session[:flash_error] = "Signup Failed"
     redirect '/signup'
   end
 end
