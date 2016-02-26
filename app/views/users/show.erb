@@ -6,13 +6,13 @@
       <div class="profile-details">
         <h1><%= @current_user.name %></h1>
         <h2>Active since <%= @current_user.created_at.to_date %></h2>
-        <p>Overall Score: -7<br>
-        Points: 50</p>
+        <p>Overall Score: <%= @current_user.num_promises_kept - @current_user.num_promises_broken %></p>
+<!--         Points: 50</p>  -->
       </div>
 
       <div class="container">
         <div class="profile-score profile-score-up">
-          5
+          <%= @current_user.num_promises_kept %>
         </div>
 
         <div class="profile-image-container">
@@ -20,7 +20,7 @@
         </div>
 
         <div class="profile-score profile-score-down">
-          12
+          <%= @current_user.num_promises_broken %>
         </div>
       </div>
 
@@ -34,88 +34,67 @@
     <section class="article-footer">
 
       <h2>Your Activity</h2>
+
       <ul class="accordion-tabs">
+
         <li class="tab-header-and-content">
-          <a href="javascript:void(0)" class="is-active tab-link">Your Promises</a>
+
+          <a href="javascript:void(0)" class="is-active tab-link">
+            Your Promises
+          </a>
+
           <div class="tab-content">
-
-
-            <div class="promise">
-              <div class="promise-image">
-                <img src="http://placehold.it/400x400" alt="Logo image">
-              </div>
-              <div class="promise-content">
-                <a href='details/index.html'><h1>You promised...</h1></a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
-                <p class="promise-detail">Expires in 13 hours!</p>
-              </div>
-            </div>
-
-            <div class="promise">
-              <div class="promise-image">
-                <img src="http://placehold.it/400x400" alt="Logo image">
-              </div>
-              <div class="promise-content">
-                <a href='details/index.html'><h1>You promised...</h1></a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
-                <p class="promise-detail">Expires in 13 hours!</p>
-              </div>
-            </div>
-
-            <div class="promise">
-              <div class="promise-image">
-                <img src="http://placehold.it/400x400" alt="Logo image">
-              </div>
-              <div class="promise-content">
-                <a href='1/index.html'><h1>You promised...</h1></a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
-                <p class="promise-detail">Expires in 13 hours!</p>
-              </div>
-            </div>
-
-
+            <% if @current_user.promises.empty? %>
+              <p>You haven't made any promises yet! </p>
+              <p><a href="/promises/new">Make a promise! </a></p>
+            <% else %>
+              <% @current_user.promises.each do |promise| %>
+                <div class="promise">
+                  <div class="promise-image">
+                    <img src="http://placehold.it/400x400" alt="Logo image">
+                  </div>
+                  <div class="promise-content">
+                    <h1>You promised...</h1>
+                    <p><%= promise.content %></p>
+                    <p class="promise-detail">Expires in  <%= promise.hours_until_expired %> hours!</p>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
           </div>
+
         </li>
+
         <li class="tab-header-and-content">
-          <a href="javascript:void(0)" class="tab-link">Your Bets</a>
+
+          <a href="javascript:void(0)" class="tab-link">
+            Your Bets
+          </a>
+
           <div class="tab-content">
-  
-
-            <div class="promise">
-              <div class="promise-image">
-                <img src="http://placehold.it/400x400" alt="Logo image">
-              </div>
-              <div class="promise-content">
-                <a href='details/index.html'<h1>Some Person has promised...</h1></a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
-                <p class="promise-detail">You bet 150 points that Some Person would screw-up!</p>
-              </div>
-            </div>
-
-            <div class="promise">
-              <div class="promise-image">
-                <img src="http://placehold.it/400x400" alt="Logo image">
-              </div>
-              <div class="promise-content">
-                <a href='details/index.html'<h1>Some Person has promised...</h1></a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
-                <p class="promise-detail">You bet 150 points that Some Person would screw-up!</p>
-              </div>
-            </div>
-
-            <div class="promise">
-              <div class="promise-image">
-                <img src="http://placehold.it/400x400" alt="Logo image">
-              </div>
-              <div class="promise-content">
-                <a href='details/index.html'<h1>Some Person has promised...</h1></a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
-                <p class="promise-detail">You bet 150 points that Some Person would screw-up!</p>
-              </div>
-            </div>  
-
-
+            <% if @current_user.bets.empty? %>
+              <p>You haven't made any bets yet! </p>
+              <p><a href="/promises">Make a bet! </a></p>
+            <% else %>
+              <% @current_user.bets.each do |bet| %>
+                <div class="promise">
+                  <div class="promise-image">
+                    <img src="http://placehold.it/400x400" alt="Logo image">
+                  </div>
+                  <div class="promise-content">
+                    <a href='details/index.html'<h1><%= bet.user_name %> has promised...</h1></a>
+                    <p><%= bet.promise_content %></p>
+                    <% if bet.in_favour %>
+                      <p class="promise-detail">You bet <%= bet.bet_value %> that <%= bet.user_name %> would keep their promise! </p>
+                    <% else %>
+                      <p class="promise-detail">You bet <%= bet.bet_value %> that <%= bet.user_name %> would screw-up!</p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
           </div>
+
         </li>
         <!-- <li class="tab-header-and-content">
           <a href="javascript:void(0)" class="tab-link">What people are saying</a>
@@ -130,14 +109,8 @@
           </div>
         </li> -->
       </ul>
-
-
     
     </section>
-
-    <footer class="article-footer">
-     
-    </footer>
 
   </article>
 
