@@ -88,28 +88,29 @@
     <header class="comments-header">
       <h1>Comments</h1>
     </header>
-
-    <div class="comment">
-      <div class="comment-image">
-        <img src="http://placehold.it/400x400" alt="Logo image">
-      </div>
-      <div class="comment-content">
-        <a href='../../profile/index.html'><h1>Some Person has commented...</h1></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
-        <p class="comment-detail">Posted on: date</p>
-      </div>
+    <% if @current_user %>
+    <div class="form-new-comment">
+      <form method="post" action="/promises/<%= @promise.id %>/comment/new">
+        <textarea id="comment-body" name="body" rows="2" placeholder="Add a comment.."></textarea>
+        <input type="submit" value="Add Comment">
+      </form>
     </div>
+    <% else %>
+      <p><a href="/login">Login</a> to post a comment</p>
+    <% end %>
 
-    <div class="comment">
-      <div class="comment-image">
-        <img src="http://placehold.it/400x400" alt="Logo image">
+    <% @promise.ordered_comments.each do |comment| %>
+      <div class="comment">
+        <div class="comment-image">
+          <img src="<%= comment.author.gravatar %>" alt="Logo image">
+        </div>
+        <div class="comment-content">
+          <a href='/users/<%= comment.author.id %>'<h1><%= comment.author.name %></h1></a>
+          <p><%= comment.body %></p>
+          <p class="comment-detail">Posted on: <%= comment.created_at %></p>
+        </div>
       </div>
-      <div class="comment-content">
-        <a href='../../profile/index.html'><h1>Some Person has commented...</h1></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
-        <p class="comment-detail">Posted on: date</p>
-      </div>
-    </div>
+    <% end %>
 
   </section>
 

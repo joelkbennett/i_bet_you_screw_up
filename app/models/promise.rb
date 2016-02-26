@@ -2,6 +2,7 @@ class Promise < ActiveRecord::Base
 
   belongs_to :user
   has_many :bets, dependent: :destroy
+  has_many :comments
 
   validates :content, presence: true
   validates :expires_at, presence:true
@@ -9,6 +10,10 @@ class Promise < ActiveRecord::Base
   validate :expiration_date_cannot_be_in_the_past, if: :expires_at
 
   DEFAULT_WORTH = 25
+
+  def ordered_comments
+    comments.order(created_at: :desc)
+  end
 
   def hours_until_expired
     time_difference = expires_at.to_time - (Time.now - 8*60*60)
