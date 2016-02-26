@@ -19,7 +19,9 @@ class User < ActiveRecord::Base
 
   def gravatar
     hash = Digest::MD5.hexdigest(email)
-    "http://www.gravatar.com/avatar/#{hash}?s=250"
+    # "http://www.gravatar.com/avatar/#{hash}?s=250"
+    cat = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
+    "http://lorempixel.com/200/200/" + cat
   end
 
   def promises_kept 
