@@ -105,9 +105,10 @@ end
 
 get '/profile' do
   if @current_user
-    erb :'users/profile'
+    @user = @current_user
+    erb :'users/show'
   else
-    redirect '/signup'
+    redirect :'/'
   end
 end
 
