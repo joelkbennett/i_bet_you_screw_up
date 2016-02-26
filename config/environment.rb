@@ -10,6 +10,7 @@ require 'sinatra/contrib/all' # Requires cookies, among other things
 require 'digest/md5'
 
 require 'pry'
+require 'pry-byebug'
 require 'pg'
 require 'bcrypt'
 require 'json'

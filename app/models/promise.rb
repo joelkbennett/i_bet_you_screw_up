@@ -19,6 +19,18 @@ class Promise < ActiveRecord::Base
     end
   end
 
+  def self.check_expired
+    expired_promises = Promise.where(validated: nil).where('expires_at < ?', DateTime.now)
+    if expired_promises
+      expired_promises.update_all(validated: false)
+      expired_promises.each { |promise| promise.apply_promise_value }
+    end
+  end
+
+  def apply_promise_value
+    validated ? user.add_points(DEFAULT_WORTH) : user.subtract_points(DEFAULT_WORTH)
+  end  
+
   private
 
   def expiration_date_cannot_be_in_the_past
@@ -27,7 +39,5 @@ class Promise < ActiveRecord::Base
     end
   end
 
-  def apply_promise_value
-    promise.validated ? user.add_points(DEFAULT_WORTH) : user.subtrack_points(DEFAULT_WORTH)
-  end
+
 end

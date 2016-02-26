@@ -38,6 +38,7 @@ before do
   current_user
   all_bets
   check_flash
+  Promise.check_expired
 end
 
 get '/' do

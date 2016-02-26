@@ -15,10 +15,10 @@ class Bet < ActiveRecord::Base
     Promise.find(promise_id).content
   end
 
-  private
-
   def apply_bet
     in_favour == promise.validated ? user.add_points(DEFAULT_BET) : user.subtrack_points(DEAFULT_BET)
   end
+
+  private
 
 end
