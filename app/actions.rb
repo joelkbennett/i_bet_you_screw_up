@@ -28,9 +28,18 @@ helpers do
   end
 
   def check_flash
-    @flash = session[:flash] if session[:flash]
-    session[:flash] = nil
+    if session[:flash_error]
+      @flash_error = session[:flash_error]
+      session[:flash_error] = nil
+    elsif session[:flash_success]
+      @flash_success = session[:flash_success]
+      session[:flash_success] = nil
+    end
   end 
+
+  def friend_since(friend_id, user_id)
+    Friendship.find_by(user_id: user_id, friend_id: friend_id).created_at.to_date
+  end
 
 end
 
@@ -45,7 +54,9 @@ get '/' do
 end
 
 get '/promises' do
-  @promises = Promise.all.paginate(:page => page_number, :per_page => 20)
+  @show_expired = params[:show_expired]
+  puts @show_expired
+  @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
   erb :'promises/index'
 end
 
@@ -136,13 +147,20 @@ post '/promises/:id/comment/new' do |id|
 
 end
 
+post '/users/friends/new/:id' do |id|
+  Friendship.new(user_id: current_user.id, friend_id: id)
+  current_user.friends << User.find(id)
+  session[:flash_success] = "Added #{User.find(id).name} to friends!"
+  redirect "/users/#{id}"
+end
+
 post '/login' do
   user = User.find_by(email: params[:email])
   if user && user.authenticate(params[:password])
     session[:id] = user.id
     redirect "/users/#{user.id}"
   else
-    session[:flash] = "Invalid login."
+    session[:flash_error] = "Invalid login."
     redirect '/'
   end
 end
@@ -172,7 +190,7 @@ post '/signup' do
     session[:id] = @user.id
     redirect "/users/#{@user.id}"
   else
-    session[:flash] = "Signup Failed"
+    session[:flash_error] = "Signup Failed"
     redirect '/signup'
   end
 end
