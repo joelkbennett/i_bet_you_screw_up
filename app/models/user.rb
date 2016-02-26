@@ -19,6 +19,14 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{hash}"
   end
 
+  def num_promises_kept
+    promises.find_all { |promise| promise.validated }.count
+  end
+
+  def num_promises_broken
+    promises.find_all { |promise| !promise.validated }.count
+  end
+
   private
   
   def password_complexity
