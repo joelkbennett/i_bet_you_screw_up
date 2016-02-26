@@ -1,7 +1,7 @@
 .cards {
   @include display(flex);
   @include flex-wrap(wrap);
-  @include justify-content(space-between);
+  /*@include justify-content(space-between);*/
 }
 
 .card {
@@ -19,9 +19,12 @@
   $card-margin: 1em;
   $card-image-hover-opacity: 0.7;
   $card-image-hover-color: #F8F2B4;
+  $promise-color: $base-font-color;
+  $promise-detail-color: transparentize($promise-color, 0.5);
+  $promise-image-vert-alignment: top;
 
   @include flex-basis(15em);
-  @include flex-grow(1);
+  /*@include flex-grow(1);*/
   @include transition (all 0.2s ease-in-out);
   background-color: $card-background;
   border-radius: $base-border-radius;
@@ -42,6 +45,8 @@
       @include transition (all 0.2s ease-in-out);
       border-top-left-radius: $base-border-radius;
       border-top-right-radius: $base-border-radius;
+      height: 150px;
+      max-height: 150px;
       width: 100%;
       opacity: 1;
     }
@@ -55,6 +60,11 @@
     font-weight: bold;
     line-height: 1.5em;
     padding: ($base-spacing / 3) ($base-spacing / 2);
+
+    h1 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0;
+    }
   }
 
   .card-copy {
@@ -64,6 +74,16 @@
 
     p {
       margin: 0 0 ($base-spacing / 2);
+    }
+
+    p.promise-detail {
+      color: $promise-detail-color;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    .card-button {
+      width: 100%;
     }
   }
 

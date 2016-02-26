@@ -1135,25 +1135,14 @@ header.navigation {
   -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-pack: justify;
-  -moz-box-pack: justify;
-  box-pack: justify;
-  -webkit-justify-content: space-between;
-  -moz-justify-content: space-between;
-  -ms-justify-content: space-between;
-  -o-justify-content: space-between;
-  justify-content: space-between;
-  -ms-flex-pack: justify; }
+  /*@include justify-content(space-between);*/ }
 
 .card {
   -webkit-flex-basis: 15em;
   -moz-flex-basis: 15em;
   flex-basis: 15em;
   -ms-flex-preferred-size: 15em;
-  -webkit-flex-grow: 1;
-  -moz-flex-grow: 1;
-  flex-grow: 1;
-  -ms-flex-positive: 1;
+  /*@include flex-grow(1);*/
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -1175,6 +1164,8 @@ header.navigation {
       transition: all 0.2s ease-in-out;
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
+      height: 150px;
+      max-height: 150px;
       width: 100%;
       opacity: 1; }
   .card .card-header {
@@ -1187,12 +1178,21 @@ header.navigation {
     font-weight: bold;
     line-height: 1.5em;
     padding: 0.5em 0.75em; }
+    .card .card-header h1 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0; }
   .card .card-copy {
     font-size: 0.9em;
     line-height: 1.5em;
     padding: 0.75em 0.75em; }
     .card .card-copy p {
       margin: 0 0 0.75em; }
+    .card .card-copy p.promise-detail {
+      color: rgba(51, 51, 51, 0.5);
+      font-size: 0.9em;
+      font-style: italic; }
+    .card .card-copy .card-button {
+      width: 100%; }
   .card:focus, .card:hover {
     cursor: pointer; }
     .card:focus img, .card:hover img {
