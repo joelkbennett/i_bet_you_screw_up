@@ -121,7 +121,7 @@ get '/users/:id' do
   erb :'users/show'
 end
 
-post '/promises/:id/new_comment' do |id|
+post '/promises/:id/comment/new' do |id|
   promise = Promise.find(id)
   user = @current_user
   comment = Comment.new(
@@ -140,11 +140,11 @@ end
 post '/login' do
   user = User.find_by(email: params[:email])
   if user.authenticate(params[:password])
-    session[:id] = @user.id
-    redirect '/'
+    session[:id] = user.id
+    redirect "/users/#{user.id}"
   else
     session[:flash] = "Invalid login."
-    redirect '/login'
+    redirect '/'
   end
 end
 
