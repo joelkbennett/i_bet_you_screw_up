@@ -1,11 +1,11 @@
 helpers do
-  # def current_user
-  #   @current_user = User.find(session[:id]) if session[:id]
-  # end
-
   def current_user
-    @current_user = User.find(2)
+    @current_user = User.find(session[:id]) if session[:id]
   end
+
+  # def current_user
+  #   @current_user = User.find(2)
+  # end
 
   def page_number
     @page_number = params[:page_number] || 1
@@ -149,4 +149,10 @@ post '/signup' do
   else
     'YIKES'
   end
+end
+
+get '/admin/:id' do |id|
+  # @user = User.find(id)
+  session[:id] = id
+  redirect '/'
 end
