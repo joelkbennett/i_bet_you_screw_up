@@ -19,6 +19,25 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{hash}"
   end
 
+  def promises_kept 
+    promises.where(validated: true).count
+  end
+
+  def promises_broken
+    promises.where(validated: false).count
+  end
+
+  def label
+    promise_delta = promises_kept - promises_broken
+    if promise_delta > 1
+      "Promise Keeper"
+    elsif promise_delta < 1
+      "Oath Breaker"
+    else
+      "Neutral"
+    end
+  end
+
   private
   
   def password_complexity

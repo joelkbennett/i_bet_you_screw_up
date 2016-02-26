@@ -1,7 +1,30 @@
-<h1>Users</h1>
+ <section class="page-body">
 
-<% @users.each do |user| %>
+    <article class="container page-article">
+      
+      <header class="article-header">
+        <h1>Users</h1>
+      </header>
 
-  <div><%= user.name %>
+      <section class="article-body users-list">
 
-<% end %>
+      <% @users.each do |user| %>
+        <div class="user-profile">
+          <img src="<%= user.gravitar %>" class="profile-image-med">  
+          <div class="user-name"><%= user.name %></div>
+          <p>
+            <%= user.promises_kept %> promises kept</p>
+            <%= user.promises_broken %> promises broken!
+            <div class="user-rating user-rating-danger"><%= user.label %></div>
+          </p>
+        </div>                  
+      <% end %>
+
+      </section>
+
+      <footer class="article-footer">
+        
+      </footer>
+
+    </article>
+  </section>
