@@ -1,7 +1,7 @@
 class Promise < ActiveRecord::Base
 
   belongs_to :user
-  has_many :bets
+  has_many :bets, dependent: :destroy
 
   validates :content, presence: true
   validates :expires_at, presence:true

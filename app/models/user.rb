@@ -2,9 +2,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  has_many :bets
-  has_many :promises
-  has_many :comments
+  has_many :bets, dependent: :destroy
+  has_many :promises, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
