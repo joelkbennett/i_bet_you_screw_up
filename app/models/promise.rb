@@ -2,6 +2,7 @@ class Promise < ActiveRecord::Base
 
   belongs_to :user
   has_many :bets
+  has_many :comments
 
   validates :content, presence: true
   validates :expires_at, presence:true
