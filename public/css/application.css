@@ -532,6 +532,9 @@ td,
 th {
   padding: 0; }
 
+.page-body {
+  padding-left: 1.5em; }
+
 .container {
   max-width: 68em;
   margin-left: auto;
@@ -545,8 +548,7 @@ th {
   margin-bottom: 2em; }
 
 .article-header {
-  margin-top: 1em;
-  padding-left: 1em; }
+  margin-top: 1.5em; }
 
 .comments-header {
   font-size: 0.7em; }
@@ -1063,7 +1065,6 @@ header.navigation {
   display: table;
   margin-bottom: 1.5em;
   padding-bottom: 1em;
-  padding-left: 1em;
   width: 100%; }
   .promise .profile-image,
   .promise .promise-content,
@@ -1216,7 +1217,7 @@ header.navigation {
 
 .form {
   text-align: center;
-  max-width: 50%;
+  max-width: 40%;
   margin-left: auto;
   margin-right: auto; }
   .form::after {
@@ -1227,16 +1228,16 @@ header.navigation {
     margin-bottom: -15px; }
   .form .promise-details p {
     margin-bottom: 0px; }
+  .form .promise-details textarea {
+    height: 25%;
+    width: 70%; }
   .form .promise-details input {
-    margin: auto;
     margin-bottom: 20px;
     margin-left: 5px;
     margin-right: 5px; }
-    .form .promise-details input#promise_text {
-      height: 25%;
-      width: 40%; }
     .form .promise-details input#promise_date {
-      width: 40%; }
+      width: 40%;
+      margin: auto; }
     .form .promise-details input.place_bet {
       min-width: 120px; }
     .form .promise-details input.verify-promise {
@@ -1376,8 +1377,7 @@ header.navigation {
 .users-list {
   max-width: 68em;
   margin-left: auto;
-  margin-right: auto;
-  padding-left: 1em; }
+  margin-right: auto; }
   .users-list::after {
     clear: both;
     content: "";
@@ -1570,7 +1570,6 @@ button {
   display: table;
   margin-bottom: 1.5em;
   padding-bottom: 1em;
-  padding-left: 1em;
   width: 100%; }
   .comment .comment-image,
   .comment .comment-content,

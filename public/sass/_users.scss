@@ -1,7 +1,6 @@
 .users-list {
   @include clearfix;
   @include outer-container;
-  padding-left: 1em;
 
   .user-profile {
     @include span-columns(3);

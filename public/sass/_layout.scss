@@ -1,9 +1,10 @@
 .page-body {
-
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .container {
-  @include outer-container;
+  @include outer-container();
 }
 
 .page-article {
@@ -11,8 +12,7 @@
 }
 
 .article-header {
-  margin-top: 1em;
-  padding-left: 1em;
+  margin-top: 1.5em;
 }
 
 .comments-header {
