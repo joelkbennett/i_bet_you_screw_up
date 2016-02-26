@@ -39,3 +39,19 @@ $form-width: 40%;
   }
 
 }
+
+.form-new-comment {
+  text-align: left;
+  textarea {
+    height: 10%;
+    float: left;
+    margin-bottom: 20px;
+  }
+
+  input {
+    width: 120px;
+    height: 30px;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+}
