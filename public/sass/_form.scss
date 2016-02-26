@@ -1,0 +1,43 @@
+$form-width: 50%;
+
+.form { 
+  text-align: center;
+  @include outer-container($form-width); 
+  
+  .promise-details {
+
+    h2 {
+      margin-bottom: -15px;
+    }
+
+    p {
+      margin-bottom: 0px;
+    }
+
+    input {
+      margin: auto;
+      margin-bottom: 20px;
+      margin-left: 5px;
+      margin-right: 5px;
+
+      &#promise_text {
+        height: 25%;
+        width: 40%;
+      }
+
+      &#promise_date {
+        width: 40%;
+      }
+
+      &.place_bet {
+        min-width: 120px;
+      }
+
+      &.verify-promise {
+        min-width: 180px;
+      }
+
+    }
+  }
+
+}

@@ -1,0 +1,20 @@
+.page-body {
+
+}
+
+.container {
+  @include outer-container;
+}
+
+.page-article {
+  margin-bottom: 2em;
+}
+
+.article-header {
+  margin-top: 1em;
+  padding-left: 1em;
+}
+
+.comments-header {
+  font-size: 0.7em;
+}

@@ -1,0 +1,102 @@
+.users-list {
+  @include clearfix;
+  @include outer-container;
+  padding-left: 1em;
+
+  .user-profile {
+    @include span-columns(3);
+    @include omega(4n);
+    text-align: center;
+    margin-bottom: 2em;
+    position: relative;
+    border-bottom: thin solid #ddd;
+
+    img {
+      border-radius: 50%;
+    }
+
+    p {
+      margin-bottom: .5em;
+    }
+  }
+}
+
+.profile-image {
+  border-radius: 50%;
+}
+
+.profile-image-large {
+  width: 300px;
+}
+
+.profile-image-med {
+  width: 200px;
+}
+
+.profile-image-small {
+  width: 75px; 
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.user-rating {
+  font-style: italic;
+  padding: .25em 1em;
+  position: absolute;
+  top: 20px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,.1)
+}
+
+.user-rating-danger {
+  background-color: red;
+  color: white;
+}
+
+.user-rating-neutral {
+  background-color: #ddd;
+  color: #333;
+}
+
+.user-rating-good {
+  background-color: green;
+  color: white;
+}
+
+.user-img {
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 1.4em;
+  img {
+    border-radius: 50%;
+    display: block;
+    height: auto;
+    max-width: none;
+    width: 7.5em;
+  }
+}
+
+/* Profile Styles */
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-score {
+  font-size: 6em;
+}
+
+.profile-score-up {
+  @include span-columns(3);
+  color: green;
+}
+
+.profile-image-container {
+  @include span-columns(6);
+}
+
+.profile-score-down {
+  @include span-columns(3);
+  color: red;
+}
