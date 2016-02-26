@@ -36,7 +36,7 @@ helpers do
   end
 
   def promise_expires_in
-    @promise_expires_in = ((@promise.expires_at.to_time - DateTime.now) / 1.hours).ceil
+    @promise_expires_in = ((@promise.expires_at.to_time - Date.today.to_time) / 1.hours)
   end
 
   def total_users_for_the_promise_to_be_kept(promise_id)
@@ -64,6 +64,7 @@ get '/promises' do
 end
 
 get '/promises/new' do
+  @promise = Promise.new
   erb :'promises/new'
 end
 
@@ -71,6 +72,7 @@ get '/promises/:id' do |id|
   a_promise(id)
   user_of_the_promise(@promise.user_id)
   all_bets_on_a_promise(id)
+  promise_expires_in
   total_users_for_the_promise_to_be_kept(id)
   total_users_against_the_promise_to_be_kept(id)
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
@@ -85,6 +87,8 @@ post '/promises/new' do
   )
   if promise.save
     redirect "/promises/#{promise.id}"
+  else
+    redirect 'promises/new'
   end
 end
 
