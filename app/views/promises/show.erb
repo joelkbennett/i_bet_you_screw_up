@@ -11,7 +11,7 @@
         <div class="details">
           <p><%= @promise.content %></p>
         </div>
-        <p class="promise-detail">Expires in <%= @promise_expires_in %> hours!</p>
+        <p class="promise-detail">Expires in <%= @promise.hours_until_expired %> hours!</p>
       </div>
       <div class="user-img">
         <img src="http://placehold.it/400x400">  

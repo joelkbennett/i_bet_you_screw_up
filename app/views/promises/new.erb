@@ -13,7 +13,7 @@
           <label for="promise-text"><h2>Promise:</h2></label><br>
           <textarea id="promise-text" name="content" rows="4" placeholder="Your promise.." value="<%= @promise.content %>"></textarea>
           <label for="promise-date"><h2>Expiry Date:</h2></label><br>
-          <input id="promise_date" type="date" name="expires_at" value="<%= @promise.expires_at %>">
+          <input id="promise_date" type="datetime-local" name="expires_at" value="<%= @promise.expires_at %>">
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id.</p><br>
           <input type="submit" value="Submit">
         </form>

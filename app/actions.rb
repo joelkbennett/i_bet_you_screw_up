@@ -35,10 +35,6 @@ helpers do
     @bet_for_a_user_on_a_promise = Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
   end
 
-  def promise_expires_in
-    @promise_expires_in = ((@promise.expires_at.to_time - Date.today.to_time) / 1.hours)
-  end
-
   def total_users_for_the_promise_to_be_kept(promise_id)
     @total_users_for_the_promise_to_be_kept = Bet.where("promise_id = ? AND in_favour = true", promise_id).count
   end
@@ -72,7 +68,6 @@ get '/promises/:id' do |id|
   a_promise(id)
   user_of_the_promise(@promise.user_id)
   all_bets_on_a_promise(id)
-  promise_expires_in
   total_users_for_the_promise_to_be_kept(id)
   total_users_against_the_promise_to_be_kept(id)
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
