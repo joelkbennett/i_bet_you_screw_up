@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   def gravitar
     hash = Digest::MD5.hexdigest(email)
-    "http://www.gravatar.com/avatar/#{hash}"
+    "http://www.gravatar.com/avatar/#{hash}?s=250"
   end
 
   def promises_kept 
