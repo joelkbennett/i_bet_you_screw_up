@@ -1,62 +1,100 @@
-<div class="promise">
-  <div class="promise-content">
-    <div class="details">
-      <p><%= @promise.content %></p>
+<%= erb :'partials/nav_bar' %>
+
+<section class="page-body">
+    
+  <article class="container page-article">
+
+    <header class="article-header">
+      <h1></h1>
+    </header>
+
+    <div class="promise">
+      <div class="promise-content">
+        <div class="details">
+          <p><%= @promise.content %></p>
+        </div>
+        <p class="promise-detail">Expires in <%= @promise_expires_in %> hours!</p>
+      </div>
+      <div class="user-img">
+        <img src="http://placehold.it/400x400">  
+      </div>
     </div>
-    <p class="promise-detail">Expires in <%= @promise_expires_in %> hours!</p>
-  </div>
-  <div class="user-img">
-    <img src="http://placehold.it/400x400">  
-  </div>
-</div>
 
-  <div>
-    <%= @current_user_bet.bet_value %>
-    <%= @current_user_bet.created_at %>
-  </div>
-<% else %>  
-  <div>
-    <form id="new-bet-form" method="post" action="/promises/<%= @promise.id %>/new_bet">
-      <input type="text" name="bet_value" placeholder="Enter Bet Value" required autofocus>
-      <input type="submit" name="in_favour" value="For">
-      <input type="submit" name="not_in_favour" value="Against">
-    </form>
-  </div>
+    <% if @current_user %>
 
+      <% if @current_user_bet %>
+        <div class="form">
+          <div class="promise-details">
+            <form>
+              <h2>Will <%= @user_of_the_promise.name %> keep their promise?</h2>
+              <br>
+              <input class="place_bet" type="button" name="yes" value="Yes (33)">
+              <input class="place_bet" type="button" name="yes" value="No (45)">
+            </form>
+            <br>
+          </div>
+        </div>
 
-<% if @current_user_bet %>
-  <div class="form">
-    <div class="promise-details">
-      <form>
-        <h2>Will <%= @user_of_the_promise.name %> keep their promise?</h2>
-        <br>
-        <input class="place_bet" type="button" name="yes" value="Yes (33)">
-        <input class="place_bet" type="button" name="yes" value="No (45)">
-      </form>
-      <br>
+      <% else %>
+        <div class="form">
+          <div class="promise-details">
+            <form>
+              <h2>Did you keep your promise?</h2>
+              <br>
+              <input class="verify-promise" type="button" name="yes" value="Promise Kept">
+              <input class="verify-promise" type="button" name="yes" value="Promise Not Kept">
+            </form>
+            <br>
+          </div>
+        </div>
+      <% end %>
+
+    <% else %>
+
+      <div class="form">
+        <div class="promise-details">
+          <form>
+            <h2>Login to place a bet.</h2>
+            <br>
+            <input type="button" name="yes" value="Login">
+          </form>
+          <br>
+        </div>
+      </div>
+
+    <% end %>
+
+    <header class="comments-header">
+      <h1>Comments</h1>
+    </header>
+
+    <div class="comment">
+      <div class="comment-image">
+        <img src="http://placehold.it/400x400" alt="Logo image">
+      </div>
+      <div class="comment-content">
+        <a href='../../profile/index.html'<h1>Some Person has commented...</h1></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
+        <p class="comment-detail">Posted on: date</p>
+      </div>
     </div>
-  </div>
-<% end %>
 
-<div class="form">
-  <div class="promise-details">
-    <form>
-      <h2>Did you keep your promise?</h2>
-      <br>
-      <input class="verify-promise" type="button" name="yes" value="Promise Kept">
-      <input class="verify-promise" type="button" name="yes" value="Promise Not Kept">
-    </form>
-    <br>
-  </div>
-</div>
+    <div class="comment">
+      <div class="comment-image">
+        <img src="http://placehold.it/400x400" alt="Logo image">
+      </div>
+      <div class="comment-content">
+        <a href='../../profile/index.html'<h1>Some Person has commented...</h1></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, aspernatur, quia modi minima debitis tempora ducimus quam vero impedit alias earum nemo error tenetur sed.</p>
+        <p class="comment-detail">Posted on: date</p>
+      </div>
+    </div>
 
-<div class="form">
-  <div class="promise-details">
-    <form>
-      <h2>Login to place a bet.</h2>
-      <br>
-      <input type="button" name="yes" value="Login">
-    </form>
-    <br>
-  </div>
-</div>
+    <%=# erb :'partials/pagination' %>
+
+  </article>
+
+</section>s
+
+
+<%= erb :'partials/footer' %>
