@@ -37,6 +37,10 @@ helpers do
     end
   end 
 
+  def friend_since(friend_id, user_id)
+    Friendship.find_by(user_id: user_id, friend_id: friend_id).created_at.to_date
+  end
+
 end
 
 before do

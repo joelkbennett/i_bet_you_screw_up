@@ -6,6 +6,15 @@
       <div class="profile-details">
         <h1><%= @user.name %></h1>
         <h2>Active since <%= @user.created_at.to_date %></h2>
+        <%= erb :'partials/flash_message_error' %>
+        <% if @current_user.friends.include?(@user) %>
+          <p>Your friend since <%= Friendship.where(user_id = @current_user.id && friend_id = @user.id).created_at %></p>
+        <% else %>
+          <form method="post" action="/users/friends/new/<%= @user.id %>">
+            <input type="submit" value="Add Friend">
+          </form>
+        <% end %>
+
       <p>Overall Score: <%= @user.promises_kept - @user.promises_broken %></p>
 <!--         Points: 50</p>  -->
       </div>
