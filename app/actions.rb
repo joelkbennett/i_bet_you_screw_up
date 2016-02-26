@@ -69,8 +69,10 @@ post '/promises/new' do
     user_id: @current_user.id
   )
   if promise.save
+    session[:flash] = 'Promise created'
     redirect "/promises/#{promise.id}"
   else
+    session[:flash] = 'There was a problem'
     redirect 'promises/new'
   end
 end
@@ -136,7 +138,7 @@ end
 
 post '/login' do
   user = User.find_by(email: params[:email])
-  if user.authenticate(params[:password])
+  if user && user.authenticate(params[:password])
     session[:id] = user.id
     redirect "/users/#{user.id}"
   else
