@@ -1098,7 +1098,7 @@ header.navigation {
     .promise .promise-content .details h1 {
       font-size: 1.9em; }
     .promise .promise-content .details p {
-      font-size: 1.2em; }
+      font-size: 1.8em; }
 
 .cards {
   display: -webkit-box;
@@ -1230,14 +1230,12 @@ header.navigation {
   .form .promise-details p {
     margin-bottom: 0px; }
   .form .promise-details textarea {
-    height: 25%;
-    width: 70%; }
+    height: 25%; }
   .form .promise-details input {
     margin-bottom: 20px;
     margin-left: 5px;
     margin-right: 5px; }
     .form .promise-details input#promise_date {
-      width: 40%;
       margin: auto; }
     .form .promise-details input.place_bet {
       min-width: 120px; }
