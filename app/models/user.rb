@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: /[A-Za-z0-9\._%+-]+@[A-Za-z0-9\.-]+\.[A-Za-z]{2,}/, message: "only allows valid email" }
 
+  before_create :add_initial_points
+
+  INITIAL_POINTS = 100
+
   # validate :password_complexity
 
   def name
@@ -50,5 +54,9 @@ class User < ActiveRecord::Base
   #     errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
   #   end
   # end
+  
+  def add_initial_points 
+    self.points = INITIAL_POINTS
+  end
 
 end

@@ -6,8 +6,7 @@
       <div class="profile-details">
         <h1><%= @user.name %></h1>
         <h2>Active since <%= @user.created_at.to_date %></h2>
-      <p>Overall Score: <%= @user.promises_kept - @user.promises_broken %></p>
-<!--         Points: 50</p>  -->
+        <p>Points: <%= @user.points %></p>
       </div>
 
       <div class="container">
