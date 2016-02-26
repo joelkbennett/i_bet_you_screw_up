@@ -15,10 +15,6 @@ helpers do
     @bets = Bet.all
   end
 
-  def a_promise(promise_id)
-    @promise = Promise.find(promise_id)
-  end
-
   def bet_for_a_user_on_a_promise(user_id, promise_id)
     @bet_for_a_user_on_a_promise = Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
   end
@@ -59,7 +55,7 @@ get '/promises/new' do
 end
 
 get '/promises/:id' do |id|
-  a_promise(id)
+  @promise = Promise.find(id)
   total_users_for_the_promise_to_be_kept(id)
   total_users_against_the_promise_to_be_kept(id)
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
@@ -80,7 +76,7 @@ post '/promises/new' do
 end
 
 post '/promises/:id/new_bet' do |id|
-  a_promise(id)
+  @promise = Promise.find(id)
   total_users_for_the_promise_to_be_kept(id)
   bet_in_favour = true if params[:in_favour] =~ /Yes/
   bet_in_favour = false if params[:not_in_favour] =~ /No/
@@ -96,7 +92,7 @@ post '/promises/:id/new_bet' do |id|
 end
 
 post '/promises/:id/validate' do |id|
-  a_promise(id)
+  @promise = Promise.find(id)
   validation = true if params[:yes] == "Promise Kept"
   validation = false if params[:no] == "Promise Not Kept"
   @promise.update(validated: validation)
