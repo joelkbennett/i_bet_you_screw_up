@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :bets, dependent: :destroy
   has_many :promises, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :friendships
+  has_many :friends, through: :friendships
+
 
   validates :first_name, presence: true
   validates :last_name, presence: true

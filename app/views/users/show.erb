@@ -6,7 +6,16 @@
       <div class="profile-details">
         <h1><%= @user.name %></h1>
         <h2>Active since <%= @user.created_at.to_date %></h2>
-        <p>Points: <%= @user.points %></p>
+        <%= erb :'partials/flash_message_error' %>
+        <% if @current_user.friends.include?(@user) || @current_user == @user %>
+          <p>Your friend since <%= friend_since(@user, @current_user) %></p>
+        <% else %>
+          <form method="post" action="/users/friends/new/<%= @user.id %>">
+            <input type="submit" value="Add Friend">
+          </form>
+        <% end %>
+
+      <p>Points: <%= @user.points %></p>
       </div>
 
       <div class="container">
