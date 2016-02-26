@@ -13,6 +13,14 @@ class Promise < ActiveRecord::Base
     ((expires_at.to_time - (DateTime.now - 8.hours)) / 1.hours).ceil
   end
 
+  def creator
+    User.find(user_id)
+  end
+
+  def ordered_comments
+    comments.order(created_at: :desc)
+  end
+
   private
     def expiration_date_cannot_be_in_the_past
       if expires_at < (DateTime.now - 8.hours)
