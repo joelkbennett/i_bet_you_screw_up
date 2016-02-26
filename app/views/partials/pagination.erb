@@ -1,0 +1,19 @@
+ <footer class="article-footer">
+  <div class="pagination">
+    <ul>
+      <% if @page_number > 1 %>
+        <li class="page-prev"><a href="/promises?page=<%= @page_number - 1 %>">Prev</a></li>
+      <% end %>
+      <li>
+        <ul>
+          <% 1.upto(@promises.total_pages) do |page_number| %>
+            <li><a href="/promises?page=<%= page_number %>"><%= page_number %></a></li>
+          <% end %>
+        </ul>
+      </li>
+      <% if @page_number < @promises.total_pages %>
+        <li class="page-next"><a href="/promises?page=<%= @page_number + 1 %>">Next</a></li>
+      <% end %>
+    </ul>
+  </div>
+</footer>
