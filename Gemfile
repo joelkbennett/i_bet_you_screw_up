@@ -18,6 +18,8 @@ gem 'will_paginate'
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-byebug'
+  gem 'byebug'
   gem 'shotgun'
   gem 'pg'
   gem 'bourbon'

@@ -50,6 +50,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def add_points(value)
+    self.points += value
+    self.save
+  end
+
+  def subtract_points(value)
+    self.points -= value
+    self.save
+  end
+
   private
   
   # def password_complexity
@@ -60,14 +70,6 @@ class User < ActiveRecord::Base
   
   def add_initial_points 
     self.points = INITIAL_POINTS
-  end
-
-  def add_points(value)
-    self.points += value
-  end
-
-  def subtract_points(value)
-    self.points -= value
   end
 
 end
