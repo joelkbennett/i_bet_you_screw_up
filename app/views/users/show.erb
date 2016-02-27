@@ -71,8 +71,8 @@
                   </div>
                   <div class="promise-content">
                     <h1>You promised...</h1>
-                    <p><%= promise.content %></p>
-                    <p class="promise-detail">Expires in  <%= promise.hours_until_expired %> hours!</p>
+                    <a href='promises/<%= promise.id %>'><p><%= promise.content %></p></a>
+                    <p class="promise-detail"><%= promise.hours_until_expired %></p>
                   </div>
                 </div>
               <% end %>
