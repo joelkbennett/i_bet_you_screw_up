@@ -18,7 +18,9 @@
         </div>
       </div>
       <div class="cards">
+
         <% @promises.each do |promise| %>
+
           <div class="<% if promise.hours_until_expired == "Expired!" %>card-expired<% end %> card">
             <div class="card-image">
               <img src="http://placehold.it/400x400" alt="Logo image">
@@ -29,10 +31,86 @@
             <div class="card-copy">
               <p><%= promise.content[0..20] %>....</p>
               <p class="promise-detail"><%= promise.hours_until_expired %></p>
-              <a class="button button-default card-button" href='#'>Quick Wager</a><br><br>
-              <a class="button button-default card-button" href='promises/<%= promise.id %>'>Details</a>
+
+              <% if @current_user %> <!-- LOGGED IN -->
+
+                <% if promise.expired? %> <!-- PROMISE EXPIRED -->
+
+                  <% if promise.validated %> <!-- Promise kept -->
+                    <p>Promise kept!</p>
+                  <% else %> <!-- Screwed up -->
+                    <p><%= promise.user.first_name %> screwed up..</p>
+                  <% end %> 
+
+                <% else %> <!-- PROMISE NOT EXPIRED -->
+
+                  <% if @current_user == promise.user %> <!-- YOUR PROMISE -->
+ 
+                    <div class="modal">
+                      <label for="modal-1">
+                        <div class="modal-trigger">Validate your promise!</div>
+                      </label>
+                      <input class="modal-state" id="modal-1" type="checkbox" />
+                      <div class="modal-fade-screen">
+                        <div class="modal-inner">
+                          <div class="modal-close" for="modal-1"></div>
+                          <h1>Did you keep your promise?</h1>
+                          <form method="post" action="/promises/<%= promise.id %>/validate">
+                            <input class="verify-promise" type="submit" name="yes" value="Yes">
+                            <input class="verify-promise" type="submit" name="no" value="No">
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                  <% else %> <!-- NOT YOUR PROMISE -->
+
+                    <% if @current_user.already_bet?(promise.id) %> <!-- Already bet -->
+
+                      <div class="promise-content">
+                        <p>You bet <%= @current_user.bet_value(promise.id) %>pts that
+                        <% if @current_user.bet_in_favour?(promise.id) %>
+                          <%= promise.user.name %> will keep their promise!</p>
+                        <% else %>
+                          <%= promise.user.name %> will screw-up!</p>
+                        <% end %>
+                      </div>
+
+                    <% else %> <!-- Prompt user to bet on promise -->
+                  
+                      <div class="modal">
+                        <label for="modal-2">
+                          <div class="modal-trigger">Quick Wager</div>
+                        </label>
+                        <input class="modal-state" id="modal-2" type="checkbox" />
+                        <div class="modal-fade-screen">
+                          <div class="modal-inner">
+                            <div class="modal-close" for="modal-2"></div>
+                            <h1>Will <%= promise.user.first_name %> keep their promise?</h1>
+                            <form method="post" action="/promises/<%= promise.id %>/new_bet">
+                              <input class="place_bet" type="text" name="bet_value" placeholder="Enter Bet Value" required autofocus>
+                              <input class="place_bet" type="submit" name="in_favour" value="Yes (<%= total_users_for_the_promise_to_be_kept(promise.id) %>)">
+                              <input class="place_bet" type="submit" name="not_in_favour" value="No (<%= total_users_against_the_promise_to_be_kept(promise.id) %>)">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                    <% end %>
+
+                  <% end %>
+
+                <% end %>
+
+              <% else %>
+
+                <p><a href="/">Login</a> to place a bet!</p>
+
+              <% end %>
+
             </div>
           </div>
+
         <% end %>
       </div>
 
