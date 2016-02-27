@@ -51,10 +51,15 @@ get '/' do
 end
 
 get '/promises' do
-  @show_expired = params[:show_expired]
-  puts @show_expired
   @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
   erb :'promises/index'
+end
+
+get '/friends/promises' do
+  content_type :json
+  @friends = @current_user.friends
+  @promises = Promise.all.where(:user_id => @friends.select("id")).reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  [@friends, @promises].to_json
 end
 
 get '/promises/new' do
@@ -105,7 +110,7 @@ post '/promises/:id/validate' do |id|
   @promise = Promise.find(id)
   validation = true if params[:yes] == "Promise Kept"
   validation = false if params[:no] == "Promise Not Kept"
-  @promise.update(validated: validation)
+  @promise.update(validated: validation, expires_at: DateTime.now - 8.hours)
   @promise.apply_promise_value
   @promise.bets.each { |bet| bet.apply_bet }
   redirect "/promises/#{id}"

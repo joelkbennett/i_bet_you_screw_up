@@ -17,6 +17,24 @@
           <label for="toggle-expired-promises">: Toggle expired promises</label>
         </div>
       </div>
+      <div id="friend-promises">
+        <label class="label-switch">
+          <input type="checkbox" id="toggle-friends-promises" />
+          <div class="checkbox"></div>
+        </label>
+        <div id="switch-label">
+          <label for="toggle-friends-promises">: Toggle friends promises</label>
+        </div>
+      </div>
+      <div id="your-promises">
+        <label class="label-switch">
+          <input type="checkbox" id="toggle-your-promises" />
+          <div class="checkbox"></div>
+        </label>
+        <div id="switch-label">
+          <label for="toggle-your-promises">: Toggle your promises</label>
+        </div>
+      </div>
       <div class="cards">
         <% @promises.each do |promise| %>
           <div class="<% if promise.hours_until_expired == "Expired!" %>card-expired<% end %> card">
