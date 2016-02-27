@@ -1803,7 +1803,8 @@ button {
 .modal .modal-state {
   display: none; }
 .modal .modal-trigger {
-  padding: 0.8em 1em; }
+  padding: 0.8em 1em;
+  width: 190px; }
 .modal .modal-fade-screen {
   -webkit-transition: opacity 0.25s ease;
   -moz-transition: opacity 0.25s ease;
