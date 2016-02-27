@@ -24,6 +24,18 @@ class User < ActiveRecord::Base
     first_name.capitalize + " " + last_name.capitalize
   end
 
+  def already_bet?(promise_id)
+    bets.find_by(promise_id: promise_id, user_id: id)
+  end
+
+  def bet_in_favour?(promise_id)
+    bets.find_by(promise_id: promise_id, user_id: id, in_favour: true)
+  end
+
+  def bet_value(promise_id)
+    bets.find_by(promise_id: promise_id, user_id: id).bet_value
+  end
+
   def gravatar
     # hash = Digest::MD5.hexdigest(email)
     # "http://www.gravatar.com/avatar/#{hash}?s=250"
