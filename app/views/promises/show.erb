@@ -20,7 +20,7 @@
 
     <% if @current_user %> <!-- LOGGED IN -->
 
-      <% if @promise.expired? %> <!-- PROMISE EXPIRED -->
+      <% if @promise.expired? || !@promise.validated.nil? %> <!-- PROMISE EXPIRED -->
 
         <% if @promise.validated %>
           <div class="promise-details">
