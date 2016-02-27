@@ -14,7 +14,7 @@
         <p class="promise-detail"><%= @promise.hours_until_expired %></p>
       </div>
       <div class="user-img">
-        <img src="http://placehold.it/400x400">  
+        <img src="<%= @promise.user.gravatar %>">  
       </div>
     </div>
 

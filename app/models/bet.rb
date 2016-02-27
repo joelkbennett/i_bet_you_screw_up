@@ -16,7 +16,7 @@ class Bet < ActiveRecord::Base
   end
 
   def apply_bet
-    in_favour == promise.validated ? user.add_points(DEFAULT_BET) : user.subtrack_points(DEAFULT_BET)
+    in_favour == promise.validated ? user.add_points(bet_value.to_i || DEFAULT_BET) : user.subtrack_points(bet_value.to_i || DEAFULT_BET)
   end
 
   private
