@@ -15,9 +15,11 @@
     </div>
 
     <div class="float-right">
+      <% if @current_user %>
       <a href="/" class="profile-pic">
         <img src="<%= @current_user.gravatar %>" alt="Logo Image">
       </a>
+      <% end %>
       <nav role="navigation">
         <ul id="js-navigation-menu" class="navigation-menu show">
           <% if @current_user %>
