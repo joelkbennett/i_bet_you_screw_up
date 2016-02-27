@@ -133,7 +133,7 @@ $(function () {
   $('.accordion-tabs').each(function(index) {
     $(this).children('li').first().children('a').addClass('is-active').next().addClass('is-open').show();
   });
-  
+
   $('.accordion-tabs').on('click', 'li > a.tab-link', function(event) {
     if (!$(this).hasClass('is-active')) {
       event.preventDefault();
@@ -152,7 +152,8 @@ $(function () {
 // modal
 
 $(function() {
-  $().on("change", function() {
+  $("#modal-1, #modal-2").on("change", function() {
+    console.log('modal-1')
     if ($(this).is(":checked")) {
       $("body").addClass("modal-open");
     } else {
@@ -168,3 +169,21 @@ $(function() {
     e.stopPropagation();
   });
 });
+
+
+// Show potential winnings when making a bet
+
+(function() {
+  var bet = $('.place_bet');
+  var keptWinnings = $('#kept-winnings span');
+  var brokenWinnings = $('#broken-winnings span');
+  var kept = parseInt($('.promise-kept').data('promise'));
+  var broken = parseInt($('.promise-broken').data('promise'));
+
+  bet.on('keyup', function() {
+    var calculatedWin = 
+    keptWinnings.text(Math.round((broken/kept) * parseInt(bet.val())));
+    brokenWinnings.text(Math.round((kept/broken) * parseInt(bet.val())));
+  });
+  
+})();
