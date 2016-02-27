@@ -35,10 +35,10 @@
               
               <% if @current_user %> <!-- LOGGED IN -->
 
-                <% if promise.expired? || promise.validated %> <!-- PROMISE EXPIRED -->
+                <% if promise.expired? || !promise.validated.nil? %> <!-- PROMISE EXPIRED OR VALIDATED -->
                   <%= erb :'/partials/validated_promise_result' %> 
 
-                <% else %> <!-- PROMISE NOT EXPIRED -->
+                <% else %> <!-- PROMISE NOT EXPIRED/VALIDATED -->
                   
                   <% if @current_user == promise.user %> <!-- YOUR PROMISE -->
                     <%= erb :'/partials/validate_your_promise_modal' %>
@@ -53,7 +53,7 @@
                   <% end %>
 
                 <% end %> <!-- NOT LOGGED IN -->
-                
+
               <% else %>
                 <p><a href="/">Login</a> to place a bet!</p>
               <% end %>
