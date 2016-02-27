@@ -1793,6 +1793,7 @@ button {
     .flash-success a:focus, .flash-success a:hover {
       color: black; }
 
+<<<<<<< HEAD
 .modal {
   display: inline-block; }
   .modal label {
@@ -1816,6 +1817,40 @@ button {
     -moz-transition: opacity 0.25s ease;
     transition: opacity 0.25s ease;
     position: fixed;
+=======
+.modal label {
+  cursor: pointer;
+  margin-bottom: 0; }
+.modal label img {
+  border-radius: 150px;
+  display: block;
+  max-width: 300px; }
+.modal .modal-state {
+  display: none; }
+.modal .modal-trigger {
+  padding: 0.8em 1em;
+  width: 190px; }
+.modal .modal-fade-screen {
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  padding-top: 0.6em;
+  text-align: left;
+  visibility: hidden;
+  z-index: 99999999999; }
+  @media screen and (min-width: 53.75em) {
+    .modal .modal-fade-screen {
+      padding-top: 10em; } }
+  .modal .modal-fade-screen .modal-bg {
+    position: absolute;
+>>>>>>> add_validate_option_to_profile
     top: 0;
     right: 0;
     bottom: 0;
