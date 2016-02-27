@@ -5,6 +5,8 @@ class Bet < ActiveRecord::Base
 
   validates :user_id, uniqueness: { scope: [:promise_id] }
 
+  before_create :apply_odds_to_bet
+
   DEFAULT_BET = 10
 
   def user_name
@@ -16,9 +18,17 @@ class Bet < ActiveRecord::Base
   end
 
   def apply_bet
-    in_favour == promise.validated ? user.add_points(bet_value.to_i || DEFAULT_BET) : user.subtract_points(bet_value.to_i || DEAFULT_BET)
+    in_favour == promise.validated ? user.add_points(bet_value.to_i) : user.subtract_points(bet_value.to_i)
   end
 
   private
+
+  def apply_odds_to_bet
+    if promise.user.promises_delta < 0
+      # bet = bet_value * (promise.user.promises_delta.abs * 0.1 + 1)
+      # self.bet_value = bet
+      self.bet_value = self.bet_value.to_i * 2
+    end
+  end
 
 end
