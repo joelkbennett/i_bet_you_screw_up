@@ -1,0 +1,5 @@
+<% if @promise.validated %> <!-- Promise kept -->
+  <p>Promise kept!</p>
+<% else %> <!-- Screwed up -->
+  <p><%= @promise.user.first_name %> screwed up..</p>
+<% end %>
