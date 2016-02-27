@@ -24,10 +24,14 @@
         <ul id="js-navigation-menu" class="navigation-menu show">
           <% if @current_user %>
             <li class="nav-link <%= 'active-nav-item' if active_page == '/profile' %>"><a href="/profile">Hello, <%= @current_user.name %></a></li>
-            <li class="nav-link"><a href="/logout">Logout</a></li>
+            <li class="nav-link"><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
           <% else %>
-            <li class="nav-link <%= 'active-nav-item' if active_page == '/signup' %>"><a href="/signup">Sign-up</a></li>
-            <li class="nav-link"><a href="/">login</a></li>
+            <li class="nav-link <%= 'active-nav-item' if active_page == '/signup' %>">
+              <a href="/signup"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>Sign-up</a>
+            </li>
+            <li class="nav-link">
+              <a href="/"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> login</a>
+            </li>
           <% end %>
         </ul>
       </nav>

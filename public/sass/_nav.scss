@@ -45,8 +45,12 @@ header.navigation {
     }
   }
 
-  .profile-pic img {
-    border-radius: 50%;
+  .profile-pic {
+    padding-right: .5em;
+
+    img {
+      border-radius: 50%;
+    }
   }
 
   // Mobile view
