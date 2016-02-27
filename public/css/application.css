@@ -1794,6 +1794,7 @@ button {
       color: black; }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .modal {
   display: inline-block; }
   .modal label {
@@ -1818,6 +1819,8 @@ button {
     transition: opacity 0.25s ease;
     position: fixed;
 =======
+=======
+>>>>>>> 0b706210baac7368ee07f046298a8f4d2e73a73f
 .modal label {
   cursor: pointer;
   margin-bottom: 0; }
@@ -1850,7 +1853,35 @@ button {
       padding-top: 10em; } }
   .modal .modal-fade-screen .modal-bg {
     position: absolute;
+<<<<<<< HEAD
 >>>>>>> add_validate_option_to_profile
+=======
+=======
+.modal {
+  display: inline-block; }
+  .modal label {
+    cursor: pointer;
+    margin-bottom: 0;
+    font-weight: normal; }
+  .modal label img {
+    border-radius: 150px;
+    display: block;
+    max-width: 300px; }
+  .modal label.modal-login img {
+    border-radius: 0; }
+  .modal .modal-state {
+    display: none; }
+  .modal .modal-trigger {
+    padding: 0.8em 1em; }
+  .modal .modal-trigger {
+    padding: 0; }
+  .modal .modal-fade-screen {
+    -webkit-transition: opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+    position: fixed;
+>>>>>>> 625f89b6ac878f92687cde25f347fc8a41139155
+>>>>>>> 0b706210baac7368ee07f046298a8f4d2e73a73f
     top: 0;
     right: 0;
     bottom: 0;
