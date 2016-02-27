@@ -3,10 +3,6 @@ helpers do
     @current_user = User.find(session[:id]) if session[:id]
   end
 
-  # def current_user
-  #   @current_user = User.find(2)
-  # end
-
   def page_number
     @page_number = params[:page_number] || 1
   end
