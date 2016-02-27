@@ -81,10 +81,10 @@ post '/promises/new' do
     user_id: @current_user.id
   )
   if promise.save
-    session[:flash] = 'Promise created'
+    session[:flash_success] = 'Promise created'
     redirect "/promises/#{promise.id}"
   else
-    session[:flash] = 'There was a problem'
+    session[:flash_error] = 'There was a problem'
     redirect 'promises/new'
   end
 end
@@ -102,6 +102,7 @@ post '/promises/:id/new_bet' do |id|
   )
   @bet.save
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
+  session[:flash_success] = "Bet placed!"
   redirect "/promises/#{id}"
 end
 
