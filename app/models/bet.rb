@@ -25,9 +25,7 @@ class Bet < ActiveRecord::Base
 
   def apply_odds_to_bet
     if promise.user.promises_delta < 0
-      # bet = bet_value * (promise.user.promises_delta.abs * 0.1 + 1)
-      # self.bet_value = bet
-      self.bet_value = self.bet_value.to_i * 2
+      self.bet_value = bet_value * (promise.user.promises_delta.abs * 0.1 + 1)
     end
   end
 

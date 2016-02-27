@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226203124) do
+ActiveRecord::Schema.define(version: 20160227050357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bets", force: :cascade do |t|
-    t.string   "bet_value"
     t.boolean  "in_favour"
     t.integer  "user_id"
     t.integer  "promise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "bet_value"
   end
 
   create_table "comments", force: :cascade do |t|
