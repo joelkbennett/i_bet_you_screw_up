@@ -8,8 +8,9 @@
 
     <div class="promise">
       <div class="promise-content">
+        <h4><%= @promise.user.first_name.capitalize %> promised to..</h4>
         <div class="details">
-          <p><%= @promise.content %></p>
+          <p><strong><%= @promise.content %></strong></p>
         </div>
         <p class="promise-detail"><%= @promise.hours_until_expired %></p>
       </div>
@@ -21,16 +22,9 @@
     <% if @current_user %> <!-- LOGGED IN -->
 
       <% if @promise.expired? || !@promise.validated.nil? %> <!-- PROMISE EXPIRED -->
-
-        <% if @promise.validated %>
-          <div class="promise-details">
-            <h2>Promise Kept!</h2>
-          </div>
-        <% else %>
-          <div class="promise-details">
-            <h2><%= @promise.user.first_name %> screwed up.</h2>
-          </div>
-        <% end %>
+        <div class="promise-content-results">
+          <%= erb :'/partials/validated_promise_result' %>
+        </div>
 
       <% else %> <!-- PROMISE NOT EXPIRED -->
 
@@ -75,7 +69,7 @@
               <% if @current_user_bet.in_favour %>
                 <p>You think <%= @promise.user.name %> will keep their promise!</p>
               <% else %>
-                <p>You think <%= @promise.user.name %> will would screw-up!</p>
+                <p>You think <%= @promise.user.name %> will screw-up!</p>
               <% end %>
             </div>
 
@@ -100,32 +94,7 @@
 
     <% end %>
 
-    <header class="comments-header">
-      <h1>Comments</h1>
-    </header>
-    <% if @current_user %>
-    <div class="form-new-comment">
-      <form method="post" action="/promises/<%= @promise.id %>/comment/new">
-        <textarea id="comment-body" name="body" rows="2" placeholder="Add a comment.."></textarea>
-        <input type="submit" value="Add Comment">
-      </form>
-    </div>
-    <% else %>
-      <p><a href="/login">Login</a> to post a comment</p>
-    <% end %>
-
-    <% @promise.ordered_comments.each do |comment| %>
-      <div class="comment">
-        <div class="comment-image">
-          <img src="<%= comment.author.gravatar %>" alt="Logo image">
-        </div>
-        <div class="comment-content">
-          <a href='/users/<%= comment.author.id %>'<h1><%= comment.author.name %></h1></a>
-          <p><%= comment.body %></p>
-          <p class="comment-detail">Posted on: <%= comment.created_at %></p>
-        </div>
-      </div>
-    <% end %>
+    <%= erb :'/partials/comments' %>
 
   </section>
 
