@@ -34,7 +34,7 @@
 
               <% if @current_user %> <!-- LOGGED IN -->
 
-                <% if promise.expired? %> <!-- PROMISE EXPIRED -->
+                <% if promise.expired? || promise.validated %> <!-- PROMISE EXPIRED -->
 
                   <% if promise.validated %> <!-- Promise kept -->
                     <p>Promise kept!</p>
@@ -56,8 +56,8 @@
                           <div class="modal-close" for="modal-1"></div>
                           <h1>Did you keep your promise?</h1>
                           <form method="post" action="/promises/<%= promise.id %>/validate">
-                            <input class="verify-promise" type="submit" name="yes" value="Yes">
-                            <input class="verify-promise" type="submit" name="no" value="No">
+                            <input class="verify-promise" type="submit" name="yes" value="Promise Kept">
+                            <input class="verify-promise" type="submit" name="no" value="Promise Not Kept">
                           </form>
                         </div>
                       </div>
