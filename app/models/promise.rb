@@ -15,6 +15,10 @@ class Promise < ActiveRecord::Base
     comments.order(created_at: :desc)
   end
 
+  def expired?
+    expires_at.to_time - (Time.now - 8*60*60) <= 0
+  end
+
   def hours_until_expired
     time_difference = expires_at.to_time - (Time.now - 8*60*60)
     hours = (time_difference / (60*60))
