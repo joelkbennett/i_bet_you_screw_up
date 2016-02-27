@@ -1202,9 +1202,6 @@ header.navigation {
     .card:active .card-header {
       background-color: #f7f7f7; }
 
-.card-expired {
-  display: none; }
-
 .pagination {
   text-align: center; }
   .pagination ul {

@@ -55,6 +55,13 @@ get '/promises' do
   erb :'promises/index'
 end
 
+get '/all/promises' do
+  content_type :json
+  @users = User.all
+  @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  [@users, @promises].to_json
+end
+
 get '/friends/promises' do
   content_type :json
   @friends = @current_user.friends
