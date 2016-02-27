@@ -19,7 +19,7 @@
       </div>
       <div class="cards">
         <% @promises.each do |promise| %>
-          <div class="<% if promise.hours_until_expired == "Expired!" %>card-expired<% end %> card">
+          <div class="card" id="card-<%= promise.id %>">
             <div class="card-image">
               <img src="http://placehold.it/400x400" alt="Logo image">
             </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="card-copy">
               <p><%= promise.content[0..20] %>....</p>
-              <p class="promise-detail"><%= promise.hours_until_expired %></p>
+              <p class="promise-detail" id="detail-<%= promise.id %>"></p>
               <a class="button button-default card-button" href='#'>Quick Wager</a><br><br>
               <a class="button button-default card-button" href='promises/<%= promise.id %>'>Details</a>
             </div>

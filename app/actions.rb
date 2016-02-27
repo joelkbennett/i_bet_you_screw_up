@@ -60,6 +60,15 @@ get '/promises' do
   erb :'promises/index'
 end
 
+get '/promises/expiry' do
+  content_type :json
+  expiry_time = []
+  Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20).each do |promise|
+    expiry_time << [promise.hours_until_expired, promise.id]
+  end
+  expiry_time.to_json
+end
+
 get '/promises/new' do
   @promise = Promise.new
   erb :'promises/new'
