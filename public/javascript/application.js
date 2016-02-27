@@ -152,8 +152,7 @@ $(function () {
 // modal
 
 $(function() {
-  $("#modal-1, #modal-2").on("change", function() {
-    console.log('modal-1')
+  $().on("change", function() {
     if ($(this).is(":checked")) {
       $("body").addClass("modal-open");
     } else {
