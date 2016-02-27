@@ -1,0 +1,20 @@
+<div class="modal">
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="modal-login"></div>
+      <h1>Login</h1>
+      <div class="form-wrapper">
+        <%= erb :'partials/flash_message_error' %>
+        <form action="/login" method="POST">
+          <label class='sr-only' for="email">Email</label>
+          <input type="email" id='email' name='email' placeholder='Email Address'>
+
+          <label class='sr-only' for="password">Password</label>
+          <input type="password" id='password' name='password' placeholder='Password'>
+
+          <input type="submit" value='submit'>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

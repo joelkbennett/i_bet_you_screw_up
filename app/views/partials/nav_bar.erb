@@ -9,7 +9,9 @@
         <ul id="js-navigation-menu" class="navigation-menu show">
           <li class="nav-link <%= 'active-nav-item' if active_page == '/promises' %>"><a href="/promises">Promises</a></li>
           <li class="nav-link <%= 'active-nav-item' if active_page == '/users' %>"><a href="/users">Users</a></li>
-          <li class="nav-link <%= 'active-nav-item' if active_page == '/promises/new' %>"><a href="/promises/new">Create a Promise</a></li>
+          <% if @current_user %>
+            <li class="nav-link <%= 'active-nav-item' if active_page == '/promises/new' %>"><a href="/promises/new">Create a Promise</a></li>
+          <% end %>
         </ul>
       </nav>
     </div>
@@ -30,7 +32,33 @@
               <a href="/signup"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>Sign-up</a>
             </li>
             <li class="nav-link">
-              <a href="/"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> login</a>
+              
+                      <div class="modal modal-login">
+                        <label for="modal-login">
+                          <div class="modal-trigger"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> login</div>
+                        </label>
+                        <input class="modal-state" id="modal-login" type="checkbox" />
+                        <div class="modal-fade-screen">
+                          <div class="modal-inner">
+                            <div class="modal-close" for="modal-login"></div>
+                            <h1>Login</h1>
+                            <div class="form-wrapper">
+                              <%= erb :'partials/flash_message_error' %>
+                              <form action="/login" method="POST">
+                                <label class='sr-only' for="email">Email</label>
+                                <input type="email" id='email' name='email' placeholder='Email Address'>
+
+                                <label class='sr-only' for="password">Password</label>
+                                <input type="password" id='password' name='password' placeholder='Password'>
+
+                                <input type="submit" value='submit'>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+              <!-- <a href="/"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> login</a> -->
             </li>
           <% end %>
         </ul>
