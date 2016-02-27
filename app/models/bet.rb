@@ -21,6 +21,10 @@ class Bet < ActiveRecord::Base
     in_favour == promise.validated ? user.add_points(bet_value.to_i) : user.subtract_points(bet_value.to_i)
   end
 
+  def won?
+    in_favour == promise.validated if promise.expired? || !promise.validated.nil?
+  end
+
   private
 
   def apply_odds_to_bet

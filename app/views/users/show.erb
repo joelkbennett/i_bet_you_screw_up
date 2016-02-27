@@ -61,54 +61,42 @@
 
           <div class="tab-content">
 
-            <% if @user.promises.empty? %>
+            <% if @user.promises.empty? %> <!-- NO PROMISES -->
+
               <p>You haven't made any promises yet! </p>
               <p><a href="/promises/new">Make a promise! </a></p>
-            <% else %>
+
+            <% else %> <!-- SHOW PROMISES -->
+
               <% @user.promises.each do |promise| %>
 
+                <% @promise = promise %> <!-- For use in partials -->
+
                 <div class="promise">
+
+                  <!-- Promise Details -->
                   <div class="promise-image">
                     <img src="http://placehold.it/400x400" alt="Logo image">
                   </div>
                   <div class="promise-content">
-                    <h1>You promised...</h1>
+                    <h1>You promised to..</h1>
                     <a href='promises/<%= promise.id %>'><p><%= promise.content %></p></a>
                     <p class="promise-detail"><%= promise.hours_until_expired %></p>
                   </div>
 
-                  <% if promise.expired? %>
-
-                    <% if promise.validated %> <!-- Promise kept -->
-                      <p>Promise kept!</p>
-                    <% else %> <!-- Screwed up -->
-                      <p><%= promise.user.first_name %> screwed up..</p>
-                    <% end %>
-
+                  <!-- Promise Status -->
+                  <% if promise.expired? || !promise.validated.nil? %>
+                    <%= erb :'/partials/validated_promise_result' %>
                   <% else %>
-
-                    <div class="modal">
-                      <label for="modal-1">
-                        <div class="modal-trigger">Validate your promise!</div>
-                      </label>
-                      <input class="modal-state" id="modal-1" type="checkbox" />
-                      <div class="modal-fade-screen">
-                        <div class="modal-inner">
-                          <div class="modal-close" for="modal-1"></div>
-                          <h1>Did you keep your promise?</h1>
-                          <form method="post" action="/promises/<%= promise.id %>/validate">
-                            <input class="verify-promise" type="submit" name="yes" value="Promise Kept">
-                            <input class="verify-promise" type="submit" name="no" value="Promise Not Kept">
-                          </form>
-                        </div>
-                      </div>
-                    </div>
+                    <%= erb :'/partials/validate_your_promise_modal' %>
                   <% end %>
                   
                 </div>
 
-              <% end %>
-            <% end %>
+              <% end %> <!-- end each loop -->
+
+            <% end %> <!-- end if/else statement checking for promises -->
+
           </div>
 
         </li>
@@ -120,22 +108,27 @@
           </a>
 
           <div class="tab-content">
-            <% if @user.bets.empty? %>
+
+            <% if @user.bets.empty? %> <!-- NO BETS -->
+
               <p>You haven't made any bets yet! </p>
               <p><a href="/promises">Make a bet! </a></p>
-            <% else %>
-              <% @user.bets.each do |bet| %>
+
+            <% else %> <!-- SHOW BETS -->
+
+              <% @user.ordered_bets.each do |bet| %>
+
                 <div class="promise">
-                  <div class="promise-image">
-                    <img src="http://placehold.it/400x400" alt="Logo image">
-                  </div>
                   <div class="promise-content">
-                    <a href='details/index.html'><h1><%= bet.user_name %> has promised...</h1></a>
-                    <p><%= bet.promise_content %></p>
                     <% if bet.in_favour %>
-                      <p class="promise-detail">You bet <%= bet.bet_value %> that <%= bet.user_name %> would keep their promise! </p>
+                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
                     <% else %>
-                      <p class="promise-detail">You bet <%= bet.bet_value %> that <%= bet.user_name %> would screw-up!</p>
+                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
+                    <% end %>
+                    <p><a href='details/index.html'>View Promise</a></p>
+                    <p class="promise-detail"><%= bet.promise.hours_until_expired %>
+                    <% if bet.promise.expired? %>
+                      <%= bet.won? ? 'You won the bet!' : 'You lost the bet..' %> </p>
                     <% end %>
                   </div>
                 </div>

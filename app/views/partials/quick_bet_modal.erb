@@ -1,0 +1,17 @@
+<div class="modal">
+  <label for="modal-2">
+    <div class="modal-trigger">Make a Bet!</div>
+  </label>
+  <input class="modal-state" id="modal-2" type="checkbox" />
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="modal-2"></div>
+      <h1>Will <%= @promise.user.first_name %> keep their promise?</h1>
+      <form method="post" action="/promises/<%= @promise.id %>/new_bet">
+        <input class="place_bet" type="text" name="bet_value" placeholder="Enter Bet Value" required autofocus>
+        <input class="place_bet" type="submit" name="in_favour" value="Yes (<%= total_users_for_the_promise_to_be_kept(@promise.id) %>)">
+        <input class="place_bet" type="submit" name="not_in_favour" value="No (<%= total_users_against_the_promise_to_be_kept(@promise.id) %>)">
+      </form>
+    </div>
+  </div>
+</div>

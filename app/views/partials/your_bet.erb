@@ -1,0 +1,8 @@
+<div class="promise-content">
+  <p>You bet <%= @current_user.bet_value(@promise.id) %>pts that
+  <% if @current_user.bet_in_favour?(@promise.id) %>
+    <%= @promise.user.name %> will keep their promise!</p>
+  <% else %>
+    <%= @promise.user.name %> will screw-up!</p>
+  <% end %>
+</div>

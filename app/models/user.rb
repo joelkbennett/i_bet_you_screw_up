@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     first_name.capitalize + " " + last_name.capitalize
   end
 
+  def ordered_bets
+    bets.order(created_at: :desc)
+  end
+
   def already_bet?(promise_id)
     bets.find_by(promise_id: promise_id, user_id: id)
   end
