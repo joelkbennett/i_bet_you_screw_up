@@ -1,4 +1,8 @@
 helpers do
+  def active_page
+    request.path_info
+  end
+
   def current_user
     @current_user = User.find(session[:id]) if session[:id]
   end

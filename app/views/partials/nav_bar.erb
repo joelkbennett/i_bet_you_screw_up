@@ -1,24 +1,36 @@
 <header class="page-header navigation" role="banner">
   <div class="navigation-wrapper">
-    <a href="/" class="logo">
-      <img src="http://placehold.it/50x50" alt="Logo Image">
-    </a>
-    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
-    <nav role="navigation">
-      <ul id="js-navigation-menu" class="navigation-menu show">
-        <li class="nav-link"><a href="/promises">Promises</a></li>
-        <li class="nav-link"><a href="/users">Users</a></li>
-        <li class="nav-link"> | &nbsp;</li>
-        <% if @current_user %>
-          <li class="nav-link"><a href="/profile">Hello, <%= @current_user.name %></a></li>
-          <li class="nav-link"><a href="/promises/new">Create a Promise</a></li>
-          <li class="nav-link"><a href="/logout">Logout</a></li>
-        <% else %>
-          <li class="nav-link"><a href="/signup">Sign-up</a></li>
-          <li class="nav-link"><a href="/">login</a></li>
-        <% end %>
-      </ul>
-    </nav>
+    <div class="float-left">
+      <a href="/" class="logo">
+        <img src="http://placehold.it/50x50" alt="Logo Image">
+      </a>
+      <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+      <nav role="navigation">
+        <ul id="js-navigation-menu" class="navigation-menu show">
+          <li class="nav-link <%= 'active-nav-item' if active_page == '/promises' %>"><a href="/promises">Promises</a></li>
+          <li class="nav-link <%= 'active-nav-item' if active_page == '/users' %>"><a href="/users">Users</a></li>
+          <li class="nav-link <%= 'active-nav-item' if active_page == '/promises/new' %>"><a href="/promises/new">Create a Promise</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="float-right">
+      <a href="/" class="profile-pic">
+        <img src="<%= @current_user.gravatar %>" alt="Logo Image">
+      </a>
+      <nav role="navigation">
+        <ul id="js-navigation-menu" class="navigation-menu show">
+          <% if @current_user %>
+            <li class="nav-link <%= 'active-nav-item' if active_page == '/profile' %>"><a href="/profile">Hello, <%= @current_user.name %></a></li>
+            <li class="nav-link"><a href="/logout">Logout</a></li>
+          <% else %>
+            <li class="nav-link <%= 'active-nav-item' if active_page == '/signup' %>"><a href="/signup">Sign-up</a></li>
+            <li class="nav-link"><a href="/">login</a></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+
     <!--<div class="navigation-tools">
       <div class="search-bar">
         <form role="search">

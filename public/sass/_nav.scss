@@ -33,7 +33,7 @@ header.navigation {
     z-index: 9999;
   }
 
-  .logo {
+  .logo, .profile-pic {
     float: left;
     max-height: $navigation-height;
     padding-left: $navigation-padding;
@@ -43,6 +43,10 @@ header.navigation {
       max-height: $navigation-height;
       padding: 0.8em 0;
     }
+  }
+
+  .profile-pic img {
+    border-radius: 50%;
   }
 
   // Mobile view
@@ -140,10 +144,8 @@ header.navigation {
   }
 
   .active-nav-item a {
-    // border-bottom: 1px solid $navigation-active-link-color;
-    // padding-bottom: 3px;
     color: $light-text;
-    background-color: #666;
+    background-color: #222;
   }
 
   // Sub menus
