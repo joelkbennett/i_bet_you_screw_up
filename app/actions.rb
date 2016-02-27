@@ -101,6 +101,7 @@ post '/promises/:id/new_bet' do |id|
   )
   @bet.save
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
+  session[:flash_success] = "Bet placed!"
   redirect "/promises/#{id}"
 end
 
