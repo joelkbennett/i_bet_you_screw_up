@@ -24,9 +24,22 @@ class Bet < ActiveRecord::Base
   private
 
   def apply_odds_to_bet
-    if promise.user.promises_delta < 0
-      self.bet_value = bet_value * (promise.user.promises_delta.abs * 0.1 + 1)
+    kept = promise.user.promises.promises_kept
+    broken = promise.user.promises.promises_broken
+
+    if in_favour
+      kept = 1 if kept == 0
+      # return bet_value if broken == 0
+      self.bet_value = broken == 0 ? bet_value : (broken / kept) * bet_value
+    else
+      broken = 1 if broken == 0
+      # return bet_value if kept == 0
+      self.bet_value = kept == 0 ? bet_value : (kept / broken) * bet_value
     end
+
+    # if promise.user.promises_delta < 0
+    #   self.bet_value = bet_value * (promise.user.promises_delta.abs * 0.1 + 1)
+    # end
   end
 
 end
