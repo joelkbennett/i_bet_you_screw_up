@@ -15,6 +15,14 @@ helpers do
     @bets = Bet.all
   end
 
+  def all_promises
+    @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  end
+
+  def promises_of_friends
+    @promises = Promise.all.where(:user_id => @friends.select("id")).reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  end
+
   def bet_for_a_user_on_a_promise(user_id, promise_id)
     @bet_for_a_user_on_a_promise = Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
   end
@@ -55,21 +63,21 @@ get '/' do
 end
 
 get '/promises' do
-  @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  all_promises
   erb :'promises/index'
 end
 
 get '/all/promises' do
   content_type :json
   @users = User.all
-  @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  all_promises
   [@users, @promises].to_json
 end
 
 get '/friends/promises' do
   content_type :json
   @friends = @current_user.friends
-  @promises = Promise.all.where(:user_id => @friends.select("id")).reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  promises_of_friends
   [@friends, @promises].to_json
 end
 

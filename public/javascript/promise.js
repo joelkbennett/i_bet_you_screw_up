@@ -1,57 +1,41 @@
 $(document).ready(function() {
 
-  $('.cards div.card-expired').hide();
+  hideExpired();
 
   $('#toggle-expired-promises').click(function() {
-    $('.cards div.card-expired').toggle();
+    hideExpired();
   });
 
   $('#toggle-friends-promises').click(function(){
 
+    var params = {
+        type: "GET",
+        success: function (result) {
+                  var users = result[0];
+                  var promises = result[1];
+                  $('div.cards').empty();
+                  var src = "http://placehold.it/400x400";
+                  var alt = "Logo image";
+                  promises.forEach( function(promise) {
+                    var name = fullName(users, promise);
+                    var timeRemaining = hoursUntilExpired(promise.expires_at);
+                    var card = addClassCardExpired(timeRemaining);
+                    createCard(promise, card, name, timeRemaining, src, alt);
+                  });
+                  hideExpired();
+                }
+    };
     if (this.checked) {
-      $.ajax({
-          url: '/friends/promises',
-          type: 'GET',
-          success: function(result) {
-            var friends = result[0];
-            var promises = result[1];
-            $('div.cards').empty();
-            var src = "http://placehold.it/400x400";
-            var alt = "Logo image";
-            promises.forEach( function(promise) {
-              var name = fullName(friends, promise);
-              var timeRemaining = hoursUntilExpired(promise.expires_at);
-              var card = addClassCardExpired(timeRemaining);
-              createCard(promise, card, name, timeRemaining, src, alt);
-          });
-        }
-      });
+        params.url = '/friends/promises';
+    } else {
+        params.url = '/all/promises';
     }
-    else {
-      $.ajax({
-          url: '/all/promises',
-          type: 'GET',
-          success: function(result) {
-            var users = result[0];
-            var promises = result[1];
-            $('div.cards').empty();
-            var src = "http://placehold.it/400x400";
-            var alt = "Logo image";
-            promises.forEach( function(promise) {
-              var name = fullName(users, promise);
-              var timeRemaining = hoursUntilExpired(promise.expires_at);
-              var card = addClassCardExpired(timeRemaining);
-              createCard(promise, card, name, timeRemaining, src, alt);
-          });
-        }
-      }); 
-    }
+    $.ajax(params); 
   });
 
   function hoursUntilExpired(expires_at) {
     var today = new Date();
     var time_difference = (Date.parse(expires_at) - today) + 28800000
-    console.log(Date.parse(expires_at) - today);
     var hours = (time_difference / (1000 * 60 * 60));
     var minutes = (time_difference / (1000 * 60));
     if (hours >= 1)
@@ -115,6 +99,16 @@ $(document).ready(function() {
       .attr("href",'promises/'+promise.id)
       .text('Details'))
     .appendTo(card);
+  }
+
+  function hideExpired() {
+    var toggleExpired = $('#toggle-expired-promises');
+    if (toggleExpired.is(':checked')) {
+      $('.cards .card-expired').show();
+    }
+    else {
+      $('.cards .card-expired').hide();
+    }
   }
 
 });
