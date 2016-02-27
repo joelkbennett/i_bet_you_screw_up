@@ -75,12 +75,15 @@
   }
 }
 
-#expired-promises {
+#expired-promises, #your-promises, #friend-promises {
   position: relative;
-}
-#switch-label {
   display: inline-block;
-  position: absolute;
-  top: 5px;
-  left: 60px;
+  width: 300px;
+
+  #switch-label {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    left: 60px;
+  }
 }
