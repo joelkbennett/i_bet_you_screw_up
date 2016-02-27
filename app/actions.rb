@@ -110,6 +110,8 @@ post '/promises/:id/validate' do |id|
   validation = true if params[:yes] == "Promise Kept"
   validation = false if params[:no] == "Promise Not Kept"
   @promise.update(validated: validation)
+  @promise.apply_promise_value
+  @promise.bets.each { |bet| bet.apply_bet }
   redirect "/promises/#{id}"
 end
 
@@ -197,7 +199,8 @@ post '/signup' do
 end
 
 get '/admin/:id' do |id|
-  # @user = User.find(id)
+  session[:id] = nil
+  @user = User.find(id)
   session[:id] = id
   redirect '/'
 end
