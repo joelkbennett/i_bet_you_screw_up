@@ -22,7 +22,7 @@
 
       <div class="container">
         <div class="profile-score profile-score-up">
-          <%= @user.promises_kept %>
+          <%= @user.promises_kept.count %>
         </div>
 
         <div class="profile-image-container">
@@ -30,7 +30,7 @@
         </div>
 
         <div class="profile-score profile-score-down">
-          <%= @user.promises_broken %>
+          <%= @user.promises_broken.count %>
         </div>
       </div>
 
@@ -56,46 +56,55 @@
         <li class="tab-header-and-content">
 
           <a href="javascript:void(0)" class="is-active tab-link">
-            Promises
+            Active Promises
           </a>
 
           <div class="tab-content">
 
-            <% if @user.promises.empty? %> <!-- NO PROMISES -->
-
-              <p>You haven't made any promises yet! </p>
+            <% if @user.promises_active.empty? %> <!-- NO ACTIVE PROMISES -->
+              <p>You have no active promises! </p>
               <p><a href="/promises/new">Make a promise! </a></p>
+            <% else %> <!-- SHOW ACTIVE PROMISES -->
+              <%= erb :'/partials/user_profile_active_promises' %>
+            <% end %>
 
-            <% else %> <!-- SHOW PROMISES -->
+          </div>
 
-              <% @user.promises.each do |promise| %>
+        </li>
 
-                <% @promise = promise %> <!-- For use in partials -->
+        <li class="tab-header-and-content">
 
-                <div class="promise">
+          <a href="javascript:void(0)" class="tab-link">
+            Promises Kept
+          </a>
 
-                  <!-- Promise Details -->
-                  <div class="promise-image">
-                    <img src="http://placehold.it/400x400" alt="Logo image">
-                  </div>
-                  <div class="promise-content">
-                    <h1>You promised to..</h1>
-                    <a href='promises/<%= promise.id %>'><p><%= promise.content %></p></a>
-                    <p class="promise-detail"><%= promise.hours_until_expired %></p>
-                  </div>
+          <div class="tab-content">
 
-                  <!-- Promise Status -->
-                  <% if promise.expired? || !promise.validated.nil? %>
-                    <%= erb :'/partials/validated_promise_result' %>
-                  <% else %>
-                    <%= erb :'/partials/validate_your_promise_modal' %>
-                  <% end %>
-                  
-                </div>
+            <% if @user.promises_kept.empty? %> <!-- NO KEPT PROMISES -->
+              <p>No kept promises..</p>
+              <p><a href="/promises/new">Make a promise! </a></p>
+            <% else %> <!-- SHOW KEPT PROMISES -->
+              <%= erb :'/partials/user_profile_kept_promises' %>
+            <% end %>
 
-              <% end %> <!-- end each loop -->
+          </div>
 
-            <% end %> <!-- end if/else statement checking for promises -->
+        </li>
+
+        <li class="tab-header-and-content">
+
+          <a href="javascript:void(0)" class="tab-link">
+            Promises Broken
+          </a>
+
+          <div class="tab-content">
+
+            <% if @user.promises_broken.empty? %> <!-- NO BROKEN PROMISES -->
+              <p>No broken promises!</p>
+              <p><a href="/promises/new">Make a promise! </a></p>
+            <% else %> <!-- SHOW BROKEN PROMISES -->
+              <%= erb :'/partials/user_profile_broken_promises' %>
+            <% end %> 
 
           </div>
 
@@ -109,31 +118,13 @@
 
           <div class="tab-content">
 
-            <% if @user.bets.empty? %> <!-- NO BETS -->
-
+            <% if @user.bets_active.empty? %> <!-- NO ACTIVE BETS -->
               <p>You haven't made any bets yet! </p>
               <p><a href="/promises">Make a bet! </a></p>
-
-            <% else %> <!-- SHOW BETS -->
-
-              <% @user.bets_active.each do |bet| %>
-
-                <div class="promise">
-                  <div class="promise-content">
-                    <% if bet.in_favour %>
-                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
-                    <% else %>
-                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
-                    <% end %>
-                    <p><a href='details/index.html'>View Promise</a></p>
-                    <p class="promise-detail"><%= bet.promise.hours_until_expired %>
-                    <% if bet.promise.expired? %>
-                      <%= bet.won? ? 'You won the bet!' : 'You lost the bet..' %> </p>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
+            <% else %> <!-- SHOW ACTIVE BETS -->
+              <%= erb :'/partials/user_profile_active_bets' %>
             <% end %>
+
           </div>
         </li>
 
@@ -141,22 +132,13 @@
           <a href="javascript:void(0)" class="tab-link">Bets Won</a>
           <div class="tab-content">
 
-              <% @user.bets_won.each do |bet| %>
+            <% if @user.bets_won.empty? %> <!-- NO BETS WON -->
+              <p>You haven't won any bets yet.. </p>
+              <p><a href="/promises">Make a bet! </a></p>
+            <% else %> <!-- SHOW BETS WON -->
+              <%= erb :'/partials/user_profile_bets_won' %>   
+            <% end %>
 
-                <div class="promise">
-                  <div class="promise-content">
-                    <% if bet.in_favour %>
-                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
-                    <% else %>
-                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
-                    <% end %>
-                    <p><a href='details/index.html'>View Promise</a></p>
-                    <p class="promise-detail">You won the bet!</p>
-                  </div>
-                </div>
-
-              <% end %>
-   
           </div>
         </li>
 
@@ -164,21 +146,12 @@
           <a href="javascript:void(0)" class="tab-link">Bets Lost</a>
           <div class="tab-content">
 
-              <% @user.bets_lost.each do |bet| %>
-
-                <div class="promise">
-                  <div class="promise-content">
-                    <% if bet.in_favour %>
-                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
-                    <% else %>
-                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
-                    <% end %>
-                    <p><a href='details/index.html'>View Promise</a></p>
-                    <p class="promise-detail">You lost the bet.</p>
-                  </div>
-                </div>
-                
-              <% end %>
+          <% if @user.bets_lost.empty? %> <!-- NO BETS LOST -->
+            <p>You haven't lost any bets!</p>
+            <p><a href="/promises">Make a bet!</a></p>
+          <% else %> <!-- SHOW BETS LOST -->
+            <%= erb :'/partials/user_profile_bets_lost' %>
+          <% end %>
 
           </div>
         </li>
