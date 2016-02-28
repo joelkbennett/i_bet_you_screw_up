@@ -71,14 +71,14 @@ get '/all/promises' do
   content_type :json
   @users = User.all
   all_promises
-  [@users, @promises].to_json
+  [@users, @promises, @current_user, @bets].to_json
 end
 
 get '/friends/promises' do
   content_type :json
   @friends = @current_user.friends
   promises_of_friends
-  [@friends, @promises].to_json
+  [@friends, @promises, @current_user, @bets].to_json
 end
 
 get '/promises/new' do
