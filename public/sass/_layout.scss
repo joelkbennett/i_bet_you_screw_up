@@ -37,6 +37,10 @@
   clip: auto;
 }
 
+.features {
+  min-height: 400px;
+}
+
 .float-left {
   float: left;
 }
@@ -46,5 +50,5 @@
 }
 
 .hide-mobile {
-  
+  display: none; 
 }

@@ -2,7 +2,7 @@
   <div class="navigation-wrapper">
     <div class="site-nav">
       <a href="/" class="logo">
-        <img src="http://placehold.it/50x50" alt="Logo Image">
+        <img src="/images/nav-logo.png" alt="Logo Image">
       </a>
       <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
       <nav role="navigation">
@@ -32,33 +32,30 @@
               <a href="/signup"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>Sign-up</a>
             </li>
             <li class="nav-link">
-              
-                      <div class="modal modal-login">
-                        <label for="modal-login">
-                          <div class="modal-trigger"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> login</div>
-                        </label>
-                        <input class="modal-state" id="modal-login" type="checkbox" />
-                        <div class="modal-fade-screen">
-                          <div class="modal-inner">
-                            <div class="modal-close" for="modal-login"></div>
-                            <h1>Login</h1>
-                            <div class="form-wrapper">
-                              <%= erb :'partials/flash_message_error' %>
-                              <form action="/login" method="POST">
-                                <label class='sr-only' for="email">Email</label>
-                                <input type="email" id='email' name='email' placeholder='Email Address'>
+              <div class="modal modal-login">
+                <label for="modal-login">
+                  <div class="modal-trigger modal-login-trigger"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> login</div>
+                </label>
+                <input class="modal-state" id="modal-login" type="checkbox" />
+                <div class="modal-fade-screen">
+                  <div class="modal-inner">
+                    <div class="modal-close" for="modal-login"></div>
+                    <h1>Login</h1>
+                    <div class="form-wrapper">
+                      <%= erb :'partials/flash_message_error' %>
+                      <form action="/login" method="POST">
+                        <label class='sr-only' for="email">Email</label>
+                        <input type="email" id='email' name='email' placeholder='Email Address'>
 
-                                <label class='sr-only' for="password">Password</label>
-                                <input type="password" id='password' name='password' placeholder='Password'>
+                        <label class='sr-only' for="password">Password</label>
+                        <input type="password" id='password' name='password' placeholder='Password'>
 
-                                <input type="submit" value='submit'>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-              <!-- <a href="/"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> login</a> -->
+                        <input type="submit" value='submit'>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
           <% end %>
         </ul>

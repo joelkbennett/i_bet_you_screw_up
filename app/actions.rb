@@ -65,6 +65,14 @@ helpers do
     Friendship.find_by(user_id: user_id, friend_id: friend_id).created_at.to_date
   end
 
+  def select_background
+    [{img: '/images/dishes.jpg', copy: 'You would have won big if you bet these dishes would stay dirty. '}, 
+     {img: '/images/dog-walk.jpg', copy: 'Who would have thought he actually WOULD walk the dog?'}, 
+     {img: '/images/laundry.jpg', copy: 'This guy never breaks his word, except when he does. '}, 
+     {img: '/images/lonely_dinner.jpg', copy: 'Stood up again... that was a sure bet. '} 
+    ].sample
+  end
+
 end
 
 before do
@@ -75,6 +83,7 @@ before do
 end
 
 get '/' do
+  @background = select_background
   erb :index
 end
 
