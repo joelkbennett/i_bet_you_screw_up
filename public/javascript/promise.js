@@ -8,22 +8,33 @@ $(document).ready(function() {
 
   $('#toggle-top-promises').click(function() {
     var url;
-    $('#toggle-friends-promises').checked = false;
-    if (this.checked) {
-        url = '/top_bets/promises';
-    } else {
-        url = '/all/promises';
+    if (this.checked && $('#toggle-friends-promises')[0].checked) {
+      url = '/friends/top_bets/promises';
+    } 
+    else if (!this.checked && $('#toggle-friends-promises')[0].checked) {
+      url = '/friends/promises';
+    }
+    else if (this.checked) {
+      url = '/top_bets/promises';
+    }
+    else {
+      url = '/all/promises';
     }
     displayPromises(url);
   });
 
   $('#toggle-friends-promises').click(function(){
     var url;
-    $('#toggle-top-promises').checked = false;
-    if (this.checked) {
-        url = '/friends/promises';
+    if (this.checked && $('#toggle-top-promises')[0].checked) {
+      url = '/friends/top_bets/promises';
+    } 
+    else if (!this.checked && $('#toggle-top-promises')[0].checked) {
+      url = '/top_bets/promises';
+    }
+    else if (this.checked) {
+      url = '/friends/promises';
     } else {
-        url = '/all/promises';
+      url = '/all/promises';
     } 
     displayPromises(url);
   });
@@ -32,10 +43,10 @@ $(document).ready(function() {
     var params = {
         type: "GET",
         success: function (result) {
-                  var users = result[0];
-                  var promises = result[1];
-                  var user = result[2];
-                  var bets = result[3];
+                  var users = result["users"];
+                  var promises = result["promises"];
+                  var user = result["user"];
+                  var bets = result["bets"];
                   // var myArray = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ];
                   $('div.cards').empty();
                   var alt = "Logo image";

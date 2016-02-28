@@ -6,6 +6,7 @@ class Bet < ActiveRecord::Base
   validates :user_id, uniqueness: { scope: [:promise_id] }
 
   before_create :set_winnings, :deduct_user_points 
+  before_create :icrement_counter_for_promise, :increment_counter_for_user
 
   DEFAULT_BET = 10
 
@@ -47,6 +48,16 @@ class Bet < ActiveRecord::Base
       end
       self.winnings = (kept == 0) ? 0 : ((kept / broken) * bet_value).round
     end
+  end
+
+  def icrement_counter_for_promise
+    promise.total_bets += 1
+    promise.save
+  end
+
+  def increment_counter_for_user
+    user.total_bets += 1
+    user.save
   end
 
 end
