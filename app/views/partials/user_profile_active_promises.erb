@@ -9,13 +9,17 @@
         <img src="http://placehold.it/400x400" alt="Logo image">
       </div>
       <div class="promise-content">
-        <h1>You promised to..</h1>
+        <h1><%= @pronoun %> promised to..</h1>
         <a href='promises/<%= promise.id %>'><p><%= promise.content %></p></a>
         <p class="promise-detail"><%= promise.hours_until_expired %></p>
       </div>
 
       <!-- Validate promise -->
-      <%= erb :'/partials/validate_your_promise_modal' %>
+      <% if @current_user == @user %>
+        <%= erb :'/partials/validate_your_promise_modal' %>
+      <% else %>
+        <%= erb :'/partials/quick_bet_modal' %>
+      <% end %>
       
     </div>
 

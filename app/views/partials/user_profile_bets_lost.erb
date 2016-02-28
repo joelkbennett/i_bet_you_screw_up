@@ -3,12 +3,11 @@
   <div class="promise">
     <div class="promise-content">
       <% if bet.in_favour %>
-        <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
+        <h1><%= @pronoun %> bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
       <% else %>
-        <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
+        <h1><%= @pronoun %> bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
       <% end %>
       <p><a href='details/index.html'>View Promise</a></p>
-      <p class="promise-detail">You lost the bet.</p>
     </div>
   </div>
   
