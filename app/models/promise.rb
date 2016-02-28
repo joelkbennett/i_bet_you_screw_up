@@ -38,16 +38,23 @@ class Promise < ActiveRecord::Base
     expired_promises = Promise.where(validated: nil).where('expires_at < ?', DateTime.now - 8.hours)
     if expired_promises[0]
       expired_promises.update_all(validated: false)
-      expired_promises.each { |promise| promise.apply_promise_value }
+      expired_promises.each do |promise| 
+        promise.apply_promise_value
+      end
     end
   end
 
   def apply_promise_value
     validated ? user.add_points(DEFAULT_WORTH) : user.subtract_points(DEFAULT_WORTH)
+    apply_promise_bets
   end
 
-  def calculate_odds
-
+  def apply_promise_bets
+    if validated
+      bets.where(in_favour: true).each { |bet| bet.user.add_points(bet.winnings) }
+    else
+      bets.where(in_favour: false).each { |bet| bet.user.add_points(bet.winnings) }
+    end
   end
 
   private

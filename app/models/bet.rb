@@ -5,7 +5,7 @@ class Bet < ActiveRecord::Base
 
   validates :user_id, uniqueness: { scope: [:promise_id] }
 
-  before_create :set_winnings
+  before_create :set_winnings, :deduct_user_points 
 
   DEFAULT_BET = 10
 
@@ -26,6 +26,11 @@ class Bet < ActiveRecord::Base
   end
 
   private
+
+  def deduct_user_points
+    user.points -= bet_value
+    user.save
+  end
 
   def set_winnings
     kept = promise.user.promises_kept.to_f
