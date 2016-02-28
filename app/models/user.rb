@@ -41,22 +41,28 @@ class User < ActiveRecord::Base
   end
 
   def bets_active
-    bets.where(validated: nil).order(created_at: :desc)
-  end
-
-  def bets_won
-    bets.where(validated: true).order(created_at: :desc)
+    bets.find_all { |bet| bet.promise.validated == nil }
   end
 
   def bets_lost
-    bets.where(validated: false).order(created_at: :desc)
+    bets_lost = bets.find_all do |bet| 
+      (bet.in_favour && bet.promise.validated == false) || (!bet.in_favour && bet.promise.validated == true)
+    end
+    # bets_lost.order(created_at: :desc)
+  end
+
+  def bets_won
+    bets_lost = bets.find_all do |bet| 
+      (bet.in_favour && bet.promise.validated == true) || (!bet.in_favour && bet.promise.validated == false)
+    end
+    # bets_lost.order(created_at: :desc)
   end
 
   def gravatar
-    # hash = Digest::MD5.hexdigest(email)
-    # "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
-    category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
-    "http://lorempixel.com/300/300/" + category
+    hash = Digest::MD5.hexdigest(email)
+    "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
+    # category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
+    # "http://lorempixel.com/300/300/" + category
   end
 
   def promises_kept 
