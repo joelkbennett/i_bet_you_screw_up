@@ -14,8 +14,8 @@
         </div>
         <p class="promise-detail"><%= @promise.hours_until_expired %></p>
         <div class="user-details">
-          <p class='promise-kept' data-promise='<%= @promise.user.promises_kept %>'>kept: <%= @promise.user.promises_kept %></p>
-          <p class='promise-broken' data-promise='<%= @promise.user.promises_broken %>'>broken: <%= @promise.user.promises_broken %></p>
+          <p class='promise-kept' data-promise='<%= @promise.user.promises_kept %>'>kept: <%= @promise.user.promises_kept.count %></p>
+          <p class='promise-broken' data-promise='<%= @promise.user.promises_broken %>'>broken: <%= @promise.user.promises_broken.count %></p>
         </div>
       </div>
       <div class="user-img">
@@ -106,10 +106,16 @@
 
     <% end %>
 
-    <%= erb :'/partials/bets' %>
+    <section class="article-footer">
+      <% unless @promise.bets.empty? %>
+        <%= erb :'/partials/bets' %>
+      <% end %>
+    </section>
 
-    <%= erb :'/partials/comments' %>
-
+    <section class="article-footer">
+      <%= erb :'/partials/comments' %>
+    </section>
+    
   </section>
 
     <!-- render pagination -->
