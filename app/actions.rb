@@ -163,13 +163,13 @@ post '/promises/:id/comment/new' do |id|
     promise_id: promise.id
   )
 
+  user.comments << comment
+  promise.comments << comment
+
   content_type :json
-  { name: 'name' }.to_json
+  "#{comment.id}".to_json 
 
-  # user.comments << comment
-  # promise.comments << comment 
-
-  # redirect "/promises/#{id}"
+  redirect "/promises/#{id}"
 
 end
 

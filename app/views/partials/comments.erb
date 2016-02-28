@@ -14,6 +14,8 @@
 <% end %>
 
 <% @promise.ordered_comments.each do |comment| %>
+  <div id="new-comment">
+  </div>
   <div class="comment">
     <div class="comment-image">
       <img src="<%= comment.author.gravatar %>" alt="Logo image">
