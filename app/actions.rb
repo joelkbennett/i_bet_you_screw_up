@@ -131,7 +131,6 @@ post '/promises/:id/validate' do |id|
   validation = true if params[:yes] == "Promise Kept"
   validation = false if params[:no] == "Promise Not Kept"
   @promise.update(validated: validation, expires_at: DateTime.now - 8.hours)
-  binding.pry
   @promise.apply_promise_value
   @promise.bets.each { |bet| bet.apply_bet }
   redirect "/promises/#{id}"
