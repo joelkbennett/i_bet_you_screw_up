@@ -54,8 +54,7 @@ class User < ActiveRecord::Base
   end
 
   def gravatar
-    hash = Digest::MD5.hexdigest(email)
-    "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
+    "http://www.gravatar.com/avatar/#{email_hash}?s=250&d=retro"
     # category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
     # "http://lorempixel.com/300/300/" + category
   end
