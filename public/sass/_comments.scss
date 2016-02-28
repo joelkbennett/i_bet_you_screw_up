@@ -69,3 +69,35 @@
   margin-top: 2.2em;
   margin-bottom: 2em;
 }
+
+.new_comment {
+  border-bottom: thick solid $red;
+}
+
+.comment-form {
+  @include clearfix;
+  margin-bottom: 2em;
+  .comments-header {
+    @include span-columns(3);
+    margin: 0;
+    h1 { 
+      padding: 0; 
+      margin: 0;
+    }
+  }
+  
+  .form-new-comment {
+    @include span-columns(9);
+  }
+
+  .card-copy {
+    padding: 1em;
+  }
+}
+
+.comments-list {
+  margin: 0 5em;
+  padding: 0 4em;
+  border-left: thin solid #ddd;
+  border-right: thin solid #ddd;
+}

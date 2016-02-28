@@ -1,43 +1,75 @@
 $(document).ready(function() {
 
+  displayPromises('/all/promises')
   hideExpired();
 
   $('#toggle-expired-promises').click(function() {
     hideExpired();
   });
 
-  $('#toggle-friends-promises').click(function(){
+  $('#toggle-top-promises').click(function() {
+    var url;
+    if (this.checked && $('#toggle-friends-promises')[0].checked) {
+      url = '/friends/top_bets/promises';
+    } 
+    else if (!this.checked && $('#toggle-friends-promises')[0].checked) {
+      url = '/friends/promises';
+    }
+    else if (this.checked) {
+      url = '/top_bets/promises';
+    }
+    else {
+      url = '/all/promises';
+    }
+    displayPromises(url);
+  });
 
+  $('#toggle-friends-promises').click(function(){
+    var url;
+    if (this.checked && $('#toggle-top-promises')[0].checked) {
+      url = '/friends/top_bets/promises';
+    } 
+    else if (!this.checked && $('#toggle-top-promises')[0].checked) {
+      url = '/top_bets/promises';
+    }
+    else if (this.checked) {
+      url = '/friends/promises';
+    } else {
+      url = '/all/promises';
+    } 
+    displayPromises(url);
+  });
+
+  function displayPromises(url) {
     var params = {
         type: "GET",
         success: function (result) {
-                  var users = result[0];
-                  var promises = result[1];
-                  var user = result[2];
-                  var bets = result[3];
-                  var myArray = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ];
+                  var users = result["users"];
+                  var promises = result["promises"];
+                  var user = result["user"];
+                  var bets = result["bets"];
+                  // var myArray = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ];
                   $('div.cards').empty();
                   var alt = "Logo image";
                   promises.forEach( function(promise) {
-                    var category = myArray[Math.floor(Math.random() * myArray.length)];
-                    var src = "http://lorempixel.com/300/300/"+category;
-                    var name = fullName(users, promise);
+                    // var category = myArray[Math.floor(Math.random() * myArray.length)];
+                    // var src = "http://www.gravatar.com/avatar/" + md5(email);
+                    var nameImageAndUser = fullNameImageAndUser(users, promise);
+                    var name = nameImageAndUser[0];
+                    var src = nameImageAndUser[1];
+                    var userOfThisPromise = nameImageAndUser[2];
                     var timeRemaining = hoursUntilExpired(promise.expires_at);
                     var content = promiseContent(promise.content);
                     var card = addClassCardExpired(timeRemaining);
-                    createCard(promise, card, name, timeRemaining, content, src, alt, user, bets);
+                    createCard(promise, card, name, timeRemaining, content, src, alt, user, bets, userOfThisPromise, promises);
                   });
                   hideExpired();
                 }
     };
-    if (this.checked) {
-        params.url = '/friends/promises';
-    } else {
-        params.url = '/all/promises';
-    }
-    $.ajax(params); 
-  });
-
+    params.url = url;
+    $.ajax(params);
+  }
+ 
   function hoursUntilExpired(expires_at) {
     var today = new Date();
     var time_difference = (Date.parse(expires_at) - today) + 28800000
@@ -63,19 +95,117 @@ $(document).ready(function() {
     }
   }
 
-  function fullName(users, promise) {
-    var name = "";
+  function fullNameImageAndUser(users, promise) {
+    var nameImageUserArray = [];
     users.forEach( function(user) {
       if (promise.user_id == user.id) {
-        name = user.first_name + " " + user.last_name;
+        nameImageUserArray.push(user.first_name + " " + user.last_name);
+        nameImageUserArray.push("http://www.gravatar.com/avatar/"+user.email_hash+"?s=250&d=retro");
+        nameImageUserArray.push(user);
       }
     });
-    return(name);
+    return(nameImageUserArray);
   }
 
-  function createCard(promise, card, name, timeRemaining, content, src, alt, user, bets) {
+  function totalPromisesKeptByThisPromiseUser(promises, userOfThisPromise) {
+    var count = 0;
+    promises.forEach(function(promise) {
+      if (promise.user_id == userOfThisPromise.id && promise.validated) {
+        count++;
+      }
+    });
+    return(count);
+  }
+
+  function totalPromisesBrokenByThisPromiseUser(promises, userOfThisPromise) {
+    var count = 0;
+    promises.forEach(function(promise) {
+      if (promise.user_id == userOfThisPromise.id && !promise.validated) {
+        count++;
+      }
+    });
+    return(count);
+  }
+
+  function totalUsersBetForPromise(promise, bets){
+    var count = 0;
+    bets.forEach(function(bet) {
+      if (bet.promise_id == promise.id && bet.in_favour == true) {
+        count ++;
+      }
+    });
+    return(count);
+  }
+
+  function totalUsersBetAgainstPromise(promise, bets){
+    var count = 0;
+    bets.forEach(function(bet) {
+      if (bet.promise_id == promise.id && bet.in_favour == false) {
+        count ++;
+      }
+    });
+    return(count);
+  }
+
+  function alreadyBet(user, bets, promise) {
+    var checkBet = null;
+    bets.forEach(function(bet) {
+      if (bet.user_id == user.id && bet.promise_id == promise.id) {
+        checkBet = bet;
+        console.log
+      }
+    });
+    return(checkBet);
+  }
+
+  function isLoggedIn(user) {
+    if (user) {
+      return(true);
+    }
+    else {
+      return(false);
+    }
+  }
+
+  function isCurrentUserPromiseUser(promise, user) {
+    if (promise.user_id == user.id) {
+      return(true);
+    }
+    else {
+      return(false);
+    }
+  }
+
+  function promiseContent(content) {
+    var new_content = "";
+    if (content.length > 30) {
+      for (var i = 0; i < 30; i++) {
+        new_content += content[i];
+      } 
+    }
+    else {
+      new_content = content;
+    }
+    return(new_content);
+  }
+
+  function hideExpired() {
+    var toggleExpired = $('#toggle-expired-promises');
+    if (toggleExpired.is(':checked')) {
+      $('.cards .card-expired').show();
+    }
+    else {
+      $('.cards .card-expired').hide();
+    }
+  }
+
+  function createCard(promise, card, name, timeRemaining, content, src, alt, user, bets, userOfThisPromise, promises) {
 
     var lastParagraph, currentUser;
+    var usersForThePromise = totalUsersBetForPromise(promise, bets);
+    var usersAgainstThePromise = totalUsersBetAgainstPromise(promise, bets);
+    var bet = alreadyBet(user, bets, promise);
+    var inFavour = "";
 
     if (isLoggedIn(user)){
       currentUser = isCurrentUserPromiseUser(promise, user);
@@ -86,14 +216,14 @@ $(document).ready(function() {
 
     if (timeRemaining == 'Expired!' || promise.validated != null) {
       if (promise.validated == true) {
-        lastParagraph = $('<p>').text("Promise Kept!");
+        lastParagraph = $('<p>').addClass("flash-success").text("Promise Kept!");
       }
       else {
         if (currentUser) {
-          lastParagraph = $('<p>').text("You screwed up..");
+          lastParagraph = $('<p>').addClass("flash-error").text("You screwed up..");
         }
         else {
-          lastParagraph = $('<p>').text(name + " screwed up..");
+          lastParagraph = $('<p>').addClass("flash-error").text(name + " screwed up..");
         }
       }
     }
@@ -134,12 +264,10 @@ $(document).ready(function() {
                                 .val("Promise Not Kept")))));
       }
       else {
-        var bet = alreadyBet(user, bets, promise);
-        var inFavour = "";
-        if (bet.in_favour) {
+        if (bet != null && bet.in_favour) {
           inFavour = "will keep their promise!";
         }
-        else {
+        else if (bet != null && !bet.in_favour) {
           inFavour = "will screw-up!";
         }
         if (bet != null) {
@@ -149,15 +277,13 @@ $(document).ready(function() {
                             .text("You bet "+bet.bet_value+"pts that "+name+" "+inFavour));
         }
         else {
-          var usersForThePromise = totalUsersBetForPromise(promise, bets);
-          var usersAgainstThePromise = totalUsersBetAgainstPromise(promise, bets);
           lastParagraph = $('<div>')
                           .addClass('modal')
                           .append($('<label>')
                             .attr("for", "modal-2")
                             .append($('<div>')
                               .addClass("modal-trigger")
-                              .text("Validate your promise!")))
+                              .text("Make a Bet!")))
                           .append($('<input>')
                             .addClass("modal-state")
                             .attr("id", "modal-2")
@@ -186,7 +312,7 @@ $(document).ready(function() {
                                   .attr("type", "submit")
                                   .attr("name", "in_favour")
                                   .val("Yes ("+usersForThePromise+")"))
-                                .apend($('<input>')
+                                .append($('<input>')
                                   .addClass("place_bet")
                                   .attr("type", "submit")
                                   .attr("name", "not_in_favour")
@@ -207,6 +333,30 @@ $(document).ready(function() {
       .text(name+" promised:"))
     .append($('<p>')
       .text(content))
+    .append($('<div>')
+      .addClass('card-stats')
+      .append($('<div>')
+        .addClass('stat-box')
+        .append($('<p>')
+          .addClass("stat-title")
+          .text("Promises"))
+        .append($('<p>')
+          .addClass("stat-success")
+          .text("Kept : "+totalPromisesKeptByThisPromiseUser(promises, userOfThisPromise)))
+        .append($('<p>')
+          .addClass("stat-error")
+          .text("Broken : "+totalPromisesBrokenByThisPromiseUser(promises, userOfThisPromise))))
+      .append($('<div>')
+        .addClass('stat-box')
+        .append($('<p>')
+          .addClass("stat-title")
+          .text("Bets"))
+        .append($('<p>')
+          .addClass("stat-success")
+          .text("For : "+totalPromisesKeptByThisPromiseUser(promises, userOfThisPromise)))
+        .append($('<p>')
+          .addClass("stat-error")
+          .text("Against : "+totalPromisesBrokenByThisPromiseUser(promises, userOfThisPromise)))))
     .appendTo(card);
     $('<div>')
     .addClass('card-copy')
@@ -215,85 +365,6 @@ $(document).ready(function() {
       .text(timeRemaining))
     .append(lastParagraph)
     .appendTo(card);
-  }
-
-  // <div class="card-header promise-card-header">
-  //   <img src="<%= promise.user.gravatar %>" class="profile-image profile-image-small">
-  //     <a href='promises/<%= promise.id %>'><%= promise.user.name %> promised:</a>
-  //   <%= promise.content %>
-  // </div>
-
-
-  function totalUsersBetForPromise(promise, bets){
-    var count = 0;
-    bets.forEach(function(bet) {
-      if (bet.promise_id == promise.id && bet.in_favour == true) {
-        count ++;
-      }
-    });
-    return(count);
-  }
-
-  function totalUsersBetAgainstPromise(promise, bets){
-    var count = 0;
-    bets.forEach(function(bet) {
-      if (bet.promise_id == promise.id && bet.in_favour == false) {
-        count ++;
-      }
-    });
-    return(count);
-  }
-
-  function alreadyBet(user, bets) {
-    var checkBet = null;
-    bets.forEach(function(bet) {
-      if (bet.user_id == user.id && bet.promise_id == promise.id) {
-        checkBet = bet;
-      }
-    });
-    return(checkBet);
-  }
-
-  function isLoggedIn(user) {
-    if (user) {
-      return(true);
-    }
-    else {
-      return(false);
-    }
-  }
-
-  function isCurrentUserPromiseUser(promise, user) {
-    if (promise.user_id == user.id) {
-      return(true);
-    }
-    else {
-      return(false);
-    }
-  }
-
-  function promiseContent(content) {
-    var new_content = "";
-    if (content.length > 30) {
-      for (var i = 0; i < 30; i++) {
-        new_content += content[i];
-      } 
-    }
-    else {
-      new_content = content;
-    }
-    return(new_content);
-  }
-
-
-  function hideExpired() {
-    var toggleExpired = $('#toggle-expired-promises');
-    if (toggleExpired.is(':checked')) {
-      $('.cards .card-expired').show();
-    }
-    else {
-      $('.cards .card-expired').hide();
-    }
   }
 
 });

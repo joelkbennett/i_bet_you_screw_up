@@ -1,0 +1,18 @@
+<% @user.bets_active.each do |bet| %>
+
+  <div class="promise">
+    <div class="promise-content">
+      <% if bet.in_favour %>
+        <h1><%= @pronoun %> bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
+      <% else %>
+        <h1><%= @pronoun %> bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
+      <% end %>
+      <p><a href='details/index.html'>View Promise</a></p>
+      <p class="promise-detail"><%= bet.promise.hours_until_expired %>
+      <% if bet.promise.expired? %>
+        <%= bet.won? ? "#{@pronoun} won the bet!" : "#{@pronoun} lost the bet.." %> </p>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>

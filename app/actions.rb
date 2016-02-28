@@ -16,17 +16,24 @@ helpers do
   end
 
   def all_promises
-    @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+    @promises = Promise.all.reorder(:expires_at).paginate(:page => page_number, :per_page => 20)
+  end
+
+  def friends_of_current_user
+    @friends = @current_user.friends
+  end
+
+  def top_bet_promises_of_friends
+    friends_of_current_user
+    @promises = Promise.where(:user_id => @friends.select(:id)).where(:id => Bet.group(:promise_id).reorder('count_id desc').count(:id).keys).paginate(:page => page_number, :per_page => 20)
   end
 
   def promises_of_friends
-    @promises = Promise.all.where(:user_id => @friends.select("id")).reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+    @promises = Promise.where(:user_id => @friends.select(:id)).reorder(:expires_at).paginate(:page => page_number, :per_page => 20)
   end
 
-  def top_bets
-  end
-
-  def top_bet_users
+  def top_bet_promises
+    @promises = Promise.where(:id => Bet.group(:promise_id).reorder('count_id desc').count(:id).keys).paginate(:page => page_number, :per_page => 20)
   end
 
   def bet_for_a_user_on_a_promise(user_id, promise_id)
@@ -84,23 +91,30 @@ end
 
 get '/top_bets/promises' do
   content_type :json
-  top_bets
-  top_bet_users
-  [@users, @promises, @current_user, @bets].to_json
+  top_bet_promises
+  @users = User.all
+  {users: @users, promises: @promises, user: @current_user, bets: @bets}.to_json
+end
+
+get '/friends/top_bets/promises' do
+  content_type :json
+  top_bet_promises_of_friends
+  @users = User.all
+  {users: @friends, promises: @promises, user: @current_user, bets: @bets}.to_json
 end
 
 get '/all/promises' do
   content_type :json
   @users = User.all
   all_promises
-  [@users, @promises, @current_user, @bets].to_json
+  {users: @users, promises: @promises, user: @current_user, bets: @bets}.to_json
 end
 
 get '/friends/promises' do
   content_type :json
-  @friends = @current_user.friends
+  friends_of_current_user
   promises_of_friends
-  [@friends, @promises, @current_user, @bets].to_json
+  {users: @friends, promises: @promises, user: @current_user, bets: @bets}.to_json
 end
 
 get '/promises/new' do
@@ -179,20 +193,14 @@ end
 post '/promises/:id/comment/new' do |id|
   promise = Promise.find(id)
   user = @current_user
-  comment = Comment.new(
+  comment = Comment.create(
     body: params[:body],
     user_id: user.id,
     promise_id: promise.id
   )
 
   content_type :json
-  { name: 'name' }.to_json
-
-  # user.comments << comment
-  # promise.comments << comment 
-
-  # redirect "/promises/#{id}"
-
+  { name: user.name, comment: comment.body, user_image: user.gravatar, date: comment.created_at }.to_json
 end
 
 post '/users/friends/new/:id' do |id|

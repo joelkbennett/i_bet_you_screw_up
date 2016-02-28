@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, format: { with: /[A-Za-z0-9\._%+-]+@[A-Za-z0-9\.-]+\.[A-Za-z]{2,}/, message: "only allows valid email" }
 
   before_create :add_initial_points
+  before_create :generate_image_hash
 
   INITIAL_POINTS = 100
 
@@ -41,38 +42,42 @@ class User < ActiveRecord::Base
   end
 
   def bets_active
-    bets.where(validated: nil).order(created_at: :desc)
-  end
-
-  def bets_won
-    bets.where(validated: true).order(created_at: :desc)
+    bets.find_all { |bet| bet.promise.validated == nil }
   end
 
   def bets_lost
-    bets.where(validated: false).order(created_at: :desc)
+    bets_lost = bets.find_all do |bet| 
+      (bet.in_favour && bet.promise.validated == false) || (!bet.in_favour && bet.promise.validated == true)
+    end
+    # bets_lost.order(created_at: :desc)
   end
 
+  def bets_won
+    bets_lost = bets.find_all do |bet| 
+      (bet.in_favour && bet.promise.validated == true) || (!bet.in_favour && bet.promise.validated == false)
+    end
+    # bets_lost.order(created_at: :desc)
+  end
+
+  def promises_active
+    promises.find_all { |promise| promise.validated == nil }
+  end
+
+
   def gravatar
-    # hash = Digest::MD5.hexdigest(email)
-    # "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
-    category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
-    "http://lorempixel.com/300/300/" + category
+    "http://www.gravatar.com/avatar/#{email_hash}?s=250&d=retro"
   end
 
   def promises_kept 
-    promises.where(validated: true).count
+    promises.where(validated: true)
   end
 
   def promises_broken
-    promises.where(validated: false).count
+    promises.where(validated: false)
   end
 
-  # def promises_delta
-  #   promises_kept - promises_broken
-  # end
-
   def label
-    promise_delta = promises_kept - promises_broken
+    promise_delta = promises_kept.count - promises_broken.count
     if promise_delta > 1
       "Promise Keeper"
     elsif promise_delta < 1
@@ -102,6 +107,10 @@ class User < ActiveRecord::Base
   
   def add_initial_points 
     self.points = INITIAL_POINTS
+  end
+
+  def generate_image_hash
+    self.email_hash = Digest::MD5.hexdigest(email)
   end
 
 end
