@@ -26,6 +26,10 @@ class Bet < ActiveRecord::Base
     in_favour == promise.validated if promise.expired? || !promise.validated.nil?
   end
 
+  def self.count_all
+    Bet.all.count
+  end
+
   private
 
   def deduct_user_points

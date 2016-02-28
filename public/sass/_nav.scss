@@ -36,7 +36,7 @@ header.navigation {
   .logo, .profile-pic {
     float: left;
     max-height: $navigation-height;
-    padding-left: $navigation-padding;
+    padding-left: .5em;
     padding-right: 2em;
 
     img {
