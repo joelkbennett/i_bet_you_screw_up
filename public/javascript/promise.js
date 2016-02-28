@@ -36,13 +36,15 @@ $(document).ready(function() {
                   var promises = result[1];
                   var user = result[2];
                   var bets = result[3];
-                  var myArray = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ];
+                  // var myArray = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ];
                   $('div.cards').empty();
                   var alt = "Logo image";
                   promises.forEach( function(promise) {
-                    var category = myArray[Math.floor(Math.random() * myArray.length)];
-                    var src = "http://lorempixel.com/300/300/"+category;
-                    var name = fullName(users, promise);
+                    // var category = myArray[Math.floor(Math.random() * myArray.length)];
+                    // var src = "http://www.gravatar.com/avatar/" + md5(email);
+                    var nameAndImage = fullNameAndImage(users, promise);
+                    var name = nameAndImage[0];
+                    var src = nameAndImage[1];
                     var timeRemaining = hoursUntilExpired(promise.expires_at);
                     var content = promiseContent(promise.content);
                     var card = addClassCardExpired(timeRemaining);
@@ -80,14 +82,15 @@ $(document).ready(function() {
     }
   }
 
-  function fullName(users, promise) {
-    var name = "";
+  function fullNameAndImage(users, promise) {
+    var nameImageArray = [];
     users.forEach( function(user) {
       if (promise.user_id == user.id) {
-        name = user.first_name + " " + user.last_name;
+        nameImageArray.push(user.first_name + " " + user.last_name);
+        nameImageArray.push("http://www.gravatar.com/avatar/"+user.email_hash+"?s=250&d=retro");
       }
     });
-    return(name);
+    return(nameImageArray);
   }
 
   function totalUsersBetForPromise(promise, bets){

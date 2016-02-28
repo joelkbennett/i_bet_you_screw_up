@@ -1772,11 +1772,11 @@ button {
       .label-switch input[type="checkbox"]:checked + .checkbox:after {
         left: 22px; }
 
-#expired-promises, #your-promises, #friend-promises {
+#expired-promises, #top-promises, #friend-promises {
   position: relative;
   display: inline-block;
   width: 300px; }
-  #expired-promises #switch-label, #your-promises #switch-label, #friend-promises #switch-label {
+  #expired-promises #switch-label, #top-promises #switch-label, #friend-promises #switch-label {
     display: inline-block;
     position: absolute;
     top: 5px;

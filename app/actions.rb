@@ -28,15 +28,12 @@ helpers do
   end
 
   def top_bet_promises
-    @promises = Promise.where(:promise_id => Bet.group(:promise_id).reorder('count_id desc').limit(10).select(:promise_id)).reorder(:expires_at).paginate(:page => page_number, :per_page => 20)
+    @promises = Promise.where(:id => Bet.group(:promise_id).reorder('count_id desc').count(:id).keys).paginate(:page => page_number, :per_page => 20)
+    p @promises
   end
 
   def top_bet_promises_of_friends
-    @promises = Promise.where(:promise_id => Bet.where(:user_id => @friends.select(:id)).group(:promise_id).reorder('count_id desc').limit(10).select(:promise_id)).reorder(:expires_at).paginate(:page => page_number, :per_page => 20)
-  end
-
-  def top_bet_users
-    @users = User.where(:user_id => Bet.group(:promise_id).reorder('count_id desc').limit(10).select(:user_id))
+    @promises = Promise.where(:promise_id => Bet.where(:user_id => @friends.select(:id)).group(:promise_id).reorder('count_id desc').count(:id).select(:promise_id)).reorder(:expires_at).paginate(:page => page_number, :per_page => 20)
   end
 
   def bet_for_a_user_on_a_promise(user_id, promise_id)
@@ -96,7 +93,7 @@ end
 get '/top_bets/promises' do
   content_type :json
   top_bet_promises
-  top_bet_users
+  @users = User.all
   [@users, @promises, @current_user, @bets].to_json
 end
 

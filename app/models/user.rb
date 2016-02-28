@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, format: { with: /[A-Za-z0-9\._%+-]+@[A-Za-z0-9\.-]+\.[A-Za-z]{2,}/, message: "only allows valid email" }
 
   before_create :add_initial_points
+  before_create :generate_image_hash
 
   INITIAL_POINTS = 100
 
@@ -53,10 +54,10 @@ class User < ActiveRecord::Base
   end
 
   def gravatar
-    # hash = Digest::MD5.hexdigest(email)
-    # "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
-    category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
-    "http://lorempixel.com/300/300/" + category
+    hash = Digest::MD5.hexdigest(email)
+    "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
+    # category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
+    # "http://lorempixel.com/300/300/" + category
   end
 
   def promises_kept 
@@ -102,6 +103,10 @@ class User < ActiveRecord::Base
   
   def add_initial_points 
     self.points = INITIAL_POINTS
+  end
+
+  def generate_image_hash
+    self.email_hash = Digest::MD5.hexdigest(email)
   end
 
 end
