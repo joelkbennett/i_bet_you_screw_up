@@ -15,6 +15,14 @@ helpers do
     @bets = Bet.all
   end
 
+  def all_promises
+    @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  end
+
+  def promises_of_friends
+    @promises = Promise.all.where(:user_id => @friends.select("id")).reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  end
+
   def bet_for_a_user_on_a_promise(user_id, promise_id)
     @bet_for_a_user_on_a_promise = Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
   end
@@ -55,10 +63,22 @@ get '/' do
 end
 
 get '/promises' do
-  @show_expired = params[:show_expired]
-  puts @show_expired
-  @promises = Promise.all.reorder("expires_at").paginate(:page => page_number, :per_page => 20)
+  all_promises
   erb :'promises/index'
+end
+
+get '/all/promises' do
+  content_type :json
+  @users = User.all
+  all_promises
+  [@users, @promises].to_json
+end
+
+get '/friends/promises' do
+  content_type :json
+  @friends = @current_user.friends
+  promises_of_friends
+  [@friends, @promises].to_json
 end
 
 get '/promises/new' do
@@ -110,7 +130,7 @@ post '/promises/:id/validate' do |id|
   @promise = Promise.find(id)
   validation = true if params[:yes] == "Promise Kept"
   validation = false if params[:no] == "Promise Not Kept"
-  @promise.update(validated: validation)
+  @promise.update(validated: validation, expires_at: DateTime.now - 8.hours)
   @promise.apply_promise_value
   @promise.bets.each { |bet| bet.apply_bet }
   redirect "/promises/#{id}"
@@ -144,10 +164,13 @@ post '/promises/:id/comment/new' do |id|
     promise_id: promise.id
   )
 
-  user.comments << comment
-  promise.comments << comment 
+  content_type :json
+  { name: 'name' }.to_json
 
-  redirect "/promises/#{id}"
+  # user.comments << comment
+  # promise.comments << comment 
+
+  # redirect "/promises/#{id}"
 
 end
 
