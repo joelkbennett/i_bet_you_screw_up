@@ -61,8 +61,6 @@ class User < ActiveRecord::Base
 
   def gravatar
     "http://www.gravatar.com/avatar/#{email_hash}?s=250&d=retro"
-    # category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
-    # "http://lorempixel.com/300/300/" + category
   end
 
   def promises_kept 
@@ -72,10 +70,6 @@ class User < ActiveRecord::Base
   def promises_broken
     promises.where(validated: false).count
   end
-
-  # def promises_delta
-  #   promises_kept - promises_broken
-  # end
 
   def label
     promise_delta = promises_kept - promises_broken

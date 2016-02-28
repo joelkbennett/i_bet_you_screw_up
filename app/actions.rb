@@ -194,20 +194,14 @@ end
 post '/promises/:id/comment/new' do |id|
   promise = Promise.find(id)
   user = @current_user
-  comment = Comment.new(
+  comment = Comment.create(
     body: params[:body],
     user_id: user.id,
     promise_id: promise.id
   )
 
   content_type :json
-  { name: 'name' }.to_json
-
-  # user.comments << comment
-  # promise.comments << comment 
-
-  # redirect "/promises/#{id}"
-
+  { name: user.name, comment: comment.body, user_image: user.gravatar, date: comment.created_at }.to_json
 end
 
 post '/users/friends/new/:id' do |id|
