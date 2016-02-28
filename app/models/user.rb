@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
   end
 
   def label
-    promise_delta = promises_kept - promises_broken
+    promise_delta = promises_kept.count - promises_broken.count
     if promise_delta > 1
       "Promise Keeper"
     elsif promise_delta < 1
