@@ -23,9 +23,12 @@ class Promise < ActiveRecord::Base
 
   def hours_until_expired
     time_difference = expires_at.to_time - (Time.now - 8 * 60 * 60)
+    days = (time_difference / (60 * 60 * 24))
     hours = (time_difference / (60 * 60))
     minutes = (time_difference / 60)
-    if hours >= 1
+    if days >= 2
+      "Expires in #{days.ceil} days!"
+    elsif hours >= 1
       "Expires in #{hours.ceil} hours!"
     elsif minutes >= 1
       "Expires in #{minutes.ceil} minutes!"
