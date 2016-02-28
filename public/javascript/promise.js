@@ -6,8 +6,29 @@ $(document).ready(function() {
     hideExpired();
   });
 
-  $('#toggle-friends-promises').click(function(){
+  $('#toggle-top-promises').click(function() {
+    var url;
+    $('#toggle-friends-promises').checked = false;
+    if (this.checked) {
+        url = '/top_bets/promises';
+    } else {
+        url = '/all/promises';
+    }
+    displayPromises(url);
+  });
 
+  $('#toggle-friends-promises').click(function(){
+    var url;
+    $('#toggle-top-promises').checked = false;
+    if (this.checked) {
+        url = '/friends/promises';
+    } else {
+        url = '/all/promises';
+    } 
+    displayPromises(url);
+  });
+
+  function displayPromises(url) {
     var params = {
         type: "GET",
         success: function (result) {
@@ -30,14 +51,10 @@ $(document).ready(function() {
                   hideExpired();
                 }
     };
-    if (this.checked) {
-        params.url = '/friends/promises';
-    } else {
-        params.url = '/all/promises';
-    }
-    $.ajax(params); 
-  });
-
+    params.url = url;
+    $.ajax(params);
+  }
+ 
   function hoursUntilExpired(expires_at) {
     var today = new Date();
     var time_difference = (Date.parse(expires_at) - today) + 28800000
@@ -73,6 +90,77 @@ $(document).ready(function() {
     return(name);
   }
 
+  function totalUsersBetForPromise(promise, bets){
+    var count = 0;
+    bets.forEach(function(bet) {
+      if (bet.promise_id == promise.id && bet.in_favour == true) {
+        count ++;
+      }
+    });
+    return(count);
+  }
+
+  function totalUsersBetAgainstPromise(promise, bets){
+    var count = 0;
+    bets.forEach(function(bet) {
+      if (bet.promise_id == promise.id && bet.in_favour == false) {
+        count ++;
+      }
+    });
+    return(count);
+  }
+
+  function alreadyBet(user, bets) {
+    var checkBet = null;
+    bets.forEach(function(bet) {
+      if (bet.user_id == user.id && bet.promise_id == promise.id) {
+        checkBet = bet;
+      }
+    });
+    return(checkBet);
+  }
+
+  function isLoggedIn(user) {
+    if (user) {
+      return(true);
+    }
+    else {
+      return(false);
+    }
+  }
+
+  function isCurrentUserPromiseUser(promise, user) {
+    if (promise.user_id == user.id) {
+      return(true);
+    }
+    else {
+      return(false);
+    }
+  }
+
+  function promiseContent(content) {
+    var new_content = "";
+    if (content.length > 30) {
+      for (var i = 0; i < 30; i++) {
+        new_content += content[i];
+      } 
+    }
+    else {
+      new_content = content;
+    }
+    return(new_content);
+  }
+
+  function hideExpired() {
+    var toggleExpired = $('#toggle-expired-promises');
+    if (toggleExpired.is(':checked')) {
+      $('.cards .card-expired').show();
+    }
+    else {
+      $('.cards .card-expired').hide();
+    }
+  }
+
   function createCard(promise, card, name, timeRemaining, content, src, alt, user, bets) {
 
     var lastParagraph, currentUser;
@@ -86,14 +174,14 @@ $(document).ready(function() {
 
     if (timeRemaining == 'Expired!' || promise.validated != null) {
       if (promise.validated == true) {
-        lastParagraph = $('<p>').text("Promise Kept!");
+        lastParagraph = $('<p>').addClass("flash-success").text("Promise Kept!");
       }
       else {
         if (currentUser) {
-          lastParagraph = $('<p>').text("You screwed up..");
+          lastParagraph = $('<p>').addClass("flash-error").text("You screwed up..");
         }
         else {
-          lastParagraph = $('<p>').text(name + " screwed up..");
+          lastParagraph = $('<p>').addClass("flash-error").text(name + " screwed up..");
         }
       }
     }
@@ -215,85 +303,6 @@ $(document).ready(function() {
       .text(timeRemaining))
     .append(lastParagraph)
     .appendTo(card);
-  }
-
-  // <div class="card-header promise-card-header">
-  //   <img src="<%= promise.user.gravatar %>" class="profile-image profile-image-small">
-  //     <a href='promises/<%= promise.id %>'><%= promise.user.name %> promised:</a>
-  //   <%= promise.content %>
-  // </div>
-
-
-  function totalUsersBetForPromise(promise, bets){
-    var count = 0;
-    bets.forEach(function(bet) {
-      if (bet.promise_id == promise.id && bet.in_favour == true) {
-        count ++;
-      }
-    });
-    return(count);
-  }
-
-  function totalUsersBetAgainstPromise(promise, bets){
-    var count = 0;
-    bets.forEach(function(bet) {
-      if (bet.promise_id == promise.id && bet.in_favour == false) {
-        count ++;
-      }
-    });
-    return(count);
-  }
-
-  function alreadyBet(user, bets) {
-    var checkBet = null;
-    bets.forEach(function(bet) {
-      if (bet.user_id == user.id && bet.promise_id == promise.id) {
-        checkBet = bet;
-      }
-    });
-    return(checkBet);
-  }
-
-  function isLoggedIn(user) {
-    if (user) {
-      return(true);
-    }
-    else {
-      return(false);
-    }
-  }
-
-  function isCurrentUserPromiseUser(promise, user) {
-    if (promise.user_id == user.id) {
-      return(true);
-    }
-    else {
-      return(false);
-    }
-  }
-
-  function promiseContent(content) {
-    var new_content = "";
-    if (content.length > 30) {
-      for (var i = 0; i < 30; i++) {
-        new_content += content[i];
-      } 
-    }
-    else {
-      new_content = content;
-    }
-    return(new_content);
-  }
-
-
-  function hideExpired() {
-    var toggleExpired = $('#toggle-expired-promises');
-    if (toggleExpired.is(':checked')) {
-      $('.cards .card-expired').show();
-    }
-    else {
-      $('.cards .card-expired').hide();
-    }
   }
 
 });
