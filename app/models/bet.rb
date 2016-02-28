@@ -28,15 +28,19 @@ class Bet < ActiveRecord::Base
   private
 
   def set_winnings
-    kept = promise.user.promises_kept
-    broken = promise.user.promises_broken
+    kept = promise.user.promises_kept.to_f
+    broken = promise.user.promises_broken.to_f
 
     if in_favour
-      return self.winnings = (broken + 1) * bet_value if kept = 0
-      self.winnings = broken == 0 ? 0 : ((broken / kept) * bet_value).round
+      if kept == 0
+        return self.winnings = (broken + 1) * bet_value
+      end
+      self.winnings = (broken == 0) ? 0 : ((broken / kept) * bet_value).round
     else
-      return self.winnings = (kept + 1) * bet_value if broken = 0
-      self.winnings = kept == 0 ? 0 : ((kept / broken) * bet_value).round
+      if broken == 0
+        return self.winnings = (kept + 1) * bet_value
+      end
+      self.winnings = (kept == 0) ? 0 : ((kept / broken) * bet_value).round
     end
   end
 

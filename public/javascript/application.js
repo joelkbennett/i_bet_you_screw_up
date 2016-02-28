@@ -187,3 +187,26 @@ $(function() {
   });
   
 })();
+
+// comments
+
+$(function() { 
+  
+  var comment_form = $('#new-comment');
+  
+  var promise_id = comment_form.data("promise");
+  console.log(promise_id)
+
+  var url = '/promises/' + promise_id + '/comment/new'
+  console.log(url)
+
+  comment_form.submit(function(ev) {
+    console.log('form_submit');
+    ev.preventDefault();
+
+    $.ajax(url, { method: 'POST'}).done(function(res) {
+        console.log(res);
+      });
+  });
+});
+

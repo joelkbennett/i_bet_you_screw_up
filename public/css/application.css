@@ -1215,9 +1215,6 @@ header.navigation {
     .card:active .card-header {
       background-color: #f7f7f7; }
 
-.card-expired {
-  display: none; }
-
 .pagination {
   text-align: center; }
   .pagination ul {
@@ -1742,14 +1739,15 @@ button {
       .label-switch input[type="checkbox"]:checked + .checkbox:after {
         left: 22px; }
 
-#expired-promises {
-  position: relative; }
-
-#switch-label {
+#expired-promises, #your-promises, #friend-promises {
+  position: relative;
   display: inline-block;
-  position: absolute;
-  top: 5px;
-  left: 60px; }
+  width: 300px; }
+  #expired-promises #switch-label, #your-promises #switch-label, #friend-promises #switch-label {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    left: 60px; }
 
 .flash-alert {
   background-color: #fff6bf;
@@ -2735,5 +2733,55 @@ button {
 
 .glyphicon-menu-up:before {
   content: "\e260"; }
+
+.tooltip-item {
+  background: white;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  display: inline-block;
+  padding: 0.5em 1em;
+  position: relative;
+  text-align: center; }
+  .tooltip-item:focus, .tooltip-item:hover .tooltip {
+    opacity: 1;
+    visibility: visible; }
+  .tooltip-item .tooltip {
+    position: absolute;
+    right: 0;
+    bottom: 3em;
+    left: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background-color: white;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 2px silver;
+    color: #333;
+    font-size: 0.9em;
+    line-height: 1.5em;
+    margin: 0 auto;
+    max-width: 16em;
+    opacity: 0;
+    padding: 1em;
+    text-align: center;
+    visibility: hidden;
+    z-index: 10; }
+    .tooltip-item .tooltip p {
+      color: #333;
+      line-height: 1.5;
+      margin: 0; }
+    .tooltip-item .tooltip:after {
+      position: absolute;
+      right: 0;
+      left: 0;
+      border: 8px solid transparent;
+      bottom: -1.3em;
+      color: white;
+      content: 'â¼';
+      font-size: 1.4em;
+      margin-left: -8px;
+      text-align: center;
+      text-shadow: 0 2px 2px silver; }
 
 /*# sourceMappingURL=application.css.map */
