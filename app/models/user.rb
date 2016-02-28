@@ -41,7 +41,8 @@ class User < ActiveRecord::Base
   end
 
   def bets_active
-    bets.where(validated: nil).order(created_at: :desc)
+    # bets.where(validated: nil).order(created_at: :desc)
+    # bets.
   end
 
   def bets_won
@@ -53,10 +54,8 @@ class User < ActiveRecord::Base
   end
 
   def gravatar
-    # hash = Digest::MD5.hexdigest(email)
-    # "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
-    category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
-    "http://lorempixel.com/300/300/" + category
+    hash = Digest::MD5.hexdigest(email)
+    "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
   end
 
   def promises_kept 

@@ -1702,6 +1702,36 @@ button {
   margin-top: 2.2em;
   margin-bottom: 2em; }
 
+.new_comment {
+  border-bottom: thick solid #cb4649; }
+
+.comment-form {
+  margin-bottom: 2em; }
+  .comment-form::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .comment-form .comments-header {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%;
+    margin: 0; }
+    .comment-form .comments-header:last-child {
+      margin-right: 0; }
+    .comment-form .comments-header h1 {
+      padding: 0;
+      margin: 0; }
+  .comment-form .form-new-comment {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 74.41059%; }
+    .comment-form .form-new-comment:last-child {
+      margin-right: 0; }
+  .comment-form .card-copy {
+    padding: 1em; }
+
 .label-switch {
   border-radius: 32px;
   cursor: pointer;
