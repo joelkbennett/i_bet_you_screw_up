@@ -140,6 +140,22 @@
         <li class="tab-header-and-content">
           <a href="javascript:void(0)" class="tab-link">Bets Won</a>
           <div class="tab-content">
+
+              <% @user.bets_won.each do |bet| %>
+
+                <div class="promise">
+                  <div class="promise-content">
+                    <% if bet.in_favour %>
+                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
+                    <% else %>
+                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
+                    <% end %>
+                    <p><a href='details/index.html'>View Promise</a></p>
+                    <p class="promise-detail">You won the bet!</p>
+                  </div>
+                </div>
+
+              <% end %>
    
           </div>
         </li>
@@ -147,6 +163,22 @@
         <li class="tab-header-and-content">
           <a href="javascript:void(0)" class="tab-link">Bets Lost</a>
           <div class="tab-content">
+
+              <% @user.bets_lost.each do |bet| %>
+
+                <div class="promise">
+                  <div class="promise-content">
+                    <% if bet.in_favour %>
+                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
+                    <% else %>
+                      <h1>You bet <%= bet.bet_value %>pts that <%= bet.user_name %> will break their promise to <%= bet.promise_content %></h1>
+                    <% end %>
+                    <p><a href='details/index.html'>View Promise</a></p>
+                    <p class="promise-detail">You lost the bet.</p>
+                  </div>
+                </div>
+                
+              <% end %>
 
           </div>
         </li>
