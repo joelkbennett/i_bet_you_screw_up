@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  displayPromises('/all/promises')
   hideExpired();
 
   $('#toggle-expired-promises').click(function() {
@@ -53,13 +54,14 @@ $(document).ready(function() {
                   promises.forEach( function(promise) {
                     // var category = myArray[Math.floor(Math.random() * myArray.length)];
                     // var src = "http://www.gravatar.com/avatar/" + md5(email);
-                    var nameAndImage = fullNameAndImage(users, promise);
-                    var name = nameAndImage[0];
-                    var src = nameAndImage[1];
+                    var nameImageAndUser = fullNameImageAndUser(users, promise);
+                    var name = nameImageAndUser[0];
+                    var src = nameImageAndUser[1];
+                    var userOfThisPromise = nameImageAndUser[2];
                     var timeRemaining = hoursUntilExpired(promise.expires_at);
                     var content = promiseContent(promise.content);
                     var card = addClassCardExpired(timeRemaining);
-                    createCard(promise, card, name, timeRemaining, content, src, alt, user, bets);
+                    createCard(promise, card, name, timeRemaining, content, src, alt, user, bets, userOfThisPromise, promises);
                   });
                   hideExpired();
                 }
@@ -93,15 +95,36 @@ $(document).ready(function() {
     }
   }
 
-  function fullNameAndImage(users, promise) {
-    var nameImageArray = [];
+  function fullNameImageAndUser(users, promise) {
+    var nameImageUserArray = [];
     users.forEach( function(user) {
       if (promise.user_id == user.id) {
-        nameImageArray.push(user.first_name + " " + user.last_name);
-        nameImageArray.push("http://www.gravatar.com/avatar/"+user.email_hash+"?s=250&d=retro");
+        nameImageUserArray.push(user.first_name + " " + user.last_name);
+        nameImageUserArray.push("http://www.gravatar.com/avatar/"+user.email_hash+"?s=250&d=retro");
+        nameImageUserArray.push(user);
       }
     });
-    return(nameImageArray);
+    return(nameImageUserArray);
+  }
+
+  function totalPromisesKeptByThisPromiseUser(promises, userOfThisPromise) {
+    var count = 0;
+    promises.forEach(function(promise) {
+      if (promise.user_id == userOfThisPromise.id && promise.validated) {
+        count++;
+      }
+    });
+    return(count);
+  }
+
+  function totalPromisesBrokenByThisPromiseUser(promises, userOfThisPromise) {
+    var count = 0;
+    promises.forEach(function(promise) {
+      if (promise.user_id == userOfThisPromise.id && !promise.validated) {
+        count++;
+      }
+    });
+    return(count);
   }
 
   function totalUsersBetForPromise(promise, bets){
@@ -124,11 +147,12 @@ $(document).ready(function() {
     return(count);
   }
 
-  function alreadyBet(user, bets) {
+  function alreadyBet(user, bets, promise) {
     var checkBet = null;
     bets.forEach(function(bet) {
       if (bet.user_id == user.id && bet.promise_id == promise.id) {
         checkBet = bet;
+        console.log
       }
     });
     return(checkBet);
@@ -175,9 +199,13 @@ $(document).ready(function() {
     }
   }
 
-  function createCard(promise, card, name, timeRemaining, content, src, alt, user, bets) {
+  function createCard(promise, card, name, timeRemaining, content, src, alt, user, bets, userOfThisPromise, promises) {
 
     var lastParagraph, currentUser;
+    var usersForThePromise = totalUsersBetForPromise(promise, bets);
+    var usersAgainstThePromise = totalUsersBetAgainstPromise(promise, bets);
+    var bet = alreadyBet(user, bets, promise);
+    var inFavour = "";
 
     if (isLoggedIn(user)){
       currentUser = isCurrentUserPromiseUser(promise, user);
@@ -236,12 +264,10 @@ $(document).ready(function() {
                                 .val("Promise Not Kept")))));
       }
       else {
-        var bet = alreadyBet(user, bets, promise);
-        var inFavour = "";
-        if (bet.in_favour) {
+        if (bet != null && bet.in_favour) {
           inFavour = "will keep their promise!";
         }
-        else {
+        else if (bet != null && !bet.in_favour) {
           inFavour = "will screw-up!";
         }
         if (bet != null) {
@@ -251,15 +277,13 @@ $(document).ready(function() {
                             .text("You bet "+bet.bet_value+"pts that "+name+" "+inFavour));
         }
         else {
-          var usersForThePromise = totalUsersBetForPromise(promise, bets);
-          var usersAgainstThePromise = totalUsersBetAgainstPromise(promise, bets);
           lastParagraph = $('<div>')
                           .addClass('modal')
                           .append($('<label>')
                             .attr("for", "modal-2")
                             .append($('<div>')
                               .addClass("modal-trigger")
-                              .text("Validate your promise!")))
+                              .text("Make a Bet!")))
                           .append($('<input>')
                             .addClass("modal-state")
                             .attr("id", "modal-2")
@@ -288,7 +312,7 @@ $(document).ready(function() {
                                   .attr("type", "submit")
                                   .attr("name", "in_favour")
                                   .val("Yes ("+usersForThePromise+")"))
-                                .apend($('<input>')
+                                .append($('<input>')
                                   .addClass("place_bet")
                                   .attr("type", "submit")
                                   .attr("name", "not_in_favour")
@@ -309,6 +333,30 @@ $(document).ready(function() {
       .text(name+" promised:"))
     .append($('<p>')
       .text(content))
+    .append($('<div>')
+      .addClass('card-stats')
+      .append($('<div>')
+        .addClass('stat-box')
+        .append($('<p>')
+          .addClass("stat-title")
+          .text("Promises"))
+        .append($('<p>')
+          .addClass("stat-success")
+          .text("Kept : "+totalPromisesKeptByThisPromiseUser(promises, userOfThisPromise)))
+        .append($('<p>')
+          .addClass("stat-error")
+          .text("Broken : "+totalPromisesBrokenByThisPromiseUser(promises, userOfThisPromise))))
+      .append($('<div>')
+        .addClass('stat-box')
+        .append($('<p>')
+          .addClass("stat-title")
+          .text("Bets"))
+        .append($('<p>')
+          .addClass("stat-success")
+          .text("For : "+totalPromisesKeptByThisPromiseUser(promises, userOfThisPromise)))
+        .append($('<p>')
+          .addClass("stat-error")
+          .text("Against : "+totalPromisesBrokenByThisPromiseUser(promises, userOfThisPromise)))))
     .appendTo(card);
     $('<div>')
     .addClass('card-copy')
