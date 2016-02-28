@@ -222,20 +222,29 @@ $(function() {
 //   })
 // })
 
-// $(function() { 
+$(function() { 
   
-//   var comment_form = $('#new-comment');
-//   var promise_id = comment_form.data("promise");
-//   var url = '/promises/' + promise_id + '/comment/new'
-//   var div = $('#new-comment');
+  var comment_form = $('#new-comment');
+  var promise_id = comment_form.data("promise");
+  var url = '/promises/' + promise_id + '/comment/new'
+  var div = $('#new-comment');
 
-//   comment_form.submit(function(ev) {
+  // comment_form.submit(function(ev) {
 
-//     ev.preventDefault();
+    // ev.preventDefault();
+  console.log('hello')
 
-//     $.ajax(url, { method: 'POST', data: data}).done(function(res) {
-//         console.log(res);
-//       });
-//   });
-// });
+  $.ajax(url, { method: "POST"}).done(function(res) {
+    console.log('entered ajax')
+      $.each(function (key, value) {
+        $('<div>')
+          .text(value)
+          .addClass('comment-image')
+          .appendTo(div);
+      });
+    });
+
+  // });
+
+});
 

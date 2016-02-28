@@ -166,8 +166,14 @@ post '/promises/:id/comment/new' do |id|
   user.comments << comment
   promise.comments << comment
 
-  # content_type :json
-  # "#{comment.id}".to_json 
+  content_type :json
+  {
+    body: "#{comment.body}",
+    user_id: "#{comment.author.id}",
+    user_photo: "#{comment.author.gravatar}",
+    user_name: "#{comment.author.name}",
+    created_at: "#{comment.created_at}"
+  }.to_json 
 
   redirect "/promises/#{id}"
 
