@@ -5,7 +5,7 @@ class Bet < ActiveRecord::Base
 
   validates :user_id, uniqueness: { scope: [:promise_id] }
 
-  before_create :apply_odds_to_bet
+  before_create :set_winnings
 
   DEFAULT_BET = 10
 
@@ -27,23 +27,21 @@ class Bet < ActiveRecord::Base
 
   private
 
-  def apply_odds_to_bet
-    kept = promise.user.promises.promises_kept
-    broken = promise.user.promises.promises_broken
+  def set_winnings
+    kept = promise.user.promises_kept.to_f
+    broken = promise.user.promises_broken.to_f
 
     if in_favour
-      kept = 1 if kept == 0
-      # return bet_value if broken == 0
-      self.bet_value = broken == 0 ? bet_value : (broken / kept) * bet_value
+      if kept == 0
+        return self.winnings = (broken + 1) * bet_value
+      end
+      self.winnings = (broken == 0) ? 0 : ((broken / kept) * bet_value).round
     else
-      broken = 1 if broken == 0
-      # return bet_value if kept == 0
-      self.bet_value = kept == 0 ? bet_value : (kept / broken) * bet_value
+      if broken == 0
+        return self.winnings = (kept + 1) * bet_value
+      end
+      self.winnings = (kept == 0) ? 0 : ((kept / broken) * bet_value).round
     end
-
-    # if promise.user.promises_delta < 0
-    #   self.bet_value = bet_value * (promise.user.promises_delta.abs * 0.1 + 1)
-    # end
   end
 
 end

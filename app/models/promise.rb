@@ -44,7 +44,11 @@ class Promise < ActiveRecord::Base
 
   def apply_promise_value
     validated ? user.add_points(DEFAULT_WORTH) : user.subtract_points(DEFAULT_WORTH)
-  end  
+  end
+
+  def calculate_odds
+
+  end
 
   private
     def expiration_date_cannot_be_in_the_past
