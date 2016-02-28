@@ -41,13 +41,13 @@ helpers do
     @bet_for_a_user_on_a_promise = Bet.where("user_id = ? AND promise_id = ?", user_id, promise_id).take(1)[0]
   end
 
-  def total_users_for_the_promise_to_be_kept(promise_id)
-    @total_users_for_the_promise_to_be_kept = Bet.where("promise_id = ? AND in_favour = true", promise_id).count
-  end
+  # def total_users_for_the_promise_to_be_kept(promise_id)
+  #   @total_users_for_the_promise_to_be_kept = Bet.where("promise_id = ? AND in_favour = true", promise_id).count
+  # end
 
-  def total_users_against_the_promise_to_be_kept(promise_id)
-    @total_users_against_the_promise_to_be_kept = Bet.where("promise_id = ? AND in_favour = false", promise_id).count
-  end
+  # def total_users_against_the_promise_to_be_kept(promise_id)
+  #   @total_users_against_the_promise_to_be_kept = Bet.where("promise_id = ? AND in_favour = false", promise_id).count
+  # end
 
   def check_flash
     if session[:flash_error]
@@ -125,8 +125,8 @@ end
 
 get '/promises/:id' do |id|
   @promise = Promise.find(id)
-  total_users_for_the_promise_to_be_kept(id)
-  total_users_against_the_promise_to_be_kept(id)
+  # total_users_for_the_promise_to_be_kept(id)
+  # total_users_against_the_promise_to_be_kept(id)
   @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
   erb :'promises/show'
 end
@@ -148,7 +148,7 @@ end
 
 post '/promises/:id/new_bet' do |id|
   @promise = Promise.find(id)
-  total_users_for_the_promise_to_be_kept(id)
+  @promise.bets_for
   bet_in_favour = true if params[:in_favour] =~ /Yes/
   bet_in_favour = false if params[:not_in_favour] =~ /No/
   @bet = Bet.new(

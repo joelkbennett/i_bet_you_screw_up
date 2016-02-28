@@ -65,8 +65,8 @@
                       <div id='broken-winnings'>You could win <span></span> points if you vote NO!</div>
                     </div>
                   </div>
-                  <input class="place_bet" type="submit" name="in_favour" value="Yes (<%= @total_users_for_the_promise_to_be_kept %>)">
-                  <input class="place_bet" type="submit" name="not_in_favour" value="No (<%= @total_users_against_the_promise_to_be_kept %>)">
+                  <input class="place_bet" type="submit" name="in_favour" value="Yes (<%= @promise.bets_for %>)">
+                  <input class="place_bet" type="submit" name="not_in_favour" value="No (<%= @promise.bets_for %>)">
                 </form>
                 <br>
               </div>

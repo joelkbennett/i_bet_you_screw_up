@@ -49,6 +49,14 @@ class Promise < ActiveRecord::Base
     end
   end
 
+  def bets_for
+    bets.where(in_favour: true).count
+  end
+
+  def bets_against
+    bets.where(in_favour: false).count
+  end
+
   def apply_promise_value
     validated ? user.add_points(DEFAULT_WORTH) : user.subtract_points(DEFAULT_WORTH)
     apply_promise_bets
