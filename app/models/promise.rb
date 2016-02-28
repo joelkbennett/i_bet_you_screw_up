@@ -59,14 +59,20 @@ class Promise < ActiveRecord::Base
     end
   end
 
-  private
-    def expiration_date_cannot_be_in_the_past
-      if expires_at.to_time < (Time.now - 8*60*60)
-        errors.add(:expires_at, "can't be in the past")
-      end
-    end
+  def self.count_all
+    { kept: Promise.where(validated: true).count,
+      broken: Promise.where(validated: false).count }
+  end
 
-    def update_expires_at
-      self.expires_at = (Time.now - 8 * 60 * 60) if !validated.nil?
+  private
+
+  def expiration_date_cannot_be_in_the_past
+    if expires_at.to_time < (Time.now - 8*60*60)
+      errors.add(:expires_at, "can't be in the past")
     end
+  end
+
+  def update_expires_at
+    self.expires_at = (Time.now - 8 * 60 * 60) if !validated.nil?
+  end
 end

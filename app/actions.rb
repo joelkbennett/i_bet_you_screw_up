@@ -57,7 +57,7 @@ helpers do
       @flash_success = session[:flash_success]
       session[:flash_success] = nil
     end
-  end 
+  end
 
   def friend_since(friend_id, user_id)
     Friendship.find_by(user_id: user_id, friend_id: friend_id).created_at.to_date
@@ -169,6 +169,8 @@ post '/promises/:id/validate' do |id|
   validation = false if params[:no] == "Promise Not Kept"
   @promise.update(validated: validation)
   @promise.apply_promise_value
+  @promise.send_notifications
+  # Pony.mail(:to => 'joelkbennett@gmail.com', :from => 'me@example.com', :subject => 'hi', :body => 'Hello there.')
   redirect "/promises/#{id}"
 end
 

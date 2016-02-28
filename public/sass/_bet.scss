@@ -1,0 +1,75 @@
+.bet {
+  $base-border-radius: 3px !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $bet-gutter: 1.4em;
+  $bet-image-padding: 0.7em;
+  $bet-image-width: 4em;
+  $bet-color: $base-font-color;
+  $bet-background: lighten($action-color, 15%);
+  $bet-detail-color: transparentize($bet-color, 0.5);
+  $bet-image-vert-alignment: top;
+
+  border-bottom: 1px solid transparentize($bet-color, 0.9);
+  display: table;
+  margin-bottom: $base-spacing;
+  padding-bottom: 1em;
+  width: 100%;
+
+  .bet-image,
+  .bet-content {
+    display: table-cell;
+    vertical-align: $bet-image-vert-alignment;
+  }
+
+  .bet-image {
+    padding-right: $bet-gutter;
+
+    > img {
+      background: $bet-background;
+      border-radius: $base-border-radius;
+      display: block;
+      height: auto;
+      max-width: none;
+      padding: $bet-image-padding;
+      width: $bet-image-width;
+    }
+
+    .bet-reverse-order & {
+      padding-right: 0;
+      padding-left: 10px;
+    }
+  }
+
+  .bet-content {
+    width: 100%;
+
+    h1 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0;
+    }
+
+    p {
+      line-height: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p.bet-detail {
+      color: $bet-detail-color;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    p.bet-won {
+      color: green;
+      font-style: strong;
+    }
+
+    p.bet-lost {
+      color: red;
+      font-style :strong;
+    }
+  }
+}

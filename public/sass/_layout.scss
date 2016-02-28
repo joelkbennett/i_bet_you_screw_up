@@ -27,6 +27,7 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
 .sr-only-focusable:active,
 .sr-only-focusable:focus {
   position: static;
@@ -35,10 +36,6 @@
   margin: 0;
   overflow: visible;
   clip: auto;
-}
-
-.features {
-  min-height: 400px;
 }
 
 .float-left {
@@ -51,4 +48,31 @@
 
 .hide-mobile {
   display: none; 
+}
+
+.features {
+  @include outer-container;
+}
+
+.feature-box {
+  @include span-columns(4);
+  @include omega(3n);
+  text-align: center;
+  h2 {
+    font-size: 6em;
+    font-style: italic;
+    font-weight: 600;
+    color: $red;
+    margin-bottom: 0;    
+  }
+}
+
+.feature-copy {
+  @include span-columns(12);
+  margin-top: 1.5em;
+  padding: .25em 0;
+  font-size: 1.5em;
+  background-color: $red;
+  display: inline-block;
+  color: $yellow;
 }

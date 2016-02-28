@@ -26,10 +26,25 @@
 
 <article class="features">
   <div id="js-fadeInElement" class="fade-in-element">
-    This box will fade in when it's <b>300px above the bottom</b> of the window.
-    <br>
-    And disappear as it goes <b>below the bottom</b> of the window.
-    <br>
-    If JavaScript is disabled, it will still show up.
+    <div class="feature-box">
+      <h2><%= Promise.count_all[:kept] %></h2>
+      <h3>Promise Kept</h3>
+    </div>
+
+    <div class="feature-box">
+      <h2><%= Promise.count_all[:broken] %></h2>
+      <h3>Promise Broken</h3>
+    </div>
+
+    <div class="feature-box">
+      <h2><%= Bet.count_all %></h2>
+      <h3>Bets Made</h3>
+    </div>
+
+    <p class="feature-copy">
+      This box will fade in when it's <b>300px above the bottom of the window.
+      And disappear as it goes <b>below the bottom</b> of the window.
+      If JavaScript is disabled, it will still show up.
+    </p>
   </div>
 </article>
