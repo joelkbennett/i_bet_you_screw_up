@@ -25,8 +25,7 @@ helpers do
 
   def top_bet_promises_of_friends
     friends_of_current_user
-    @promises = Promise.where(:id => Bet.where(:user_id => @friends.select(:id)).group(:promise_id).reorder('count_id desc').count(:id).keys).paginate(:page => page_number, :per_page => 20)
-    p @promises
+    @promises = Promise.where(:user_id => @friends.select(:id)).where(:id => Bet.group(:promise_id).reorder('count_id desc').count(:id).keys).paginate(:page => page_number, :per_page => 20)
   end
 
   def promises_of_friends
