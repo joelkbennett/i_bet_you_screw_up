@@ -6,7 +6,7 @@ class Bet < ActiveRecord::Base
   validates :user_id, uniqueness: { scope: [:promise_id] }
 
   before_create :set_winnings, :deduct_user_points 
-  before_create :icrement_counter_for_promise, :increment_counter_for_user
+  before_create :icrement_counter_for_promise
 
   DEFAULT_BET = 10
 
@@ -34,8 +34,8 @@ class Bet < ActiveRecord::Base
   end
 
   def set_winnings
-    kept = promise.user.promises_kept.to_f
-    broken = promise.user.promises_broken.to_f
+    kept = promise.user.promises_kept.count.to_f
+    broken = promise.user.promises_broken.count.to_f
 
     if in_favour
       if kept == 0

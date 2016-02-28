@@ -9,6 +9,8 @@ class Promise < ActiveRecord::Base
 
   validate :expiration_date_cannot_be_in_the_past, if: :expires_at
 
+  before_save :update_expires_at
+
   DEFAULT_WORTH = 25
 
   def ordered_comments
@@ -62,5 +64,9 @@ class Promise < ActiveRecord::Base
       if expires_at.to_time < (Time.now - 8*60*60)
         errors.add(:expires_at, "can't be in the past")
       end
+    end
+
+    def update_expires_at
+      self.expires_at = (Time.now - 8 * 60 * 60) if !validated.nil?
     end
 end

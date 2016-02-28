@@ -3,9 +3,11 @@ $(document).ready(function() {
   var topBetsButton = $('#toggle-top-promises')[0];
   var friendsButton = $('#toggle-friends-promises')[0];
   var hideButton = $('#toggle-expired-promises')[0];
-  friendsButton.checked = false;
-  topBetsButton.checked = false;
-  hideButton.checked = false;
+  if (hideButton) {
+    friendsButton.checked = false;
+    topBetsButton.checked = false;
+    hideButton.checked = false;
+  }
   displayPromises('/all/promises');
   hideExpired();
 
@@ -322,7 +324,7 @@ $(document).ready(function() {
                                   .addClass("place_bet")
                                   .attr("type", "submit")
                                   .attr("name", "not_in_favour")
-                                  .val("Yes ("+usersAgainstThePromise+")")))));
+                                  .val("No ("+usersAgainstThePromise+")")))));
         }
       }
     }
