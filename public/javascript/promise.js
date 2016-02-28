@@ -1,6 +1,12 @@
 $(document).ready(function() {
 
-  displayPromises('/all/promises')
+  var topBetsButton = $('#toggle-top-promises')[0];
+  var friendsButton = $('#toggle-friends-promises')[0];
+  var hideButton = $('#toggle-expired-promises')[0];
+  friendsButton.checked = false;
+  topBetsButton.checked = false;
+  hideButton.checked = false;
+  displayPromises('/all/promises');
   hideExpired();
 
   $('#toggle-expired-promises').click(function() {
@@ -9,10 +15,10 @@ $(document).ready(function() {
 
   $('#toggle-top-promises').click(function() {
     var url;
-    if (this.checked && $('#toggle-friends-promises')[0].checked) {
+    if (this.checked && friendsButton.checked) {
       url = '/friends/top_bets/promises';
     } 
-    else if (!this.checked && $('#toggle-friends-promises')[0].checked) {
+    else if (!this.checked && friendsButton.checked) {
       url = '/friends/promises';
     }
     else if (this.checked) {
@@ -26,10 +32,10 @@ $(document).ready(function() {
 
   $('#toggle-friends-promises').click(function(){
     var url;
-    if (this.checked && $('#toggle-top-promises')[0].checked) {
+    if (this.checked && topBetsButton.checked) {
       url = '/friends/top_bets/promises';
     } 
-    else if (!this.checked && $('#toggle-top-promises')[0].checked) {
+    else if (!this.checked && topBetsButton.checked) {
       url = '/top_bets/promises';
     }
     else if (this.checked) {
@@ -353,10 +359,10 @@ $(document).ready(function() {
           .text("Bets"))
         .append($('<p>')
           .addClass("stat-success")
-          .text("For : "+totalPromisesKeptByThisPromiseUser(promises, userOfThisPromise)))
+          .text("For : "+totalUsersBetForPromise(promise, bets)))
         .append($('<p>')
           .addClass("stat-error")
-          .text("Against : "+totalPromisesBrokenByThisPromiseUser(promises, userOfThisPromise)))))
+          .text("Against : "+totalUsersBetAgainstPromise(promise, bets)))))
     .appendTo(card);
     $('<div>')
     .addClass('card-copy')

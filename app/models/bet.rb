@@ -55,9 +55,4 @@ class Bet < ActiveRecord::Base
     promise.save
   end
 
-  def increment_counter_for_user
-    user.total_bets += 1
-    user.save
-  end
-
 end

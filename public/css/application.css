@@ -1240,7 +1240,10 @@ header.navigation {
       background-color: #f7f7f7; }
 
 .promise-card-header {
-  min-height: 200px; }
+  position: relative;
+  height: 250px;
+  min-height: 200px;
+  max-height: 350px; }
 
 .pagination {
   text-align: center; }
@@ -2889,7 +2892,10 @@ button {
   max-width: 68em;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 1em; }
+  padding-top: 1em;
+  position: absolute;
+  bottom: 5px;
+  width: 90%; }
   .card-stats::after {
     clear: both;
     content: "";

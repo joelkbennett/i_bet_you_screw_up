@@ -31,26 +31,29 @@ $success-color: #e6efc2 !default;
 
 
 .card-stats {
-    @include outer-container;
-     padding-top: 1em;
-  }
+  @include outer-container;
+  padding-top: 1em;
+  position: absolute;
+  bottom: 5px;
+  width: 90%;
+}
 
-  .stat-box {
-   @include span-columns(6);
-   // @include omega(3n);
-   text-align: center;
-   p.stat-title {
-    font-size: 15px;
-    font-style: italic;
-    font-weight: 600;
-    color: $blue;
-    margin-bottom: 0;
-   }
-   p.stat-error, p.stat-success {
-     font-size: 12px;
-     font-style: italic;
-     font-weight: 600;
-     color: $red;
-     margin-bottom: 0;
-   }
-  }
+.stat-box {
+ @include span-columns(6);
+ // @include omega(3n);
+ text-align: center;
+ p.stat-title {
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 600;
+  color: $blue;
+  margin-bottom: 0;
+ }
+ p.stat-error, p.stat-success {
+   font-size: 12px;
+   font-style: italic;
+   font-weight: 600;
+   color: $red;
+   margin-bottom: 0;
+ }
+}
