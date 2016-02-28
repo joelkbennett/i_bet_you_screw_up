@@ -106,5 +106,8 @@
 }
 
 .promise-card-header {
+  position: relative;
+  height: 250px;
   min-height: 200px;
+  max-height: 350px;
 }
