@@ -40,6 +40,18 @@ class User < ActiveRecord::Base
     bets.find_by(promise_id: promise_id, user_id: id).bet_value
   end
 
+  def bets_active
+    bets.where(validated: nil).order(created_at: :desc)
+  end
+
+  def bets_won
+    bets.where(validated: true).order(created_at: :desc)
+  end
+
+  def bets_lost
+    bets.where(validated: false).order(created_at: :desc)
+  end
+
   def gravatar
     # hash = Digest::MD5.hexdigest(email)
     # "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"

@@ -6,18 +6,18 @@
   $hero-background-bottom: #20392B;
   $hero-color: white;
   $gradient-angle: 10deg;
-  $hero-image: 'https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png';
+  // $hero-image: '../images/dishes.jpg';
 
-  @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
+  // @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
   background-color: #324766;
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 3em;
-  min-height: 600px;
+  min-height: 800px;
 
   .hero-logo img {
-    height: 4em;
+    height: 8em;
     margin-bottom: 1em;
   }
 
@@ -27,13 +27,14 @@
     margin: auto;
     padding: 3.5em;
     text-align: center;
-    padding-top: 6em;
+    padding-top: 8em;
 
     .hero-copy {
       text-align: center;
+      padding-top: 4em;
       
       h1 {
-        color: $hero-color;
+        color: #efefef;
         font-size: 1.6em;
         margin-bottom: 0.5em;
 
@@ -42,7 +43,17 @@
         }
       }
 
+      h2 {
+        background-color: #222;
+        display: inline-block;
+        padding: .25em 1em;
+        color: #efefef;
+      }
+
       p {
+        background-color: #222;
+        display: inline-block;
+        padding: .25em 1em;
         color: $hero-color;
         line-height: 1.4em;
         margin: 0 auto 1em auto; 

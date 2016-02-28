@@ -1,13 +1,12 @@
-<div class="hero">
+<div class="hero" style="background-image: url(<%= @background[:img] %>)">
   <div class="hero-inner">
-    <a href="" class="hero-logo"><img src="http://placehold.it/300x300"></a>
+    <a href="" class="hero-logo"><img src="/images/screw-logo.png"></a>
     <div class="hero-copy">
-      <h1>I Bet You'll Screw Up</h1>
-      <h2>Something about how this works. 
-        <% if current_user %><a href='/promises/new'>Make a promise</a><% else %><a href='/signup'>Join today</a><% end %>.
-      </h2> 
+      <h2><%= @background[:copy] %>
+        <% if current_user %><a href='/promises/new'>Make a promise</a><% else %><a href='/signup'>Join today</a> and win big<% end %>.
+      </h2><br> 
       <% if !current_user %>
-        <p>Already a user? Login below</p>
+        <p>Already a user? Login below</p><br>
         <div class="form-wrapper">
           <%= erb :'partials/flash_message_error' %>
           <form action="/login" method="POST">
@@ -24,3 +23,7 @@
     </div>
   </div>
 </div>
+
+<article class="features">
+  
+</article>
