@@ -6,7 +6,7 @@
 <div class="form-new-comment">
   <form id="new-comment" method="post" action="/promises/<%= @promise.id %>/comment/new" data-promise="<%= @promise.id %>">
     <textarea id="comment-body" name="body" rows="2" placeholder="Add a comment.."></textarea>
-    <input type="submit" value="Add Comment">
+    <input id="create-comment" type="submit" value="Add Comment">
   </form>
 </div>
 <% else %>

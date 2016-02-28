@@ -157,7 +157,7 @@ end
 post '/promises/:id/comment/new' do |id|
   promise = Promise.find(id)
   user = @current_user
-  comment = Comment.new(
+  comment = Comment.create(
     body: params[:body],
     user_id: user.id,
     promise_id: promise.id
@@ -166,8 +166,8 @@ post '/promises/:id/comment/new' do |id|
   user.comments << comment
   promise.comments << comment
 
-  content_type :json
-  "#{comment.id}".to_json 
+  # content_type :json
+  # "#{comment.id}".to_json 
 
   redirect "/promises/#{id}"
 

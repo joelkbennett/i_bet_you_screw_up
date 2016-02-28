@@ -190,19 +190,37 @@ $(function() {
 
 // comments
 
-$(document).ready(function() { add_comment (); });
+// $(document).ready(function() { add_comment (); });
 
-function add_comment() {
-  var comment_form = $('#new-comment');
-  var promise_id = comment_form.data("promise");
-  var url = '/promises/' + promise_id + '/comment/new'
+// function add_comment() {
+//   var comment_form = $('#new-comment');
+//   var promise_id = comment_form.data("promise");
+//   var url = '/promises/' + promise_id + '/comment/new'
   
-  $.post(url, 
-    function(data) {
-      $("#new-comment").html(data);
-    },
-    'text');
-};
+//   $.post(url, 
+//     function(data) {
+//       $("#new-comment").html(data);
+//     },
+//     'text');
+// };
+
+// $('#create-comment-button').on('click', function(e) {
+//   e.preventDefault();
+  
+//   var comment_form = $('#new-comment');
+//   var promise_id = comment_form.data("promise");
+//   var url = '/promises/' + promise_id + '/comment/new'
+//   console.log(url)
+
+//   $.ajax({
+//     url: url,
+//     method: 'POST',
+//     data: {
+
+//     },
+//     success: function
+//   })
+// })
 
 // $(function() { 
   
