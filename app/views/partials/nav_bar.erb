@@ -17,15 +17,18 @@
     </div>
 
     <div class="profile-nav">
-      <% if @current_user %>
-      <a href="/" class="profile-pic">
-        <img src="<%= @current_user.gravatar %>" alt="Logo Image">
-      </a>
-      <% end %>
       <nav role="navigation">
         <ul id="js-navigation-menu" class="navigation-menu show">
           <% if @current_user %>
-            <li class="nav-link <%= 'active-nav-item' if active_page == '/profile' %>"><a href="/profile">Hello, <%= @current_user.name %></a></li>
+            <li class="nav-link <%= 'active-nav-item' if active_page == '/profile' %>">
+              <a href="/profile">
+                <div class="profile-pic">
+                  <img src="<%= @current_user.gravatar %>" alt="Logo Image">
+                </div>
+                Hello, <%= @current_user.name %> 
+                <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+              </a>
+            </li>
             <li class="nav-link"><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
           <% else %>
             <li class="nav-link <%= 'active-nav-item' if active_page == '/signup' %>">
