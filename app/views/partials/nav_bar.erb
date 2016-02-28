@@ -1,6 +1,6 @@
 <header class="page-header navigation" role="banner">
   <div class="navigation-wrapper">
-    <div class="float-left">
+    <div class="site-nav">
       <a href="/" class="logo">
         <img src="http://placehold.it/50x50" alt="Logo Image">
       </a>
@@ -16,7 +16,7 @@
       </nav>
     </div>
 
-    <div class="float-right">
+    <div class="profile-nav">
       <% if @current_user %>
       <a href="/" class="profile-pic">
         <img src="<%= @current_user.gravatar %>" alt="Logo Image">

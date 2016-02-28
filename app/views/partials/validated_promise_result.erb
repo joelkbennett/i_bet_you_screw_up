@@ -1,6 +1,6 @@
 <% if @promise.validated %> <!-- Promise kept -->
-  <p>Promise kept!</p>
+    <div class="flash-success"><%= @flash_success %>Promise kept!</div>
 <% else %> <!-- Screwed up -->
   <% @promise.user == @current_user ? name = "You" : name = "#{@promise.user.first_name}" %>
-  <p><%= name %> screwed up..</p>
+  <div class="flash-error"><%= name %> screwed up!</div>
 <% end %>

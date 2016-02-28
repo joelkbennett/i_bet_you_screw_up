@@ -34,19 +34,18 @@
           <label for="toggle-your-promises">: Toggle your promises</label>
         </div>
       </div>
+      <hr>
       <div class="cards">
-
         <% @promises.each do |promise| %>
 
           <div class="<% if promise.hours_until_expired == "Expired!" %>card-expired<% end %> card">
-            <div class="card-image">
-              <img src="http://placehold.it/400x400" alt="Logo image">
+            <div class="card-header promise-card-header">
+              <img src="<%= promise.user.gravatar %>" class="profile-image profile-image-small">
+                <a href='promises/<%= promise.id %>'><%= promise.user.name %> promised:</a>
+              <%= promise.content %>
             </div>
-            <div class="card-header">
-              <a href='promises/<%= promise.id %>'><h1><%= promise.user.name %> promised to...</h1></a>
-            </div>
+
             <div class="card-copy">
-              <p><%= promise.content[0..30] %><% if promise.content.length > 30 %>..<% end %></p>
               <p class="promise-detail"><%= promise.hours_until_expired %></p>
               
               <% @promise = promise %> <!-- For accessing promise in partials -->

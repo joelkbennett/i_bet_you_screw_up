@@ -344,3 +344,17 @@ header.navigation {
     }
   }
 }
+
+.site-nav {
+  @include media($medium-screen-up) {
+    float: left;
+  }
+}
+
+.profile-nav {
+  display: none;
+  @include media($medium-screen-up) {
+    display: block;
+    float: right;
+  }
+}
