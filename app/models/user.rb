@@ -55,9 +55,9 @@ class User < ActiveRecord::Base
     promises.where(validated: false).count
   end
 
-  def promises_delta
-    promises_kept - promises_broken
-  end
+  # def promises_delta
+  #   promises_kept - promises_broken
+  # end
 
   def label
     promise_delta = promises_kept - promises_broken
