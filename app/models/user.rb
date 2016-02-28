@@ -59,6 +59,11 @@ class User < ActiveRecord::Base
     # bets_lost.order(created_at: :desc)
   end
 
+  def promises_active
+    promises.find_all { |promise| promise.validated == nil }
+  end
+
+
   def gravatar
     hash = Digest::MD5.hexdigest(email)
     "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
@@ -67,16 +72,12 @@ class User < ActiveRecord::Base
   end
 
   def promises_kept 
-    promises.where(validated: true).count
+    promises.where(validated: true)
   end
 
   def promises_broken
-    promises.where(validated: false).count
+    promises.where(validated: false)
   end
-
-  # def promises_delta
-  #   promises_kept - promises_broken
-  # end
 
   def label
     promise_delta = promises_kept - promises_broken
