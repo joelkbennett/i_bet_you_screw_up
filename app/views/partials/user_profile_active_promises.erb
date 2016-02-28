@@ -1,0 +1,22 @@
+<% @user.promises_active.each do |promise| %>
+
+  <% @promise = promise %> <!-- For use in partials -->
+
+    <div class="promise">
+
+      <!-- Promise Details -->
+      <div class="promise-image">
+        <img src="http://placehold.it/400x400" alt="Logo image">
+      </div>
+      <div class="promise-content">
+        <h1>You promised to..</h1>
+        <a href='promises/<%= promise.id %>'><p><%= promise.content %></p></a>
+        <p class="promise-detail"><%= promise.hours_until_expired %></p>
+      </div>
+
+      <!-- Validate promise -->
+      <%= erb :'/partials/validate_your_promise_modal' %>
+      
+    </div>
+
+<% end %> <!-- end each loop -->
