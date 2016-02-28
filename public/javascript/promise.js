@@ -194,7 +194,6 @@ $(document).ready(function() {
         }
       }
     }
-    debugger;
     $('<div>')
     .addClass('card-header')
     .addClass('promise-card-header')
