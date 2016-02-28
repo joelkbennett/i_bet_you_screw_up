@@ -1,0 +1,32 @@
+<h1>Bets</h1>
+
+<% @promise.bets.each do |bet| %>
+
+  <% if @promise.expired? %>
+    <% if bet.won? %>
+      <% status = "WON #{bet.winnings} points!" %>
+      <% pclass = 'bet-won' %>
+    <% else %>
+      <% status = "Lost #{bet.bet_value} points" %>
+      <% pclass = 'bet-lost' %>
+    <% end %>
+  <% else %>
+    <% status = 'Active' %>
+  <% end %>
+
+  <div class="bet">
+    <div class="bet-image">
+      <img src="<%= bet.user.gravatar %>" alt="Logo image">
+    </div>
+    <div class="bet-content">
+      <h1><%= bet.user.name %> bet that <%= @promise.user.first_name.capitalize %> will <%= bet.in_favour ? 'keep' : 'break' %> their promise.</h1>
+      <p class="<%= pclass %>"><%= status %></p>
+      <% unless @promise.expired? %>
+        <p>Bet value: <%= bet.bet_value %>pts</p>
+        <p>Potential winnings: <%= bet.winnings %> </p>
+      <% end %>
+      <p class="bet-detail"><%= bet.created_at %></p>
+    </div>
+  </div>
+
+<% end %>
