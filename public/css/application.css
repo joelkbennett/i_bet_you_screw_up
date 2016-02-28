@@ -3100,5 +3100,7 @@ button {
     .bet .bet-content p.bet-lost {
       color: red;
       font-style: strong; }
+    .bet .bet-content p.bet-active {
+      color: black; }
 
 /*# sourceMappingURL=application.css.map */
