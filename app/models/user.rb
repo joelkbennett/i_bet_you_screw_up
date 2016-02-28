@@ -60,14 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def gravatar
-<<<<<<< HEAD
-    hash = Digest::MD5.hexdigest(email)
-    "http://www.gravatar.com/avatar/#{hash}?s=250&d=retro"
-=======
     "http://www.gravatar.com/avatar/#{email_hash}?s=250&d=retro"
-    # category = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ].sample
-    # "http://lorempixel.com/300/300/" + category
->>>>>>> 4a477e94149c613432566c8f73ba6a7429af4868
   end
 
   def promises_kept 
@@ -77,10 +70,6 @@ class User < ActiveRecord::Base
   def promises_broken
     promises.where(validated: false).count
   end
-
-  # def promises_delta
-  #   promises_kept - promises_broken
-  # end
 
   def label
     promise_delta = promises_kept - promises_broken
