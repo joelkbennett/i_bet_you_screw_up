@@ -13,6 +13,10 @@
           <p><strong><%= @promise.content %></strong></p>
         </div>
         <p class="promise-detail"><%= @promise.hours_until_expired %></p>
+        <div class="user-details">
+          <p class='promise-kept' data-promise='<%= @promise.user.promises_kept %>'>kept: <%= @promise.user.promises_kept %></p>
+          <p class='promise-broken' data-promise='<%= @promise.user.promises_broken %>'>broken: <%= @promise.user.promises_broken %></p>
+        </div>
       </div>
       <div class="user-img">
         <img src="<%= @promise.user.gravatar %>">  
@@ -54,6 +58,13 @@
                   <h2>Will <%= @promise.user.name %> keep their promise?</h2>
                   <br>
                   <input class="place_bet" type="text" name="bet_value" placeholder="Enter Bet Value" required autofocus>
+                  <div class="tooltip-item">
+                    Check Your Odds!
+                    <div class="tooltip">
+                      <div id='kept-winnings'>You could win <span></span> points if you vote YES!</div>
+                      <div id='broken-winnings'>You could win <span></span> points if you vote NO!</div>
+                    </div>
+                  </div>
                   <input class="place_bet" type="submit" name="in_favour" value="Yes (<%= @total_users_for_the_promise_to_be_kept %>)">
                   <input class="place_bet" type="submit" name="not_in_favour" value="No (<%= @total_users_against_the_promise_to_be_kept %>)">
                 </form>
@@ -66,6 +77,7 @@
             <div class="promise-content">
               <h1>Your bet</h1>
               <h2>Value: <%= @current_user_bet.bet_value %></h2>
+              <h2>Potential Winnings: <%= @current_user_bet.winnings %></h2>
               <% if @current_user_bet.in_favour %>
                 <p>You think <%= @promise.user.name %> will keep their promise!</p>
               <% else %>
