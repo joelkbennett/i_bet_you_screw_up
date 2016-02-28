@@ -25,16 +25,20 @@ $success-color: #e6efc2 !default;
 
 .flash-alert {
   @include flash($alert-color);
+  min-width: 100px;
 }
 
 .flash-error {
   @include flash($error-color);
+  min-width: 100px;
 }
 
 .flash-notice {
   @include flash($notice-color);
+  min-width: 100px;
 }
 
 .flash-success {
   @include flash($success-color);
+  min-width: 100px;
 }

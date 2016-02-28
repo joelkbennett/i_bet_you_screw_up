@@ -36,49 +36,7 @@
       </div>
       <hr>
       <div class="cards">
-        <% @promises.each do |promise| %>
-
-          <div class="<% if promise.hours_until_expired == "Expired!" %>card-expired<% end %> card">
-            <div class="card-header promise-card-header">
-              <img src="<%= promise.user.gravatar %>" class="profile-image profile-image-small">
-              <a href='promises/<%= promise.id %>'><%= promise.user.name %> promised:</a>
-              <p><%= promise.content %></p>
-            </div>
-
-            <div class="card-copy">
-              <p class="promise-detail"><%= promise.hours_until_expired %></p>
-              
-              <% @promise = promise %> <!-- For accessing promise in partials -->
-              
-              <% if @current_user %> <!-- LOGGED IN -->
-
-                <% if promise.expired? || !promise.validated.nil? %> <!-- PROMISE EXPIRED OR VALIDATED -->
-                  <%= erb :'/partials/validated_promise_result' %> 
-
-                <% else %> <!-- PROMISE NOT EXPIRED/VALIDATED -->
-                  
-                  <% if @current_user == promise.user %> <!-- YOUR PROMISE -->
-                    <%= erb :'/partials/validate_your_promise_modal' %>
-
-                  <% else %> <!-- NOT YOUR PROMISE -->
-                    <% if @current_user.already_bet?(promise.id) %> <!-- Already bet -->
-                      <%= erb :'/partials/your_bet' %>
-                    <% else %> <!-- Prompt user to bet on promise -->
-                      <%= erb :'/partials/quick_bet_modal' %>
-                    <% end %>
-
-                  <% end %>
-
-                <% end %> <!-- NOT LOGGED IN -->
-
-              <% else %>
-                <p><a href="/">Login</a> to place a bet!</p>
-              <% end %>
-
-            </div>
-          </div>
-
-        <% end %>
+        
       </div>
 
     </section>

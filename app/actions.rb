@@ -25,7 +25,7 @@ helpers do
 
   def top_bet_promises_of_friends
     friends_of_current_user
-    @promises = Promise.where(:user_id => @friends.select(:id)).where(:id => Bet.group(:promise_id).reorder('count_id desc').count(:id).keys).paginate(:page => page_number, :per_page => 20)
+    @promises = Promise.where(:user_id => @friends.select(:id)).where(:id => Bet.group(:promise_id).reorder('count_id desc').count(:id).keys).reorder('total_bets desc').paginate(:page => page_number, :per_page => 20)
   end
 
   def promises_of_friends
@@ -33,7 +33,8 @@ helpers do
   end
 
   def top_bet_promises
-    @promises = Promise.where(:id => Bet.group(:promise_id).reorder('count_id desc').count(:id).keys).paginate(:page => page_number, :per_page => 20)
+    @promises = Promise.where(:id => Bet.group(:promise_id).reorder('count_id desc').count(:id).keys).reorder('total_bets desc').paginate(:page => page_number, :per_page => 20)
+    p @promises
   end
 
   def bet_for_a_user_on_a_promise(user_id, promise_id)

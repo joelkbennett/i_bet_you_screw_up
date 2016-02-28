@@ -59,20 +59,25 @@ class User < ActiveRecord::Base
     # bets_lost.order(created_at: :desc)
   end
 
+  def promises_active
+    promises.find_all { |promise| promise.validated == nil }
+  end
+
+
   def gravatar
     "http://www.gravatar.com/avatar/#{email_hash}?s=250&d=retro"
   end
 
   def promises_kept 
-    promises.where(validated: true).count
+    promises.where(validated: true)
   end
 
   def promises_broken
-    promises.where(validated: false).count
+    promises.where(validated: false)
   end
 
   def label
-    promise_delta = promises_kept - promises_broken
+    promise_delta = promises_kept.count - promises_broken.count
     if promise_delta > 1
       "Promise Keeper"
     elsif promise_delta < 1
