@@ -41,8 +41,8 @@
           <div class="<% if promise.hours_until_expired == "Expired!" %>card-expired<% end %> card">
             <div class="card-header promise-card-header">
               <img src="<%= promise.user.gravatar %>" class="profile-image profile-image-small">
-                <a href='promises/<%= promise.id %>'><%= promise.user.name %> promised:</a>
-              <%= promise.content %>
+              <a href='promises/<%= promise.id %>'><%= promise.user.name %> promised:</a>
+              <p><%= promise.content %></p>
             </div>
 
             <div class="card-copy">

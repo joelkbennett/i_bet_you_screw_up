@@ -15,10 +15,12 @@ $(document).ready(function() {
                   var promises = result[1];
                   var user = result[2];
                   var bets = result[3];
+                  var myArray = [ 'people', 'food', 'cats', 'city', 'nature', 'abstract', 'fashion', 'animals', 'sports', 'technics', 'nightlife', 'business' ];
                   $('div.cards').empty();
-                  var src = "http://placehold.it/400x400";
                   var alt = "Logo image";
                   promises.forEach( function(promise) {
+                    var category = myArray[Math.floor(Math.random() * myArray.length)];
+                    var src = "http://lorempixel.com/300/300/"+category;
                     var name = fullName(users, promise);
                     var timeRemaining = hoursUntilExpired(promise.expires_at);
                     var content = promiseContent(promise.content);
@@ -192,27 +194,36 @@ $(document).ready(function() {
         }
       }
     }
-    
-    $('<div>').addClass('card-image')
-    .append($('<img>').attr("src", src).attr("alt", alt))
-    .appendTo(card);
+    debugger;
     $('<div>')
     .addClass('card-header')
-    .append($('<a>').attr("href", 'promises/'+promise.id)
-      .append($('<h1>').text(name+" has promised...")))
+    .addClass('promise-card-header')
+    .append($('<img>')
+      .addClass('profile-image')
+      .addClass('profile-image-small')
+      .attr("src", src)
+      .attr("alt", alt))
+    .append($('<a>')
+      .attr("href", 'promises/'+promise.id)
+      .text(name+" promised:"))
+    .append($('<p>')
+      .text(content))
     .appendTo(card);
     $('<div>')
     .addClass('card-copy')
     .append($('<p>')
-      .text(content))
-    .append($('<p>')
       .addClass('promise-detail')
       .text(timeRemaining))
-    .append($('<br>'))
-    .append($('<br>'))
     .append(lastParagraph)
     .appendTo(card);
   }
+
+  // <div class="card-header promise-card-header">
+  //   <img src="<%= promise.user.gravatar %>" class="profile-image profile-image-small">
+  //     <a href='promises/<%= promise.id %>'><%= promise.user.name %> promised:</a>
+  //   <%= promise.content %>
+  // </div>
+
 
   function totalUsersBetForPromise(promise, bets){
     var count = 0;
