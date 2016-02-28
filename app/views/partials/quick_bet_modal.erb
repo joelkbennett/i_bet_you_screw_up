@@ -1,11 +1,11 @@
 <div class="modal">
-  <label for="modal-2">
+  <label for="modal-<%= @promise %>">
     <div class="modal-trigger">Make a Bet!</div>
   </label>
-  <input class="modal-state" id="modal-2" type="checkbox" />
+  <input class="modal-state" id="modal-<%= @promise %>" type="checkbox" />
   <div class="modal-fade-screen">
     <div class="modal-inner">
-      <div class="modal-close" for="modal-2"></div>
+      <div class="modal-close" for="modal-<%= @promise %>"></div>
       <h1>Will <%= @promise.user.first_name %> keep their promise?</h1>
       <form method="post" action="/promises/<%= @promise.id %>/new_bet">
         <input class="place_bet" type="text" name="bet_value" placeholder="Enter Bet Value" required autofocus>

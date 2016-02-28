@@ -1215,9 +1215,6 @@ header.navigation {
     .card:active .card-header {
       background-color: #f7f7f7; }
 
-.card-expired {
-  display: none; }
-
 .pagination {
   text-align: center; }
   .pagination ul {
@@ -1742,14 +1739,15 @@ button {
       .label-switch input[type="checkbox"]:checked + .checkbox:after {
         left: 22px; }
 
-#expired-promises {
-  position: relative; }
-
-#switch-label {
+#expired-promises, #your-promises, #friend-promises {
+  position: relative;
   display: inline-block;
-  position: absolute;
-  top: 5px;
-  left: 60px; }
+  width: 300px; }
+  #expired-promises #switch-label, #your-promises #switch-label, #friend-promises #switch-label {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    left: 60px; }
 
 .flash-alert {
   background-color: #fff6bf;
