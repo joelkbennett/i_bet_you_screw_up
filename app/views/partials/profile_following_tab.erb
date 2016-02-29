@@ -31,7 +31,7 @@
             <p>You aren't following anyone! </p>
             <p><a href="/users">Find someone to follow! </a></p>
           <% else %> <!-- SHOW ACTIVITY - BETS -->
-            <%= erb :'/partials/profile_following_activity_bets' %>   
+            <%= erb :'/partials/profile_following_activity_promises' %>   
           <% end %>
         </div>
 
@@ -45,7 +45,7 @@
               <p><%= @pronoun %> hasn't lost any bets! </p>
             <% end %>
           <% else %> <!-- SHOW ACTIVITY - BETS -->
-            <%= erb :'/partials/profile_following_activity_promises' %>
+            <%= erb :'/partials/profile_following_activity_bets' %>
           <% end %> 
         </div>
 
