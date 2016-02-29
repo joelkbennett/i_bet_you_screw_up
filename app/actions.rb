@@ -127,7 +127,9 @@ get '/promises/:id' do |id|
   @promise = Promise.find(id)
   # total_users_for_the_promise_to_be_kept(id)
   # total_users_against_the_promise_to_be_kept(id)
-  @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
+  if @current_user
+    @current_user_bet = bet_for_a_user_on_a_promise(@current_user.id, id)
+  end
   erb :'promises/show'
 end
 

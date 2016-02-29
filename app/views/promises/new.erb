@@ -2,20 +2,20 @@
   <article class="container page-article">
 
     <header class="article-header">
-      <h1>New Promise</h1>
+      <h1 class=''>New Promise</h1>
     </header>
 
     <div class="form">
       <%= erb :'partials/flash_message_error' %>
       <div class="promise-details">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit ante augue, a auctor elit rutrum vel. Cras dapibus, libero.</p>
+        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit ante augue, a auctor elit rutrum vel. Cras dapibus, libero.</p> -->
         <br>
         <form method="post" action="/promises/new">
           <label for="promise-text"><h2>Promise:</h2></label><br>
           <textarea id="promise-text" name="content" rows="4" placeholder="Your promise.." value="<%= @promise.content %>"></textarea>
           <label for="promise-date"><h2>Expiry Date:</h2></label><br>
           <input id="promise_date" type="datetime-local" name="expires_at" value="<%= @promise.expires_at %>">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id.</p><br>
+          <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id.</p> --><br>
           <input type="submit" value="Submit">
         </form>
       </div>

@@ -8,7 +8,7 @@
         <h2>Active since <%= @user.created_at.to_date %></h2>
         <p>Points: <%= @user.points %></p>
         <%= erb :'partials/flash_message_error' %>
-        <% unless @current_user == @user %>
+        <% if @current_user && @current_user != @user %>
           <% if @current_user.friends.include?(@user) %>
             <p>Following since <%= friend_since(@user, @current_user) %></p>
           <% elsif @current_user != @user %>

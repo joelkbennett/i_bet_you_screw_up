@@ -118,9 +118,9 @@ class User < ActiveRecord::Base
   def label
     promise_delta = promises_kept.count - promises_broken.count
     if promise_delta > 1
-      "Promise Keeper"
+      "Promise-Keeper"
     elsif promise_delta < 1
-      "Oath Breaker"
+      "Oath-Breaker"
     else
       "Neutral"
     end

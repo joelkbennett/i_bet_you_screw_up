@@ -17,7 +17,7 @@
               <%= user.promises_broken.count %> promises broken!<br>
               <strong><%= user.points %> "points"</strong>
             </p>
-            <div class="user-rating user-rating-danger"><%= user.label %></div>
+            <div class="user-rating user-rating-<%= user.label %>"><%= user.label %></div>
           </div>                  
         <% end %>
 

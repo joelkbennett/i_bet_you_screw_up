@@ -733,6 +733,9 @@ p.author {
   font-family: "PT Sans", sans-serif;
   font-style: italic; }
 
+.center-text {
+  align: center; }
+
 header.navigation {
   background-color: white;
   border-bottom: 1px solid #e6e6e6;
@@ -829,9 +832,10 @@ header.navigation {
         color: black; }
   header.navigation .active-nav-item {
     position: relative; }
-  header.navigation .active-nav-item a {
-    color: #efefef;
-    background-color: #eee; }
+  @media screen and (min-width: 600px) {
+    header.navigation .active-nav-item a {
+      color: #efefef;
+      background-color: #eee; } }
   header.navigation li.more.nav-link {
     padding-right: 0; }
     @media screen and (min-width: 900px) {
@@ -1104,10 +1108,16 @@ header.navigation {
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 3em;
-  min-height: 800px; }
+  min-height: 400px; }
+  @media screen and (min-width: 600px) {
+    .hero {
+      min-height: 800px; } }
   .hero .hero-logo img {
-    height: 8em;
+    height: 4em;
     margin-bottom: 1em; }
+    @media screen and (min-width: 600px) {
+      .hero .hero-logo img {
+        height: 8em; } }
   .hero .hero-inner {
     max-width: 68em;
     margin-left: auto;
@@ -1319,14 +1329,16 @@ header.navigation {
         background: #f7f7f7; }
 
 .form {
-  text-align: center;
-  max-width: 40%;
-  margin-left: auto;
-  margin-right: auto; }
-  .form::after {
-    clear: both;
-    content: "";
-    display: table; }
+  text-align: center; }
+  @media screen and (min-width: 900px) {
+    .form {
+      max-width: 40%;
+      margin-left: auto;
+      margin-right: auto; }
+      .form::after {
+        clear: both;
+        content: "";
+        display: table; } }
   .form .promise-details h2 {
     margin-bottom: -15px; }
   .form .promise-details p {
@@ -1344,23 +1356,25 @@ header.navigation {
     .form .promise-details input.verify-promise {
       min-width: 180px; }
 
-.form-wrapper {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 31.76157%;
-  margin-left: 34.11922%; }
-  .form-wrapper:last-child {
-    margin-right: 0; }
+@media screen and (min-width: 600px) {
+  .form-wrapper {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%;
+    margin-left: 34.11922%; }
+    .form-wrapper:last-child {
+      margin-right: 0; } }
 
-.new-user-form {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 48.82117%;
-  margin-left: 25.58941%; }
-  .new-user-form:last-child {
-    margin-right: 0; }
+@media screen and (min-width: 600px) {
+  .new-user-form {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 48.82117%;
+    margin-left: 25.58941%; }
+    .new-user-form:last-child {
+      margin-right: 0; } }
 
 .form-new-comment {
   text-align: left; }
@@ -1518,20 +1532,18 @@ header.navigation {
     content: "";
     display: table; }
   .users-list .user-profile {
-    float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 23.23176%;
     text-align: center;
     margin-bottom: 2em;
     position: relative;
     border-bottom: thin solid #ddd; }
-    .users-list .user-profile:last-child {
-      margin-right: 0; }
-    .users-list .user-profile:nth-child(4n) {
-      margin-right: 0; }
-    .users-list .user-profile:nth-child(4n+1) {
-      clear: left; }
+    @media screen and (min-width: 600px) {
+      .users-list .user-profile {
+        float: left;
+        display: block;
+        margin-right: 2.35765%;
+        width: 23.23176%; }
+        .users-list .user-profile:last-child {
+          margin-right: 0; } }
     .users-list .user-profile img {
       border-radius: 50%; }
     .users-list .user-profile p {
@@ -1565,16 +1577,16 @@ header.navigation {
   top: 20px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); }
 
-.user-rating-danger {
-  background-color: red;
+.user-rating-Oath-Breaker {
+  background-color: #cb4649;
   color: white; }
 
-.user-rating-neutral {
-  background-color: #ddd;
+.user-rating-Neutral {
+  background-color: #f5cb3b;
   color: #333; }
 
-.user-rating-good {
-  background-color: green;
+.user-rating-Promise-Keeper {
+  background-color: #2bbf1b;
   color: white; }
 
 .user-img {
@@ -1773,11 +1785,12 @@ button {
   .comment-form .card-copy {
     padding: 1em; }
 
-.comments-list {
-  margin: 0 5em;
-  padding: 0 4em;
-  border-left: thin solid #ddd;
-  border-right: thin solid #ddd; }
+@media screen and (min-width: 600px) {
+  .comments-list {
+    margin: 0 5em;
+    padding: 0 4em;
+    border-left: thin solid #ddd;
+    border-right: thin solid #ddd; } }
 
 .label-switch {
   border-radius: 32px;

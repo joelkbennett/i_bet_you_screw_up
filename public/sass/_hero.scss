@@ -14,10 +14,16 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 3em;
-  min-height: 800px;
+  min-height: 400px;
+  @include media($medium-screen-up) {
+    min-height: 800px;  
+  }
 
   .hero-logo img {
-    height: 8em;
+    height: 4em;
+    @include media($medium-screen-up) {
+      height: 8em;
+    }
     margin-bottom: 1em;
   }
 
