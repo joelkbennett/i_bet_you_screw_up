@@ -208,7 +208,7 @@ end
 post '/users/friends/new/:id' do |id|
   Friendship.new(user_id: current_user.id, friend_id: id)
   current_user.friends << User.find(id)
-  session[:flash_success] = "Added #{User.find(id).name} to friends!"
+  session[:flash_success] = "Followed!"
   redirect "/users/#{id}"
 end
 
