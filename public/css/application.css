@@ -2001,6 +2001,34 @@ button {
     .flash-error a:focus, .flash-error a:hover {
       color: #110203; }
 
+.flash-error-new-promise {
+  background-color: #fbe3e4;
+  color: #97161b;
+  display: block;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+  text-align: center;
+  min-width: 100px; }
+  .flash-error-new-promise a {
+    color: #6a0f13;
+    text-decoration: underline; }
+    .flash-error-new-promise a:focus, .flash-error-new-promise a:hover {
+      color: #110203; }
+
+.flash-success-new-promise {
+  background-color: #e6efc2;
+  color: #56651a;
+  display: block;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+  text-align: center;
+  min-width: 100px; }
+  .flash-success-new-promise a {
+    color: #333c10;
+    text-decoration: underline; }
+    .flash-success-new-promise a:focus, .flash-success-new-promise a:hover {
+      color: black; }
+
 .flash-notice {
   background-color: #e5edf8;
   color: #244e87;

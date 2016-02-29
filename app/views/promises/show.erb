@@ -27,7 +27,7 @@
 
       <% if @promise.expired? || !@promise.validated.nil? %> <!-- PROMISE EXPIRED -->
         <div class="promise-content-results">
-          <%= erb :'partials/validated_promise_result' %>
+          <%= erb :'/partials/validated_promise_result' %>
         </div>
 
       <% else %> <!-- PROMISE NOT EXPIRED -->
@@ -66,7 +66,7 @@
                     </div>
                   </div>
                   <input class="place_bet" type="submit" name="in_favour" value="Yes (<%= @promise.bets_for %>)">
-                  <input class="place_bet" type="submit" name="not_in_favour" value="No (<%= @promise.bets_for %>)">
+                  <input class="place_bet" type="submit" name="not_in_favour" value="No (<%= @promise.bets_against %>)">
                 </form>
                 <br>
               </div>

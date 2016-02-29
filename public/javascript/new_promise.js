@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-  if ($('.flash-error')) {
-    $('.flash-error').remove();
+  if ($('.flash-error-new-promise')) {
+    $('.flash-error-new-promise').remove();
   }
-  if ($('.flash-success')) {
-    $('.flash-success').remove();
+  if ($('.flash-success-new-promise')) {
+    $('.flash-success-new-promise').remove();
   }
 
   $('#new-promise').click(function(e) {
-    if ($('.flash-error')) {
-      $('.flash-error').remove();
+    if ($('.flash-error-new-promise')) {
+      $('.flash-error-new-promise').remove();
     }
-    if ($('.flash-success')) {
-      $('.flash-success').remove();
+    if ($('.flash-success-new-promise')) {
+      $('.flash-success-new-promise').remove();
     }
     e.preventDefault();
       var url = '/promises/new';
@@ -28,7 +28,7 @@ $(document).ready(function() {
           $('.promise-details')
           .prepend(
             $('<div>')
-            .addClass("flash-error")
+            .addClass("flash-error-new-promise")
             .text(error_message));
         }
         else {
@@ -45,7 +45,7 @@ $(document).ready(function() {
           $('.promise-details')
           .prepend(
             $('<div>')
-            .addClass("flash-success")
+            .addClass("flash-success-new-promise")
             .text(success_message));
           debugger;
           var newCard = createNewCard(name, user, promisesBroken, promisesKept, promise, timeRemaining);
