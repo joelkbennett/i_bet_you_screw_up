@@ -13,8 +13,8 @@
             <a href="/users/<%= user.id %>"><img src="<%= user.gravatar %>" class="profile-image-med"></a>
             <div class="user-name"><%= user.name %></div>
             <p>
-              <%= user.promises_kept %> promises kept<br>
-              <%= user.promises_broken %> promises broken!<br>
+              <%= user.promises_kept.count %> promises kept<br>
+              <%= user.promises_broken.count %> promises broken!<br>
               <strong><%= user.points %> "points"</strong>
             </p>
             <div class="user-rating user-rating-danger"><%= user.label %></div>

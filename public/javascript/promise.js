@@ -3,10 +3,12 @@ $(document).ready(function() {
   var topBetsButton = $('#toggle-top-promises')[0];
   var friendsButton = $('#toggle-friends-promises')[0];
   var hideButton = $('#toggle-expired-promises')[0];
-  friendsButton.checked = false;
-  topBetsButton.checked = false;
-  hideButton.checked = false;
-  displayPromises('/all/promises');
+  if (hideButton) {
+    friendsButton.checked = false;
+    topBetsButton.checked = false;
+    hideButton.checked = false;
+    //displayPromises('/all/promises');
+  }
   hideExpired();
 
   $('#toggle-expired-promises').click(function() {
@@ -78,15 +80,18 @@ $(document).ready(function() {
  
   function hoursUntilExpired(expires_at) {
     var today = new Date();
-    var time_difference = (Date.parse(expires_at) - today) + 28800000
+    var time_difference = (Date.parse(expires_at) - today) + 28800000;
+    var days = (time_difference / (1000 * 60 * 60 * 24));
     var hours = (time_difference / (1000 * 60 * 60));
     var minutes = (time_difference / (1000 * 60));
-    if (hours >= 1)
-      return("Expires in " + Math.ceil(hours) +" hours!");
+    if (days >= 2)
+      return("Expires in "+ Math.ceil(days) + " days!");
+    else if (hours >= 1)
+      return("Expires in " + Math.ceil(hours) + " hours!");
     else if (minutes >= 1)
-      return("Expires in " + Math.ceil(minutes) +" minutes!");
+      return("Expires in " + Math.ceil(minutes) + " minutes!");
     else if (time_difference > 0)
-      return("Expires in " + Math.ceil(time_difference) +" seconds!");
+      return("Expires in " + Math.ceil(time_difference) + " seconds!");
     else  
       return("Expired!");
   }
@@ -240,8 +245,10 @@ $(document).ready(function() {
                         .append($('<label>')
                           .attr("for", "modal-1")
                           .append($('<div>')
-                            .addClass("modal-trigger")
-                            .text("Validate your promise!")))
+                              .addClass("flash-alert")
+                              .append($('<div>')
+                                .addClass("modal-trigger")
+                                .text("Validate your promise!"))))
                         .append($('<input>')
                           .addClass("modal-state")
                           .attr("id", "modal-1")
@@ -288,8 +295,10 @@ $(document).ready(function() {
                           .append($('<label>')
                             .attr("for", "modal-2")
                             .append($('<div>')
-                              .addClass("modal-trigger")
-                              .text("Make a Bet!")))
+                              .addClass("flash-alert")
+                              .append($('<div>')
+                                .addClass("modal-trigger")
+                                .text("Make a Bet!"))))
                           .append($('<input>')
                             .addClass("modal-state")
                             .attr("id", "modal-2")
@@ -322,7 +331,7 @@ $(document).ready(function() {
                                   .addClass("place_bet")
                                   .attr("type", "submit")
                                   .attr("name", "not_in_favour")
-                                  .val("Yes ("+usersAgainstThePromise+")")))));
+                                  .val("No ("+usersAgainstThePromise+")")))));
         }
       }
     }

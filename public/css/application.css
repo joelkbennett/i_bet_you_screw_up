@@ -3068,4 +3068,48 @@ button {
       .vertical-tabs-container .vertical-tab-accordion-heading {
         display: none; } }
 
+.bet {
+  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+  display: table;
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  width: 100%; }
+  .bet .bet-image,
+  .bet .bet-content {
+    display: table-cell;
+    vertical-align: top; }
+  .bet .bet-image {
+    padding-right: 1.4em; }
+    .bet .bet-image > img {
+      background: #dc8284;
+      border-radius: 3px;
+      display: block;
+      height: auto;
+      max-width: none;
+      padding: 0.7em;
+      width: 4em; }
+    .bet-reverse-order .bet .bet-image {
+      padding-right: 0;
+      padding-left: 10px; }
+  .bet .bet-content {
+    width: 100%; }
+    .bet .bet-content h1 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0; }
+    .bet .bet-content p {
+      line-height: 1.5em;
+      margin-bottom: 0.5em; }
+    .bet .bet-content p.bet-detail {
+      color: rgba(51, 51, 51, 0.5);
+      font-size: 0.9em;
+      font-style: italic; }
+    .bet .bet-content p.bet-won {
+      color: green;
+      font-style: strong; }
+    .bet .bet-content p.bet-lost {
+      color: red;
+      font-style: strong; }
+    .bet .bet-content p.bet-active {
+      color: black; }
+
 /*# sourceMappingURL=application.css.map */

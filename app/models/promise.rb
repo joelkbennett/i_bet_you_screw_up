@@ -9,6 +9,8 @@ class Promise < ActiveRecord::Base
 
   validate :expiration_date_cannot_be_in_the_past, if: :expires_at
 
+  before_save :update_expires_at
+
   DEFAULT_WORTH = 25
 
   def ordered_comments
@@ -21,9 +23,12 @@ class Promise < ActiveRecord::Base
 
   def hours_until_expired
     time_difference = expires_at.to_time - (Time.now - 8 * 60 * 60)
+    days = (time_difference / (60 * 60 * 24))
     hours = (time_difference / (60 * 60))
     minutes = (time_difference / 60)
-    if hours >= 1
+    if days >= 2
+      "Expires in #{days.ceil} days!"
+    elsif hours >= 1
       "Expires in #{hours.ceil} hours!"
     elsif minutes >= 1
       "Expires in #{minutes.ceil} minutes!"
@@ -42,6 +47,14 @@ class Promise < ActiveRecord::Base
         promise.apply_promise_value
       end
     end
+  end
+
+  def bets_for
+    bets.where(in_favour: true).count
+  end
+
+  def bets_against
+    bets.where(in_favour: false).count
   end
 
   def apply_promise_value
@@ -74,4 +87,7 @@ class Promise < ActiveRecord::Base
     end
   end
 
+  def update_expires_at
+    self.expires_at = (Time.now - 8 * 60 * 60) if !validated.nil?
+  end
 end
