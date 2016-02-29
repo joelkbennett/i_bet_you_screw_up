@@ -4,8 +4,8 @@
 
     <header class="article-header profile-header">
       <div class="profile-details">
-        <h1><%= @user.name %></h1>
-        <h2>Active since <%= @user.created_at.to_date %></h2>
+        <h1 style="margin-bottom: 0em;"><%= @user.name %></h1>
+        <h2 style="margin: 0;">Active since <%= @user.created_at.to_date %></h2>
         <p>Points: <%= @user.points %></p>
         <%= erb :'partials/flash_message_error' %>
         <% if @current_user && @current_user != @user %>
@@ -14,7 +14,7 @@
           <% elsif @current_user != @user %>
             <form method="post" action="/users/friends/new/<%= @user.id %>">
               <input type="submit" value="Follow">
-            </form>
+            </form><br>
           <% end %>
         <% end %>
 
