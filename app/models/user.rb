@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     first_name.capitalize + " " + last_name.capitalize
   end
 
+  def followers
+    User.all.find_all { |user| user.friends.include?(self) }
+  end
+
   def following_bets
     bets = friends.map { |friend| friend.bets }.flatten!
     ordered_bets = []
