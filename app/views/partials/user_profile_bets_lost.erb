@@ -1,7 +1,7 @@
 <% @user.bets_lost.each do |bet| %>
 
-  <div class="promise">
-    <div class="promise-content">
+  <div class="promise-profile">
+    <div class="promise-content-profile">
       <% if bet.in_favour %>
         <h1><%= @pronoun %> bet <%= bet.bet_value %>pts that <%= bet.user_name %> will keep their promise to <%= bet.promise_content %></h1>
       <% else %>
