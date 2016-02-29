@@ -140,3 +140,90 @@
 .new-promise-inner {
   padding: 1em;
 }
+
+.promise-profile {
+  $base-border-radius: 3px !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $promise-gutter: 1.4em;
+  $promise-image-padding: 0.7em;
+  $promise-image-width: 5em;
+  $promise-color: $base-font-color;
+  $promise-background: lighten($action-color, 15%);
+  $promise-detail-color: transparentize($promise-color, 0.5);
+  $promise-image-vert-alignment: top;
+
+  border-bottom: 1px solid transparentize($promise-color, 0.9);
+  display: table;
+  margin-bottom: $base-spacing;
+  padding-bottom: 1em;
+  width: 100%;
+
+  .profile-image-profile,
+  .promise-content-profile,
+  .promise-controls-profile {
+    display: table-cell;
+    vertical-align: $promise-image-vert-alignment;
+  }
+
+  .profile-image-profile {
+    padding-right: $promise-gutter;
+
+    > img {
+      border-radius: $base-border-radius;
+      display: block;
+      height: auto;
+      max-width: none;
+      width: $promise-image-width;
+    }
+
+    .promise-reverse-order & {
+      padding-right: 0;
+      padding-left: 10px;
+    }
+  }
+
+  .promise-content-profile {
+    width: 100%;
+
+    h1 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0;
+    }
+
+    p {
+      line-height: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p.promise-detail {
+      color: $promise-detail-color;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    .details-profile {
+
+      h1 {
+        font-size: 1.9em;
+      }
+
+      p {
+        font-size: 3em;
+      }
+      
+    }
+
+  }
+
+}
+
+.promise-content-results-profile {
+  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+  p {
+    font-size: 2em;
+    margin-bottom: 1em;
+  }
+}

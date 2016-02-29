@@ -1,4 +1,4 @@
-<h1>Bets</h1>
+<h1 style="clear:left">Bets</h1>
 
 <% @promise.bets.each do |bet| %>
 
@@ -20,10 +20,9 @@
       <img src="<%= bet.user.gravatar %>" alt="Logo image">
     </div>
     <div class="bet-content">
-      <h1><%= bet.user.name %> bet that <%= @promise.user.first_name.capitalize %> will <%= bet.in_favour ? 'keep' : 'break' %> their promise.</h1>
+      <h1><%= bet.user.name %> bet <strong><%= bet.bet_value %> points</strong> that <%= @promise.user.first_name.capitalize %> will <strong><%= bet.in_favour ? 'keep' : 'break' %></strong> their promise.</h1>
       <p class="<%= pclass %>"><%= status %></p>
       <% unless @promise.expired? %>
-        <p>Bet value: <%= bet.bet_value %>pts</p>
         <p>Potential winnings: <%= bet.winnings %> </p>
       <% end %>
       <p class="bet-detail"><%= bet.created_at %></p>
