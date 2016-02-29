@@ -1261,6 +1261,47 @@ header.navigation {
 .promise-profile-wrap {
   position: relative; }
 
+.new-promise-inner {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .new-promise-inner::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+@media screen and (min-width: 600px) {
+  .promise-text-input {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 65.88078%; }
+    .promise-text-input:last-child {
+      margin-right: 0; } }
+
+@media screen and (min-width: 600px) {
+  .promise-date-input {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%;
+    margin-right: 0; }
+    .promise-date-input:last-child {
+      margin-right: 0; } }
+
+@media screen and (min-width: 600px) {
+  .promise-submit {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%;
+    margin-right: 0; }
+    .promise-submit:last-child {
+      margin-right: 0; } }
+
+.new-promise-inner {
+  padding: 1em; }
+
 .cards {
   display: -webkit-box;
   display: -moz-box;

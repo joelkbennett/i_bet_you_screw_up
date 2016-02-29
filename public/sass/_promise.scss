@@ -111,3 +111,32 @@
 .promise-profile-wrap {
   position: relative;
 }
+
+.new-promise-inner {
+  @include outer-container;
+}
+
+.promise-text-input {
+  @include media($medium-screen-up) {
+    @include span-columns(8 of 12);
+  }
+}
+
+.promise-date-input {
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 12);
+    @include omega;
+  }
+}
+
+.promise-submit {
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 12);
+    // @include shift(4);
+    @include omega;
+  }
+}
+
+.new-promise-inner {
+  padding: 1em;
+}
