@@ -94,12 +94,17 @@
 }
 
 .profile-score {
-  font-size: 6em;
+  
 }
 
 .profile-score-up {
   @include span-columns(3);
-  color: green;
+  font-style: italic;
+  font-weight: 800;
+  color: $green;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .profile-image-container {
@@ -108,5 +113,34 @@
 
 .profile-score-down {
   @include span-columns(3);
-  color: red;
+  font-style: italic;
+  font-weight: 800;
+  color: $red;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.profile-score {
+  h2 {
+    font-size: 4em;
+    margin-bottom: 0;
+    padding-bottom: 0;    
+    @include media($medium-screen-up) {
+      font-size: 6em;
+    }
+  }
+  h3 {
+    font-size: .5em;
+    @include media($medium-screen-up) {
+      font-size: 1em;
+    }
+    background: #333;
+    display: inline-block;
+    color: #efefef;
+    padding: .25em 1em .5em 1em;
+    font-weight: normal;
+    position: relative;
+    z-index: 2;    
+  }
 }

@@ -27,18 +27,21 @@
 <article class="features">
   <div id="js-fadeInElement" class="fade-in-element">
     <div class="feature-box">
-      <h2><%= Promise.count_all[:kept] %></h2>
-      <h3>Promise Kept</h3>
+      <h2 class='promise-count'><%= Promise.count_all[:kept] %></h2>
+      <h3 class='promise-title'>Promises Kept</h3>
+      <svg class='one' width="120" height="120" viewPort="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon class="bg-shape" points="80,10 100,20 120,100 40,150 20,100 20,80 10,40"/></svg>
     </div>
 
     <div class="feature-box">
-      <h2><%= Promise.count_all[:broken] %></h2>
-      <h3>Promise Broken</h3>
+      <h2 class='promise-count'><%= Promise.count_all[:broken] %></h2>
+      <h3 class='promise-title'>Promises Broken</h3>
+      <svg class='two' width="120" height="120" viewPort="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon class="bg-shape" points="80,10 100,20 120,100 40,150 20,100 20,80 10,40"/></svg>
     </div>
 
     <div class="feature-box">
-      <h2><%= Bet.count_all %></h2>
-      <h3>Bets Made</h3>
+      <h2 class='promise-count'><%= Bet.count_all %></h2>
+      <h3 class='promise-title'>Bets Made</h3>
+      <svg class='three' width="120" height="120" viewPort="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon class="bg-shape" points="80,10 100,20 120,100 40,150 20,100 20,80 10,40"/></svg>
     </div>
 
     <p class="feature-copy">

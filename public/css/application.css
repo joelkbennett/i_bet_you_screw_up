@@ -592,33 +592,59 @@ th {
   display: block;
   margin-right: 2.35765%;
   width: 31.76157%;
-  text-align: center; }
+  text-align: center;
+  position: relative; }
   .feature-box:last-child {
     margin-right: 0; }
   .feature-box:nth-child(3n) {
     margin-right: 0; }
   .feature-box:nth-child(3n+1) {
     clear: left; }
-  .feature-box h2 {
+  .feature-box svg {
+    position: absolute;
+    top: 20px;
+    left: 30%;
+    z-index: 1; }
+  .feature-box h2.promise-count {
     font-size: 6em;
     font-style: italic;
     font-weight: 600;
     color: #cb4649;
     margin-bottom: 0; }
+  .feature-box h3.promise-title {
+    background: #333;
+    display: inline-block;
+    color: #efefef;
+    padding: .25em 1em .5em 1em;
+    font-weight: normal; }
+  .feature-box h2.promise-count, .feature-box h3.promise-title {
+    position: relative;
+    z-index: 2; }
+  .feature-box .one {
+    transform: rotate(45deg); }
+  .feature-box .two {
+    transform: rotate(90deg); }
+  .feature-box .three {
+    transform: rotate(200deg); }
 
 .feature-copy {
   float: left;
   display: block;
   margin-right: 2.35765%;
   width: 100%;
-  margin-top: 1.5em;
+  margin-top: .5em;
   padding: .25em 0;
   font-size: 1.5em;
   background-color: #cb4649;
   display: inline-block;
-  color: #f5cb3b; }
+  color: #f5cb3b;
+  transform: rotate(-2deg);
+  margin-bottom: 0; }
   .feature-copy:last-child {
     margin-right: 0; }
+
+.bg-shape {
+  fill: #f5cb3b; }
 
 body {
   font-family: "PT Sans", sans-serif;
@@ -1604,15 +1630,17 @@ header.navigation {
 .profile-header {
   text-align: center; }
 
-.profile-score {
-  font-size: 6em; }
-
 .profile-score-up {
   float: left;
   display: block;
   margin-right: 2.35765%;
   width: 23.23176%;
-  color: green; }
+  font-style: italic;
+  font-weight: 800;
+  color: #2bbf1b;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2; }
   .profile-score-up:last-child {
     margin-right: 0; }
 
@@ -1629,9 +1657,34 @@ header.navigation {
   display: block;
   margin-right: 2.35765%;
   width: 23.23176%;
-  color: red; }
+  font-style: italic;
+  font-weight: 800;
+  color: #cb4649;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2; }
   .profile-score-down:last-child {
     margin-right: 0; }
+
+.profile-score h2 {
+  font-size: 4em;
+  margin-bottom: 0;
+  padding-bottom: 0; }
+  @media screen and (min-width: 600px) {
+    .profile-score h2 {
+      font-size: 6em; } }
+.profile-score h3 {
+  font-size: .5em;
+  background: #333;
+  display: inline-block;
+  color: #efefef;
+  padding: .25em 1em .5em 1em;
+  font-weight: normal;
+  position: relative;
+  z-index: 2; }
+  @media screen and (min-width: 600px) {
+    .profile-score h3 {
+      font-size: 1em; } }
 
 .button {
   border-radius: 5px;

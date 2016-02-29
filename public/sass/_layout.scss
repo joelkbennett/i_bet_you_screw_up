@@ -58,21 +58,61 @@
   @include span-columns(4);
   @include omega(3n);
   text-align: center;
-  h2 {
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: 20px;
+    left: 30%;
+    z-index: 1;
+  }
+
+  h2.promise-count {
     font-size: 6em;
     font-style: italic;
     font-weight: 600;
     color: $red;
     margin-bottom: 0;    
   }
+
+  h3.promise-title {
+    background: #333;
+    display: inline-block;
+    color: #efefef;
+    padding: .25em 1em .5em 1em;
+    font-weight: normal;
+  }
+
+  h2.promise-count, h3.promise-title {
+    position: relative;
+    z-index: 2;
+  }
+
+  .one {
+    transform: rotate(45deg);
+  }
+
+  .two {
+    transform: rotate(90deg);
+  }
+
+  .three {
+    transform: rotate(200deg);
+  }
 }
 
 .feature-copy {
   @include span-columns(12);
-  margin-top: 1.5em;
+  margin-top: .5em;
   padding: .25em 0;
   font-size: 1.5em;
   background-color: $red;
   display: inline-block;
   color: $yellow;
+  transform: rotate(-2deg);
+  margin-bottom: 0;
+}
+
+.bg-shape {
+  fill: $yellow;
 }
