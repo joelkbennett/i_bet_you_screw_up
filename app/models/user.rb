@@ -25,6 +25,49 @@ class User < ActiveRecord::Base
     first_name.capitalize + " " + last_name.capitalize
   end
 
+  def followers
+    User.all.find_all { |user| user.friends.include?(self) }
+  end
+
+  def following_bets
+    bets = friends.map { |friend| friend.bets }.flatten!
+    ordered_bets = []
+    until bets.count == 0
+      most_recent = bets[0]
+      bets.each { |bet| most_recent = bet if bet.created_at > most_recent.created_at }
+      ordered_bets << most_recent
+      bets.delete(most_recent)
+    end
+    ordered_bets
+  end
+
+  def following_promises
+    promises = friends.map { |friend| friend.promises }.flatten!
+    ordered_promises = []
+    until promises.count == 0
+      most_recent = promises[0]
+      promises.each { |promise| most_recent = promise if promise.created_at > most_recent.created_at }
+      ordered_promises << most_recent
+      promises.delete(most_recent)
+    end
+    ordered_promises
+  end
+
+  def following_activity
+    activity = []
+    activity << following_promises
+    activity << following_bets
+    activity.flatten!
+    ordered_activity = []
+    until activity.count == 0
+      most_recent = activity[0]
+      activity.each { |event| most_recent = event if event.created_at > most_recent.created_at }
+      ordered_activity << most_recent
+      activity.delete(most_recent)
+    end
+    ordered_activity
+  end
+
   def ordered_bets
     bets.order(created_at: :desc)
   end

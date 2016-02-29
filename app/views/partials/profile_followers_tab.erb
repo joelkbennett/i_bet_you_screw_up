@@ -1,6 +1,30 @@
 <li class="tab-header-and-content">
-  <a href="javascript:void(0)" class="tab-link">Following</a>
+  <a href="javascript:void(0)" class="tab-link">Followers</a>
   <div class="tab-content">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt pellentesque lorem, id suscipit dolor rutrum id. Morbi facilisis porta volutpat. Fusce adipiscing, mauris quis congue tincidunt, sapien purus suscipit odio, quis dictum odio tortor in sem. Ut sit amet libero nec orci mattis fringilla. Praesent eu ipsum in sapien tincidunt molestie sed ut magna. Nam accumsan dui at orci rhoncus pharetra tincidunt elit ullamcorper. Sed ac mauris ipsum. Nullam imperdiet sapien id purus pretium id aliquam mi ullamcorper.</p>
+
+    <section class="article-body users-list-small">
+
+      <% if @user.followers.empty? %> <!-- USER HAS NO FOLLOWERS -->
+        <div class="user-no-followers">
+          <p>You don't have any followers! </p>
+        </div>
+      <% else %> <!-- SHOW FOLLOWERS -->
+
+        <% @user.followers.each do |friend| %>
+          <div class="user-profile">
+            <a href="/users/<%= friend.id %>"><img src="<%= friend.gravatar %>" class="profile-image-med"></a>
+            <div class="user-name"><%= friend.name %></div>
+            <p>
+              <%= friend.promises_kept.count %> promises kept<br>
+              <%= friend.promises_broken.count %> promises broken!<br>
+              <strong><%= friend.points %> "points"</strong>
+            </p>
+            <div class="user-rating user-rating-<%= friend.label %>"><%= friend.label %></div>
+          </div>                  
+        <% end %>
+      <% end %>
+
+    </section>
+
   </div>
 </li>

@@ -75,14 +75,8 @@
           <% else %> <!-- You've already placed a bet -->
 
             <div class="promise-content">
-              <h1>Your bet</h1>
-              <h2>Value: <%= @current_user_bet.bet_value %></h2>
+              <h1>You bet <%= @current_user_bet.bet_value %>pts that <%= @promise.user.first_name.capitalize %> will <%= @current_user_bet.in_favour ? 'keep' : 'break' %> their promise</h1>
               <h2>Potential Winnings: <%= @current_user_bet.winnings %></h2>
-              <% if @current_user_bet.in_favour %>
-                <p>You think <%= @promise.user.name %> will keep their promise!</p>
-              <% else %>
-                <p>You think <%= @promise.user.name %> will screw-up!</p>
-              <% end %>
             </div>
 
           <% end %>
@@ -112,6 +106,16 @@
     </section>
 
     <section class="article-footer">
+      <%= erb :'/partials/comments' %>
+    </section>
+    
+  </section>
+
+    <!-- render pagination -->
+
+  </article>
+
+</section>   <section class="article-footer">
       <%= erb :'/partials/comments' %>
     </section>
     
