@@ -8,7 +8,8 @@ helpers do
   end
 
   def page_number
-    @page_number = params[:page_number] || 1
+    @page_number = params[:page] || 1
+    @page_number = @page_number.to_i
   end
 
   def all_bets
