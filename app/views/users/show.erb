@@ -65,8 +65,10 @@
       <ul class="accordion-tabs">
         <%= erb :'/partials/profile_promises_tab' %>
         <%= erb :'/partials/profile_bets_tab' %>
-        <%= erb :'/partials/profile_following_tab' %>
-        <%= erb :'/partials/profile_followers_tab' %>
+        <% if @user == @current_user %>
+          <%= erb :'/partials/profile_following_tab' %>
+          <%= erb :'/partials/profile_followers_tab' %>
+        <% end %>
       </ul>
     
     </section>
