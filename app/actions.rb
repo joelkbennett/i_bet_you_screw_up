@@ -19,6 +19,10 @@ helpers do
     @promises = Promise.all.reorder(:expires_at).paginate(:page => page_number, :per_page => 20)
   end
 
+  def all_users
+    @users = User.all.paginate(:page => page_number, :per_page => 20)
+  end
+
   def friends_of_current_user
     @friends = @current_user.friends
   end

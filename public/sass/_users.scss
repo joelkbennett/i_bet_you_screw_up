@@ -5,7 +5,7 @@
   .user-profile {
     @include media($medium-screen-up) {
       @include span-columns(3 of 12);
-      // @include omega(4n);
+      @include omega(4n);
     }
     text-align: center;
     margin-bottom: 2em;

@@ -1569,7 +1569,11 @@ header.navigation {
         margin-right: 2.35765%;
         width: 23.23176%; }
         .users-list .user-profile:last-child {
-          margin-right: 0; } }
+          margin-right: 0; }
+        .users-list .user-profile:nth-child(4n) {
+          margin-right: 0; }
+        .users-list .user-profile:nth-child(4n+1) {
+          clear: left; } }
     .users-list .user-profile img {
       border-radius: 50%; }
     .users-list .user-profile p {
