@@ -33,6 +33,16 @@ $success-color: #e6efc2 !default;
   min-width: 100px;
 }
 
+.flash-error-new-promise {
+  @include flash($error-color);
+  min-width: 100px;
+}
+
+.flash-success-new-promise {
+  @include flash($success-color);
+  min-width: 100px;
+}
+
 .flash-notice {
   @include flash($notice-color);
   min-width: 100px;

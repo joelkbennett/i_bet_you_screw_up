@@ -1,7 +1,7 @@
 <% if @promise.validated %> <!-- Promise kept -->
-    <div class="flash-success">Promise kept!</div>
+    <div class="flash-success"><%= @flash_success %>Promise kept!</div>
 <% elsif @promise.validated == false || @promise.expired? %> <!-- Screwed up -->
-  <% name = @promise.user == @current_user ? "You" : "#{@promise.user.first_name}" %>
+  <% @promise.user == @current_user ? name = "You" : name = "#{@promise.user.first_name}" %>
   <div class="flash-error"><%= name %> screwed up!</div>
 <% else %> <!-- Not expired yet -->
   <div class="flash-notice"><%= @promise.hours_until_expired %></div>
