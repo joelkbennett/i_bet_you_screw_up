@@ -1,55 +1,51 @@
 <li class="tab-header-and-content">
-  <a href="javascript:void(0)" class="tab-link">Following</a>
+
+  <a href="javascript:void(0)" class="tab-link">
+    Following
+  </a>
+
   <div class="tab-content">
 
     <div class="vertical-tabs-container">
 
       <div class="vertical-tabs">
-        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab is-active" rel="tab4">All Activity</a>
-        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="tab5">Promises</a>
-        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="tab6">Bets</a>
+        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab is-active" rel="tab7">All Activity</a>
+        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="tab8">Promises</a>
+        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="tab9">Bets</a>
       </div>
 
       <div class="vertical-tab-content-container">
-        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="tab4">All Activity</a>
-        <div id="tab4" class="js-vertical-tab-content vertical-tab-content">
-          <% if @user.friends.empty? %> <!-- NO ACTIVE BETS -->
-            <% if @pronoun == 'You' %>
-              <p>You have no active bets </p>
-              <p><a href="/promises">Make a bet! </a></p>
-            <% else %>
-              <p><%= @pronoun %> has no active bets </p>
-            <% end %>
-          <% else %> <!-- SHOW ACTIVE BETS -->
-            <%= erb :'/partials/user_profile_active_bets' %>
+        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="tab7">All Activity</a>
+        <div id="tab7" class="js-vertical-tab-content vertical-tab-content">
+          <% if @user.friends.empty? %> <!-- USER NOT FOLLOWING ANYONE -->
+            <p>You aren't following anyone! </p>
+            <p><a href="/users">Find someone to follow! </a></p>
+          <% else %> <!-- SHOW ACTIVITY -->
+            <%= erb :'/partials/profile_following_activity_all' %>
           <% end %>
         </div>
 
-        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading" rel="tab5">Promises</a>
-        <div id="tab5" class="js-vertical-tab-content vertical-tab-content">
-          <% if @user.bets_won.empty? %> <!-- NO BETS WON -->
-            <% if @pronoun == 'You' %>
-              <p>You haven't won any bets yet.. </p>
-              <p><a href="/promises">Make a bet! </a></p>
-            <% else %>
-              <p><%= @pronoun %> hasn't won any bets yet.. </p>
-            <% end %>
-          <% else %> <!-- SHOW BETS WON -->
-            <%= erb :'/partials/user_profile_bets_won' %>   
+        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading" rel="tab8">Promises</a>
+        <div id="tab8" class="js-vertical-tab-content vertical-tab-content">
+          <% if @user.friends.empty? %> <!-- USER NOT FOLLOWING ANYONE -->
+            <p>You aren't following anyone! </p>
+            <p><a href="/users">Find someone to follow! </a></p>
+          <% else %> <!-- SHOW ACTIVITY - BETS -->
+            <%= erb :'/partials/profile_following_activity_bets' %>   
           <% end %>
         </div>
 
-        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading" rel="tab6">Bets</a>
-        <div id="tab6" class="js-vertical-tab-content vertical-tab-content">
-          <% if @user.bets_lost.empty? %> <!-- NO BETS LOST -->
+        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading" rel="tab9">Bets</a>
+        <div id="tab9" class="js-vertical-tab-content vertical-tab-content">
+          <% if @user.friends.empty? %> <!-- USER NOT FOLLOWING ANYONE -->
             <% if @pronoun == 'You' %>
               <p>You haven't lost any bets! </p>
               <p><a href="/promises">Make a bet! </a></p>
             <% else %>
               <p><%= @pronoun %> hasn't lost any bets! </p>
             <% end %>
-          <% else %> <!-- SHOW BETS LOST -->
-            <%= erb :'/partials/user_profile_bets_lost' %>
+          <% else %> <!-- SHOW ACTIVITY - BETS -->
+            <%= erb :'/partials/profile_following_activity_promises' %>
           <% end %> 
         </div>
 

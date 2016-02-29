@@ -1,0 +1,23 @@
+<% @user.following_activity.each do |event| %>
+
+  <% if event.class == Promise %> <!-- EVENT IS A PROMISE -->
+
+    <% @promise = event %> <!-- For use in partials -->
+
+    <div class="bet">
+      <div class="bet-image">
+        <img src="<%= @promise.user.gravatar %>" alt="Logo image">
+      </div>
+      <div class="bet-content">
+        <h1><%= @promise.user.first_name.capitalize %> promised to <%= @promise.content %></h1>
+        <% unless @promise.expired? %>
+          <p class="bet-detail"><%= @promise.hours_until_expired %></p>
+        <% end %>
+        <p class="bet-detail"><%= @promise.created_at %></p>
+      </div>
+      <%= erb :'/partials/quick_bet_modal' %>
+    </div>
+
+  <% end %> <!-- END IF STATEMENT -->
+
+<% end %> <!-- END EACH LOOP -->

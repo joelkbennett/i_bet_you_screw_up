@@ -1,0 +1,66 @@
+<% @user.following_activity.each do |event| %>
+
+  <% if event.class == Bet %> <!-- EVENT IS A BET -->
+
+    <% bet = event %>
+
+    <% if bet.promise.user == @current_user %>
+      <% pronoun = 'your' %>
+      <% name = 'you' %>
+    <% else %>
+      <% pronoun = 'their' %>
+      <% name = "#{bet.promise.user.first_name.capitalize}" %>
+    <% end %>
+
+    <% if bet.promise.expired? %>
+      <% if bet.won? %>
+        <% status = "WON #{bet.winnings} points!" %>
+        <% pclass = 'bet-won' %>
+      <% else %>
+        <% status = "Lost #{bet.bet_value} points" %>
+        <% pclass = 'bet-lost' %>
+      <% end %>
+    <% else %>
+      <% status = 'Active' %>
+      <% pclass = 'bet-active' %>
+    <% end %>
+
+    <div class="bet">
+      <div class="bet-image">
+        <img src="<%= bet.user.gravatar %>" alt="Logo image">
+      </div>
+      <div class="bet-content">
+        <h1><%= bet.user.name %> bet that <%= name %> will <%= bet.in_favour ? 'keep' : 'break' %> <%= pronoun %> promise to <%= bet.promise.content %></h1>
+        <p class="<%= pclass %>"><%= status %></p>
+        <% unless bet.promise.expired? %>
+          <p>Bet value: <%= bet.bet_value %>pts</p>
+          <p>Potential winnings: <%= bet.winnings %> </p>
+        <% end %>
+        <p class="bet-detail"><%= bet.created_at %></p>
+      </div>
+      <% if name == 'you' %>
+        <%= erb :'/partials/validate_your_promise_modal' %>
+      <% end %>
+    </div>
+
+  <% else %> <!-- EVENT IS A PROMISE -->
+
+    <% @promise = event %> <!-- For use in partials -->
+
+    <div class="bet">
+      <div class="bet-image">
+        <img src="<%= @promise.user.gravatar %>" alt="Logo image">
+      </div>
+      <div class="bet-content">
+        <h1><%= @promise.user.first_name.capitalize %> promised to <%= @promise.content %></h1>
+        <% unless @promise.expired? %>
+          <p class="bet-detail"><%= @promise.hours_until_expired %></p>
+        <% end %>
+        <p class="bet-detail"><%= @promise.created_at %></p>
+      </div>
+      <%= erb :'/partials/quick_bet_modal' %>
+    </div>
+
+  <% end %> <!-- END IF/ELSE STATEMENT -->
+
+<% end %> <!-- END EACH LOOP -->
