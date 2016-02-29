@@ -96,8 +96,10 @@
 }
 
 .comments-list {
-  margin: 0 5em;
-  padding: 0 4em;
-  border-left: thin solid #ddd;
-  border-right: thin solid #ddd;
+  @include media($medium-screen-up) {
+    margin: 0 5em;
+    padding: 0 4em;
+    border-left: thin solid #ddd;
+    border-right: thin solid #ddd;
+  }
 }

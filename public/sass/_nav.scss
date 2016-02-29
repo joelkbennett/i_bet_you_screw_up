@@ -148,8 +148,10 @@ header.navigation {
   }
 
   .active-nav-item a {
-    color: $light-text;
-    background-color: #eee;
+    @include media($medium-screen-up) {
+      color: $light-text;
+      background-color: #eee;
+    }
   }
 
   // Sub menus

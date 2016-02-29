@@ -3,8 +3,10 @@
   @include outer-container;
 
   .user-profile {
-    @include span-columns(3);
-    @include omega(4n);
+    @include media($medium-screen-up) {
+      @include span-columns(3 of 12);
+      // @include omega(4n);
+    }
     text-align: center;
     margin-bottom: 2em;
     position: relative;
@@ -57,18 +59,18 @@
   box-shadow: 5px 5px 10px rgba(0,0,0,.1)
 }
 
-.user-rating-danger {
-  background-color: red;
+.user-rating-Oath-Breaker {
+  background-color: $red;
   color: white;
 }
 
-.user-rating-neutral {
-  background-color: #ddd;
+.user-rating-Neutral {
+  background-color: $yellow;
   color: #333;
 }
 
-.user-rating-good {
-  background-color: green;
+.user-rating-Promise-Keeper {
+  background-color: $green;
   color: white;
 }
 
