@@ -39,8 +39,8 @@
         <div id="tab9" class="js-vertical-tab-content vertical-tab-content">
           <% if @user.friends.empty? %> <!-- USER NOT FOLLOWING ANYONE -->
             <% if @pronoun == 'You' %>
-              <p>You haven't lost any bets! </p>
-              <p><a href="/promises">Make a bet! </a></p>
+              <p>You aren't following anyone! </p>
+              <p><a href="/users">Find someone to follow! </a></p>
             <% else %>
               <p><%= @pronoun %> hasn't lost any bets! </p>
             <% end %>
