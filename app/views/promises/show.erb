@@ -7,6 +7,20 @@
     </header>
 
     <div class="promise">
+
+      <div class='promise-profile promise-profile-wrap'>
+        <div class="user-profile">
+          <a href="/users/<%= @promise.user.id %>"><img src="<%= @promise.user.gravatar %>" class="profile-image-med profile-image"></a>
+          <div class="user-name"><%= @promise.user.name %></div>
+          <p>
+            <%= @promise.user.promises_kept.count %> promises kept<br>
+            <%= @promise.user.promises_broken.count %> promises broken!<br>
+            <strong><%= @promise.user.points %> "points"</strong>
+          </p>
+          <div class="user-rating user-rating-<%= @promise.user.label %>"><%= @promise.user.label %></div>
+        </div> 
+      </div> 
+
       <div class="promise-content">
         <h4><%= @promise.user.first_name.capitalize %> promised to..</h4>
         <div class="details">
@@ -14,13 +28,11 @@
         </div>
         <p class="promise-detail"><%= @promise.hours_until_expired %></p>
         <div class="user-details">
-          <p class='promise-kept' data-promise='<%= @promise.user.promises_kept %>'>kept: <%= @promise.user.promises_kept.count %></p>
-          <p class='promise-broken' data-promise='<%= @promise.user.promises_broken %>'>broken: <%= @promise.user.promises_broken.count %></p>
+          <p class='promise-kept' data-promise='<%= @promise.user.promises_kept.count %>'><!-- kept: <%= @promise.user.promises_kept.count %> --></p>
+          <p class='promise-broken' data-promise='<%= @promise.user.promises_broken.count %>'><!-- broken: <%= @promise.user.promises_broken.count %> --></p>
         </div>
-      </div>
-      <div class="user-img">
-        <img src="<%= @promise.user.gravatar %>">  
-      </div>
+      </div>          
+
     </div>
 
     <% if @current_user %> <!-- LOGGED IN -->

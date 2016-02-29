@@ -21,15 +21,15 @@
   .profile-image,
   .promise-content,
   .promise-controls {
-    display: table-cell;
-    vertical-align: $promise-image-vert-alignment;
+    // display: table-cell;
+    // vertical-align: $promise-image-vert-alignment;
   }
 
   .profile-image {
     padding-right: $promise-gutter;
 
     > img {
-      border-radius: $base-border-radius;
+      // border-radius: 50%;
       display: block;
       height: auto;
       max-width: none;
@@ -43,7 +43,7 @@
   }
 
   .promise-content {
-    width: 100%;
+    // width: 100%;
 
     h1 {
       font-size: 1em;
@@ -51,13 +51,18 @@
     }
 
     p {
-      line-height: 1.5em;
+      line-height: 1.2em;
       margin-bottom: 0.5em;
     }
 
     p.promise-detail {
-      color: $promise-detail-color;
-      font-size: 0.9em;
+      // color: $promise-detail-color;
+      padding: .25em 1em;
+      display: inline-block;
+      background-color: $yellow;
+      color: $red;
+      font-weight: bold;
+      font-size: 1.2em;
       font-style: italic;
     }
 
@@ -83,4 +88,26 @@
     font-size: 2em;
     margin-bottom: 1em;
   }
+}
+
+.promise {
+  @include outer-container;
+}
+
+.promise-content {
+  @include media($medium-screen-up) {
+    @include span-columns(10 of 12);
+  }
+}
+
+.promise-profile {
+  display: none;
+  @include media($medium-screen-up) {
+    display: block;
+    @include span-columns(2 of 12);
+  }
+}
+
+.promise-profile-wrap {
+  position: relative;
 }
