@@ -25,7 +25,7 @@ $(document).ready(function() {
       }).done(function(result) {
         var error_message = result["error_message"];
         if (error_message) {  
-          $('.promise-details')
+          $('.new-promise')
           .prepend(
             $('<div>')
             .addClass("flash-error-new-promise")
@@ -42,7 +42,7 @@ $(document).ready(function() {
           var promise = result["promise"];
           var name = result["name"];
           var timeRemaining = result["time_remaining"];
-          $('.promise-details')
+          $('.new-promise')
           .prepend(
             $('<div>')
             .addClass("flash-success-new-promise")

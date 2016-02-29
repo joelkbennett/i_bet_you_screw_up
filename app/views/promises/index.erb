@@ -7,13 +7,16 @@
       <header class="article-header">
 
         <div class="form">
-          <form id="form-new-promise">
-            <label for="promise-text"><p>I promise to:</p></label>
-            <input type="text" id="promise-text" name="content" rows="4" placeholder="Your promise..."></input>
-            <label for="promise-date"><p>by:</p></label>
-            <input id="promise-date" type="datetime-local" name="expires_at">
-            <input class="submit-button" type="submit" id="new-promise" value="Submit">
-          </form>
+          <%= erb :'/partials/flash_message_error' %>
+          <div class="new-promise">
+            <form id="form-new-promise">
+              <label for="promise-text"><p>I promise to:</p></label>
+              <input type="text" id="promise-text" name="content" rows="4" placeholder="Your promise..."></input>
+              <label for="promise-date"><p>by:</p></label>
+              <input id="promise-date" type="datetime-local" name="expires_at">
+              <input class="submit-button" type="submit" id="new-promise" value="Submit">
+            </form>
+          </div>
         </div>
 
       </header>
