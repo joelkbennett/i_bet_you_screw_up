@@ -85,6 +85,7 @@ $(function() {
   });
 
   $(".modal-fade-screen, .modal-close").on("click", function() {
+    console.log('test')
     $(".modal-state:checked").prop("checked", false).change();
   });
 
@@ -174,4 +175,21 @@ $(document).ready(function() {
   });
 });
 
+// remove flash message
 
+$(function() { 
+  
+  var messages = $('.flash')
+
+  messages.find('.remove-flash').on('click', function(e) {
+    var self = $(this);
+    var noteId = self.data('id');
+    self.parent('.flash').fadeOut();
+    e.preventDefault();
+    $.ajax({ 
+        url: '/remove_notification',
+        method: 'POST',
+        data: { id: noteId }
+    })
+  });
+});

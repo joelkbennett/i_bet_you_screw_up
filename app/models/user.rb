@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :friendships
   has_many :friends, through: :friendships
-
+  has_many :notifications, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -95,6 +95,10 @@ class User < ActiveRecord::Base
   def subtract_points(value)
     self.points -= value
     self.save
+  end
+
+  def add_notification(message)
+    Notification.create(user_id: id, text: message)
   end
 
   private

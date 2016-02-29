@@ -169,6 +169,7 @@ post '/promises/:id/validate' do |id|
   validation = false if params[:no] == "Promise Not Kept"
   @promise.update(validated: validation)
   @promise.apply_promise_value
+  @promise.send_notifications
   redirect "/promises/#{id}"
 end
 
@@ -257,4 +258,9 @@ get '/admin/:id' do |id|
   @user = User.find(id)
   session[:id] = id
   redirect '/'
+end
+
+post '/remove_notification' do
+  @note = Notification.find(params[:id])
+  @note.destroy
 end

@@ -62,6 +62,10 @@ class Promise < ActiveRecord::Base
       broken: Promise.where(validated: false).count }
   end
 
+  def send_notifications
+    bets.each { |bet| bet.user.add_notification("A promise you've bet on have been validated!") }
+  end
+
   private
 
   def expiration_date_cannot_be_in_the_past

@@ -20,6 +20,14 @@
       <p>Points: <%= @user.points %></p>
       </div>
 
+      <div class="section user-notifications">
+        <% @user.notifications.each do |note| %>
+          <div class="flash flash-notice">
+            <%= note.text %><a href='#' class="remove-flash" data-id="<%= note.id %>"><span class="glyphicon glyphicon-remove"></span></a>
+          </div>
+        <% end %>          
+      </div>
+
       <div class="container">
         <div class="profile-score profile-score-up">
           <%= @user.promises_kept.count %>

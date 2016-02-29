@@ -1915,6 +1915,15 @@ button {
     .flash-success a:focus, .flash-success a:hover {
       color: black; }
 
+.flash {
+  margin-bottom: 1.5em; }
+
+.flash .remove-flash {
+  float: right;
+  padding-top: 3px; }
+  .flash .remove-flash span {
+    color: rgba(0, 0, 0, 0.25); }
+
 .modal {
   display: inline-block; }
   .modal label {
