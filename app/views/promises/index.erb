@@ -2,18 +2,39 @@
     
   <article class="container page-article">
 
-    <header class="article-header">
-      <h1>All Promises</h1>
-    </header>
-
     <section class="article-body">
+
+      <header class="article-header">
+        <h1 class=''>New Promise</h1>
+      </header>
+
+      <div class="form">
+        <%= erb :'partials/flash_message_error' %>
+        <div class="promise-details">
+          <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit ante augue, a auctor elit rutrum vel. Cras dapibus, libero.</p> -->
+          <br>
+          <form>
+            <label for="promise-text"><h2>Promise:</h2></label><br>
+            <textarea id="promise-text" name="content" rows="4" placeholder="Your promise..."></textarea>
+            <label for="promise-date"><h2>Expiry Date:</h2></label><br>
+            <input id="promise-date" type="datetime-local" name="expires_at">
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id.</p> --><br>
+            <input type="submit" id="new-promise" value="Submit">
+          </form>
+        </div>
+      </div>
+
+      <header class="article-header">
+        <h1>All Promises</h1>
+      </header>
+
       <div id="expired-promises">
         <label class="label-switch">
           <input type="checkbox" id="toggle-expired-promises" />
           <div class="checkbox"></div>
         </label>
         <div id="switch-label">
-          <label for="toggle-expired-promises">: Toggle expired promises</label>
+          <label for="toggle-expired-promises" id="expired">: Show Expired</label>
         </div>
       </div>
       <div id="friend-promises">
@@ -22,7 +43,7 @@
           <div class="checkbox"></div>
         </label>
         <div id="switch-label">
-          <label for="toggle-friends-promises">: Toggle friends promises</label>
+          <label for="toggle-friends-promises" id="friends">: Show Promises of Friends</label>
         </div>
       </div>
       <div id="top-promises">
@@ -31,7 +52,7 @@
           <div class="checkbox"></div>
         </label>
         <div id="switch-label">
-          <label for="toggle-top-promises">: Promises with most bets</label>
+          <label for="toggle-top-promises" id="most-bets">: Show Promises with most Bets</label>
         </div>
       </div>
       <hr>

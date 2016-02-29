@@ -94,34 +94,34 @@ get '/top_bets/promises' do
   content_type :json
   top_bet_promises
   @users = User.all
-  {users: @users, promises: @promises, user: @current_user, bets: @bets}.to_json
+  { users: @users, promises: @promises, user: @current_user, bets: @bets }.to_json
 end
 
 get '/friends/top_bets/promises' do
   content_type :json
   top_bet_promises_of_friends
   @users = User.all
-  {users: @friends, promises: @promises, user: @current_user, bets: @bets}.to_json
+  { users: @friends, promises: @promises, user: @current_user, bets: @bets }.to_json
 end
 
 get '/all/promises' do
   content_type :json
   @users = User.all
   all_promises
-  {users: @users, promises: @promises, user: @current_user, bets: @bets}.to_json
+  { users: @users, promises: @promises, user: @current_user, bets: @bets }.to_json
 end
 
 get '/friends/promises' do
   content_type :json
   friends_of_current_user
   promises_of_friends
-  {users: @friends, promises: @promises, user: @current_user, bets: @bets}.to_json
+  { users: @friends, promises: @promises, user: @current_user, bets: @bets }.to_json
 end
 
-get '/promises/new' do
-  @promise = Promise.new
-  erb :'promises/new'
-end
+# get '/promises/new' do
+#   @promise = Promise.new
+#   erb :'promises/new'
+# end
 
 get '/promises/:id' do |id|
   @promise = Promise.find(id)
@@ -141,10 +141,12 @@ post '/promises/new' do
   )
   if promise.save
     session[:flash_success] = 'Promise created'
-    redirect "/promises/#{promise.id}"
+    content_type :json
+    { name: @current_user.name, promise: promise, success_message: session[:flash_success], user: @current_user, promises_kept: @current_user.promises_kept.count, promises_broken: @current_user.promises_broken.count, time_remaining: promise.hours_until_expired }.to_json
   else
     session[:flash_error] = 'There was a problem'
-    redirect 'promises/new'
+    content_type :json
+    { error_message: session[:flash_error] }.to_json
   end
 end
 

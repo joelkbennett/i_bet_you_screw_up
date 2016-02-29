@@ -18,15 +18,19 @@ $(document).ready(function() {
   $('#toggle-top-promises').click(function() {
     var url;
     if (this.checked && friendsButton.checked) {
+      $('#most-bets').text(": Show all Promises");
       url = '/friends/top_bets/promises';
     } 
     else if (!this.checked && friendsButton.checked) {
+      $('#most-bets').text(": Show Promises with most Bets");
       url = '/friends/promises';
     }
     else if (this.checked) {
+      $('#most-bets').text(": Show all Promises");
       url = '/top_bets/promises';
     }
     else {
+      $('#most-bets').text(": Show Promises with most Bets");
       url = '/all/promises';
     }
     displayPromises(url);
@@ -35,14 +39,18 @@ $(document).ready(function() {
   $('#toggle-friends-promises').click(function(){
     var url;
     if (this.checked && topBetsButton.checked) {
+      $('#friends').text(": Show all Promises");
       url = '/friends/top_bets/promises';
     } 
     else if (!this.checked && topBetsButton.checked) {
+      $('#friends').text(": Show Promises of Friends");
       url = '/top_bets/promises';
     }
     else if (this.checked) {
+      $('#friends').text(": Show all Promises");
       url = '/friends/promises';
     } else {
+      $('#friends').text(": Show Promises of Friends");
       url = '/all/promises';
     } 
     displayPromises(url);
@@ -204,9 +212,11 @@ $(document).ready(function() {
     var toggleExpired = $('#toggle-expired-promises');
     if (toggleExpired.is(':checked')) {
       $('.cards .card-expired').show();
+      $('#expired').text(": Hide Expired");
     }
     else {
       $('.cards .card-expired').hide();
+      $('#expired').text(": Show Expired");
     }
   }
 

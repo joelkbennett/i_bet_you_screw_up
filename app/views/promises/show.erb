@@ -27,7 +27,7 @@
 
       <% if @promise.expired? || !@promise.validated.nil? %> <!-- PROMISE EXPIRED -->
         <div class="promise-content-results">
-          <%= erb :'/partials/validated_promise_result' %>
+          <%= erb :'partials/validated_promise_result' %>
         </div>
 
       <% else %> <!-- PROMISE NOT EXPIRED -->
@@ -106,16 +106,6 @@
     </section>
 
     <section class="article-footer">
-      <%= erb :'/partials/comments' %>
-    </section>
-    
-  </section>
-
-    <!-- render pagination -->
-
-  </article>
-
-</section>   <section class="article-footer">
       <%= erb :'/partials/comments' %>
     </section>
     
