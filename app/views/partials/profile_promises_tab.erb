@@ -1,0 +1,64 @@
+<li class="tab-header-and-content">
+
+  <a href="javascript:void(0)" class="is-active tab-link">
+    Promises
+  </a>
+
+  <div class="tab-content">
+
+    <div class="vertical-tabs-container">
+      <div class="vertical-tabs">
+        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab is-active" rel="tab1">Active</a>
+        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="tab2">Kept</a>
+        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="tab3">Broken</a>
+      </div>
+
+      <div class="vertical-tab-content-container">
+        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="tab1">Active</a>
+        <div id="tab1" class="js-vertical-tab-content vertical-tab-content">
+          <% if @user.promises_active.empty? %> <!-- NO ACTIVE PROMISES -->
+            <% if @pronoun == 'You' %>
+              <p>You have no active promises</p>
+              <p><a href="/promises">Make a promise! </a></p>
+            <% else %>
+              <p><%= @pronoun %> has no active promises </p>
+            <% end %>
+          <% else %> <!-- SHOW ACTIVE PROMISES -->
+            <%= erb :'/partials/user_profile_active_promises' %>
+          <% end %>
+        </div>
+
+        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading" rel="tab2">Kept</a>
+        <div id="tab2" class="js-vertical-tab-content vertical-tab-content">
+          <% if @user.promises_kept.empty? %> <!-- NO KEPT PROMISES -->
+            <% if @pronoun == 'You' %>
+              <p>You haven't kept any promises..</p>
+              <p><a href="/promises">Make a promise! </a></p>
+            <% else %>
+              <p><%= @pronoun %> hasn't kept any promises.. </p>
+            <% end %>
+          <% else %> <!-- SHOW KEPT PROMISES -->
+            <%= erb :'/partials/user_profile_kept_promises' %>
+          <% end %>
+        </div>
+
+        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading" rel="tab3">Broken</a>
+        <div id="tab3" class="js-vertical-tab-content vertical-tab-content">
+          <% if @user.promises_broken.empty? %> <!-- NO BROKEN PROMISES -->
+            <% if @pronoun == 'You' %>
+              <p>You haven't broke any promises</p>
+              <p><a href="/promises">Make a promise! </a></p>
+            <% else %>
+              <p><%= @pronoun %> hasn't broke any promises </p>
+            <% end %>
+          <% else %> <!-- SHOW BROKEN PROMISES -->
+            <%= erb :'/partials/user_profile_broken_promises' %>
+          <% end %> 
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</li>
