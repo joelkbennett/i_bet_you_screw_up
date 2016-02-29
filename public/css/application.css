@@ -1549,6 +1549,50 @@ header.navigation {
     .users-list .user-profile p {
       margin-bottom: .5em; }
 
+.users-list-small {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .users-list-small::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .users-list-small::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .users-list-small .user-no-followers {
+    text-align: left;
+    margin-bottom: 2em;
+    position: relative;
+    padding: 1em; }
+    @media screen and (min-width: 600px) {
+      .users-list-small .user-no-followers {
+        float: left;
+        display: block;
+        margin-right: 2.35765%;
+        width: 23.23176%; }
+        .users-list-small .user-no-followers:last-child {
+          margin-right: 0; } }
+  .users-list-small .user-profile {
+    text-align: center;
+    margin-bottom: 2em;
+    position: relative;
+    border-bottom: thin solid #ddd;
+    padding: 2em; }
+    @media screen and (min-width: 600px) {
+      .users-list-small .user-profile {
+        float: left;
+        display: block;
+        margin-right: 2.35765%;
+        width: 23.23176%; }
+        .users-list-small .user-profile:last-child {
+          margin-right: 0; } }
+    .users-list-small .user-profile img {
+      border-radius: 50%; }
+    .users-list-small .user-profile p {
+      margin-bottom: .5em; }
+
 .profile-image {
   border-radius: 50%; }
 
