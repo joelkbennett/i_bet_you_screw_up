@@ -103,9 +103,11 @@ $(function() {
   var brokenWinnings = $('#broken-winnings span');
   var kept = parseInt($('.promise-kept').data('promise'));
   var broken = parseInt($('.promise-broken').data('promise'));
+  console.log(kept);
+  console.log(broken);
 
   bet.on('keyup', function() {
-    var calculatedWin = 
+    // var calculatedWin = 
     keptWinnings.text(Math.round((broken/kept) * parseInt(bet.val())));
     brokenWinnings.text(Math.round((kept/broken) * parseInt(bet.val())));
   });
