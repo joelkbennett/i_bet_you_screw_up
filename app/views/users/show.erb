@@ -31,7 +31,8 @@
 
       <div class="container">
         <div class="profile-score profile-score-up">
-          <%= @user.promises_kept.count %>
+          <h2><%= @user.promises_kept.count %></h2>
+          <h3>Promises Kept</h3>
         </div>
 
         <div class="profile-image-container">
@@ -39,7 +40,8 @@
         </div>
 
         <div class="profile-score profile-score-down">
-          <%= @user.promises_broken.count %>
+          <h2><%= @user.promises_broken.count %></h2>
+          <h3>Promises Broken</h3>
         </div>
       </div>
 
