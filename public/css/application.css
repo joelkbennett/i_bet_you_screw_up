@@ -1261,6 +1261,51 @@ header.navigation {
 .promise-profile-wrap {
   position: relative; }
 
+.promise-profile {
+  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+  display: table;
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  width: 100%; }
+  .promise-profile .profile-image-profile,
+  .promise-profile .promise-content-profile,
+  .promise-profile .promise-controls-profile {
+    display: table-cell;
+    vertical-align: top; }
+  .promise-profile .profile-image-profile {
+    padding-right: 1.4em; }
+    .promise-profile .profile-image-profile > img {
+      border-radius: 3px;
+      display: block;
+      height: auto;
+      max-width: none;
+      width: 5em; }
+    .promise-reverse-order .promise-profile .profile-image-profile {
+      padding-right: 0;
+      padding-left: 10px; }
+  .promise-profile .promise-content-profile {
+    width: 100%; }
+    .promise-profile .promise-content-profile h1 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0; }
+    .promise-profile .promise-content-profile p {
+      line-height: 1.5em;
+      margin-bottom: 0.5em; }
+    .promise-profile .promise-content-profile p.promise-detail {
+      color: rgba(51, 51, 51, 0.5);
+      font-size: 0.9em;
+      font-style: italic; }
+    .promise-profile .promise-content-profile .details-profile h1 {
+      font-size: 1.9em; }
+    .promise-profile .promise-content-profile .details-profile p {
+      font-size: 3em; }
+
+.promise-content-results-profile {
+  border-bottom: 1px solid rgba(51, 51, 51, 0.1); }
+  .promise-content-results-profile p {
+    font-size: 2em;
+    margin-bottom: 1em; }
+
 .cards {
   display: -webkit-box;
   display: -moz-box;
