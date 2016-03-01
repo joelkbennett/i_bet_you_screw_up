@@ -26,3 +26,7 @@ group :development, :test do
   gem 'neat'
   gem 'bitters'
 end
+
+group :production do
+  gem 'pg'
+end
