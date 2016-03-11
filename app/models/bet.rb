@@ -53,12 +53,12 @@ class Bet < ActiveRecord::Base
       if kept == 0
         return self.winnings = (broken + 1) * bet_value
       end
-      self.winnings = (broken == 0) ? 0 : ((broken / kept) * bet_value).round
+      self.winnings = (broken == 0) ? bet_value : ((broken / kept) * bet_value).round
     else
       if broken == 0
         return self.winnings = (kept + 1) * bet_value
       end
-      self.winnings = (kept == 0) ? 0 : ((kept / broken) * bet_value).round
+      self.winnings = (kept == 0) ? bet_value : ((kept / broken) * bet_value).round
     end
   end
 

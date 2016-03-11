@@ -47,7 +47,6 @@ $(document).ready(function() {
             $('<div>')
             .addClass("flash-success-new-promise")
             .text(success_message));
-          debugger;
           var newCard = createNewCard(name, user, promisesBroken, promisesKept, promise, timeRemaining);
 
           $('div.cards').prepend(newCard);
