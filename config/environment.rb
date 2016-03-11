@@ -9,8 +9,8 @@ require 'sinatra/activerecord'
 require 'sinatra/contrib/all' # Requires cookies, among other things
 require 'digest/md5'
 
-require 'pry'
-require 'pry-byebug'
+require 'pry' if development?
+require 'pry-byebug' if development?
 require 'pg'
 require 'bcrypt'
 require 'json'
