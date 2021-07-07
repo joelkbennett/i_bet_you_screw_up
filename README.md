@@ -1,3 +1,5 @@
+**Lighthouse Labs "mid-term" project**:
+
 I Bet You Screwed Up
 ====================
 
